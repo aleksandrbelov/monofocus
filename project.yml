@@ -1,0 +1,52 @@
+name: MonoFocus
+options:
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: 5.9
+    DEVELOPMENT_TEAM: ""
+targets:
+  MonoFocus:
+    type: application
+    platform: iOS
+    sources:
+      - path: mobile
+        excludes:
+          - MonoFocusWidgets/**
+          - Utils/generateTheme.swift
+    info:
+      path: mobile/Info.plist
+      properties:
+        UIBackgroundModes:
+          - processing
+        NSSupportsLiveActivities: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "dev.monofocus.app"
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: "0.1.0"
+        ENABLE_PREVIEWS: YES
+    dependencies:
+      - target: MonoFocusWidgets
+  MonoFocusWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: mobile/MonoFocusWidgets
+      - path: mobile/Models
+        includes:
+          - TimerAttributes.swift
+    info:
+      path: mobile/MonoFocusWidgets/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "dev.monofocus.app.widgets"
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: "0.1.0"
+schemes:
+  MonoFocus:
+    build:
+      targets:
+        MonoFocus: all
+        MonoFocusWidgets: all

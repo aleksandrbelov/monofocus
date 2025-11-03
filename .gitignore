@@ -1,0 +1,70 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+# Build products
+build/
+DerivedData/
+.build/
+
+# Workspace and user settings
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+
+# Xcode project files that should not be committed (user-specific)
+*.xcuserdatad
+
+# Swift Package Manager
+/.build/
+/.swiftpm/
+Packages/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Built products
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Node
+node_modules/
+dist/
+build/
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Bundler
+.bundle/
+
+# Temporary files
+*.swp
+*~
+
+# User-specific files
+.DS_Store

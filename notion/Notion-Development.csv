@@ -1,0 +1,7 @@
+Sprint,Title,Status,Assignee,Estimate,Notes
+1,Implement TimerViewModel,Todo,,4h,
+1,Local notifications,Todo,,2h,
+1,URL scheme + widget,Todo,,3h,
+2,SetupView and guidance,Todo,,3h,
+2,Session persistence,Todo,,2h,
+3,AppIntents + Live Activity,Todo,,1d,

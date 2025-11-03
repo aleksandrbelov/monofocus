@@ -1,0 +1,691 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */; };
+		183044CCBF304AEA6BE660AF /* ControlButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */; };
+		19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B05AC6512D49E2F00B05FEF /* HeaderView.swift */; };
+		2071ABC26D30D9906A6EB840 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B629EF4A8B588087A40E1 /* ContentView.swift */; };
+		3C885EBC3C467157EFC74A0A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */; };
+		3E6DCBCCDD601CEA9407EB46 /* AutomationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */; };
+		43A86DBDAEBB74C81789DD07 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040899776CF4AD863E345A4C /* ThemeManager.swift */; };
+		450CBC85972CA214071E3B67 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539369DC7C8F4E06F04BF8BD /* ActivityViewController.swift */; };
+		4D37550BB363905CA9854606 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA0F4574C151841A1B506C /* TimerView.swift */; };
+		4E70C9BDFB3B9EA048FA025B /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */; };
+		4F77044AAF0F457922F19C01 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20027F733506318B78AD85BE /* Radius.swift */; };
+		53986D856EDB713D6777579F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514DC351084B56C4A72B8EC /* EmptyStateView.swift */; };
+		5BBC038C625840188E308193 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C38186D05076BD8581E020 /* ShortcutService.swift */; };
+		5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF70E3700D03FC7810545C /* Shadows.swift */; };
+		6BEAFB4A7B28620A9BE4A219 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA570100E37B71D26C8DE147 /* Theme.swift */; };
+		6EA028595854FE4BC858A759 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96FFC8C26F47B7F47A1AF /* Typography.swift */; };
+		729152B6351A14EE31AAE38D /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */; };
+		744E7A3686C24818AE13512B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16984762DEFD1EA982CB43 /* SetupView.swift */; };
+		76A926341BF2B0DE3D37279D /* StartTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */; };
+		78A1849B8CCF814904F78CF7 /* FocusSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D01580A523937B25F87E6 /* FocusSession.swift */; };
+		7F05066521A11CB0DAA25563 /* ResumeSessionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15D26088BFC2A281C6EC9C8 /* ResumeSessionDialog.swift */; };
+		84E6722A3A3A20D09BDD4C16 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
+		89F3611BA2C51EB6BE70C0D3 /* MonoFocusWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 655AE25680C9310789C89152 /* MonoFocusWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8BA4D29DFCC46858BEB74376 /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5C60B44F5241839389A2D /* URLRouter.swift */; };
+		9191BAF71CAA0C96443C7358 /* TimePickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF1E5BFAD8E15FF0871E02A /* TimePickerModal.swift */; };
+		979982C3F590B5A3B986C6EA /* DigitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FDD78338644316DD62B740 /* DigitCardView.swift */; };
+		A3BDB5BE5D865B2A10254EC0 /* StopTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */; };
+		A840D9F880C4292FD12842D1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D635B3F231AD80883829559 /* CircularProgressView.swift */; };
+		B6788DBF1E0B5D3E9AD8F25E /* SessionExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */; };
+		B89BF3761B1C004F84F23550 /* CompletionModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAFBAF609AF587678592F99 /* CompletionModal.swift */; };
+		BA4C1D1E5AB56838F564B609 /* TimerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CD0EF768770A7E6F2359 /* TimerLiveActivity.swift */; };
+		BCD7CDE6CC26936C7F2D9EB5 /* PresetButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2CE399CDD28CA59B3A6434 /* PresetButtonGroup.swift */; };
+		BF46DB6374741C8550CD2BE2 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371C0015B402D05FDF882F4 /* Spacing.swift */; };
+		C1C52D685B093F252E827F9A /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366417649E8609F25DE2106A /* CircularTimerView.swift */; };
+		C408EA5812F87B4460D29532 /* TimerShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0387317BAC46E254A8503A0E /* TimerShortcuts.swift */; };
+		C4CAE5370BD42D3784524913 /* MonoFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */; };
+		C4F8F264E6959075D730C865 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCA158C7EC8453397FC446 /* ButtonStyles.swift */; };
+		CBF01498628386BF976ADA46 /* HomeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE71FAC79960C7AAC04B37A /* HomeIndicatorView.swift */; };
+		D153B7C52C17778938C733DB /* MonoFocusWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */; };
+		D4D13A02C7E1900884E52836 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF9D1B580F2CB5807048B08 /* Colors.swift */; };
+		D9186C4493EA48314B709F01 /* ThemeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6515E27281A7FCB4560ADA /* ThemeToggle.swift */; };
+		DDE529F7BA515F34AF36B262 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A833CA241DE7F74D5BE5CA /* Animations.swift */; };
+		DF93149DD7230C12134823EB /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1166CBCFE57F0E2D45D877C /* CustomModal.swift */; };
+		E88D9C7E49F3C7BCF02AA6E7 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
+		FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FEF4C651CB8ED17BB09E21C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C434B445741090DA7143948 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3CFA44E3900D3185FB2600C;
+			remoteInfo = MonoFocusWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		94927A45922B9C5E0A3692F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				89F3611BA2C51EB6BE70C0D3 /* MonoFocusWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0387317BAC46E254A8503A0E /* TimerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerShortcuts.swift; sourceTree = "<group>"; };
+		03C38186D05076BD8581E020 /* ShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
+		040899776CF4AD863E345A4C /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButtonGroup.swift; sourceTree = "<group>"; };
+		0CE5C60B44F5241839389A2D /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
+		14E8CD0EF768770A7E6F2359 /* TimerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLiveActivity.swift; sourceTree = "<group>"; };
+		16A833CA241DE7F74D5BE5CA /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		1BF9D1B580F2CB5807048B08 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		20027F733506318B78AD85BE /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
+		2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerIntent.swift; sourceTree = "<group>"; };
+		2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusApp.swift; sourceTree = "<group>"; };
+		2DF1E5BFAD8E15FF0871E02A /* TimePickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerModal.swift; sourceTree = "<group>"; };
+		2FC96FFC8C26F47B7F47A1AF /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		366417649E8609F25DE2106A /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		3E8B629EF4A8B588087A40E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F16984762DEFD1EA982CB43 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		4514DC351084B56C4A72B8EC /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		49B808BF9E35A92859790B41 /* TimerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAttributes.swift; sourceTree = "<group>"; };
+		4FBA0F4574C151841A1B506C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		539369DC7C8F4E06F04BF8BD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		57BF70E3700D03FC7810545C /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		5B5D01580A523937B25F87E6 /* FocusSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSession.swift; sourceTree = "<group>"; };
+		5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExporter.swift; sourceTree = "<group>"; };
+		622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationCardView.swift; sourceTree = "<group>"; };
+		655AE25680C9310789C89152 /* MonoFocusWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MonoFocusWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
+		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D635B3F231AD80883829559 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		933FB4FCE9030B42ECC39CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9371C0015B402D05FDF882F4 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		9B05AC6512D49E2F00B05FEF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopTimerIntent.swift; sourceTree = "<group>"; };
+		AFAFBAF609AF587678592F99 /* CompletionModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionModal.swift; sourceTree = "<group>"; };
+		B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		B1166CBCFE57F0E2D45D877C /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
+		B9FDD78338644316DD62B740 /* DigitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitCardView.swift; sourceTree = "<group>"; };
+		CC2CE399CDD28CA59B3A6434 /* PresetButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetButtonGroup.swift; sourceTree = "<group>"; };
+		D15D26088BFC2A281C6EC9C8 /* ResumeSessionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeSessionDialog.swift; sourceTree = "<group>"; };
+		D1A8902F9C906AD30652A007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D3CCA158C7EC8453397FC446 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSection.swift; sourceTree = "<group>"; };
+		DCE71FAC79960C7AAC04B37A /* HomeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndicatorView.swift; sourceTree = "<group>"; };
+		DD6515E27281A7FCB4560ADA /* ThemeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeToggle.swift; sourceTree = "<group>"; };
+		E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusWidgets.swift; sourceTree = "<group>"; };
+		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		12E71DBDD80C1FA260606684 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				733EDD3C2A3752D484BF0B0F /* MonoFocus.app */,
+				655AE25680C9310789C89152 /* MonoFocusWidgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1659679EEEF1E8659BF1A2DC /* Chrome */ = {
+			isa = PBXGroup;
+			children = (
+				9B05AC6512D49E2F00B05FEF /* HeaderView.swift */,
+				DCE71FAC79960C7AAC04B37A /* HomeIndicatorView.swift */,
+				6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */,
+				DD6515E27281A7FCB4560ADA /* ThemeToggle.swift */,
+			);
+			path = Chrome;
+			sourceTree = "<group>";
+		};
+		1A5673DAECD28C6BF22913AD /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				1659679EEEF1E8659BF1A2DC /* Chrome */,
+				82AF23DA8522BBD298EE18F0 /* Components */,
+				95709F6A94DD50698E40EBCB /* Modifiers */,
+				BAAE92EED732ED8FFD8AA47B /* Theme */,
+				455114CF852DCAE3EE081F5B /* Tokens */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		36BA51090534E661666DDCCA /* mobile */ = {
+			isa = PBXGroup;
+			children = (
+				D1A8902F9C906AD30652A007 /* Info.plist */,
+				2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */,
+				5AA0AB0C04E1A707120E79ED /* App */,
+				61948A26594B26BD24D2A5D4 /* AppIntents */,
+				1A5673DAECD28C6BF22913AD /* DesignSystem */,
+				DE9A0A9BC0E5188E853889AB /* Models */,
+				7BA8D33A44A7BA6F579077AA /* Services */,
+				C58FE9E3295657076A56CAB5 /* Utils */,
+				EB7184078CE0DF75960A7952 /* ViewModels */,
+				56D8C7FFB8B06067766B1039 /* Views */,
+			);
+			path = mobile;
+			sourceTree = "<group>";
+		};
+		44163249801CBF06384B0803 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				AFAFBAF609AF587678592F99 /* CompletionModal.swift */,
+				B1166CBCFE57F0E2D45D877C /* CustomModal.swift */,
+				D15D26088BFC2A281C6EC9C8 /* ResumeSessionDialog.swift */,
+				2DF1E5BFAD8E15FF0871E02A /* TimePickerModal.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		455114CF852DCAE3EE081F5B /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				16A833CA241DE7F74D5BE5CA /* Animations.swift */,
+				1BF9D1B580F2CB5807048B08 /* Colors.swift */,
+				20027F733506318B78AD85BE /* Radius.swift */,
+				57BF70E3700D03FC7810545C /* Shadows.swift */,
+				9371C0015B402D05FDF882F4 /* Spacing.swift */,
+				2FC96FFC8C26F47B7F47A1AF /* Typography.swift */,
+			);
+			path = Tokens;
+			sourceTree = "<group>";
+		};
+		56D8C7FFB8B06067766B1039 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F16984762DEFD1EA982CB43 /* SetupView.swift */,
+				4FBA0F4574C151841A1B506C /* TimerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5AA0AB0C04E1A707120E79ED /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3E8B629EF4A8B588087A40E1 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		61948A26594B26BD24D2A5D4 /* AppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */,
+				9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */,
+				0387317BAC46E254A8503A0E /* TimerShortcuts.swift */,
+			);
+			path = AppIntents;
+			sourceTree = "<group>";
+		};
+		7BA8D33A44A7BA6F579077AA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */,
+				03C38186D05076BD8581E020 /* ShortcutService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		82AF23DA8522BBD298EE18F0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */,
+				DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */,
+				8D635B3F231AD80883829559 /* CircularProgressView.swift */,
+				366417649E8609F25DE2106A /* CircularTimerView.swift */,
+				08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */,
+				B9FDD78338644316DD62B740 /* DigitCardView.swift */,
+				4514DC351084B56C4A72B8EC /* EmptyStateView.swift */,
+				CC2CE399CDD28CA59B3A6434 /* PresetButtonGroup.swift */,
+				6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */,
+				44163249801CBF06384B0803 /* Modals */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		95709F6A94DD50698E40EBCB /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D3CCA158C7EC8453397FC446 /* ButtonStyles.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		BAAE92EED732ED8FFD8AA47B /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				040899776CF4AD863E345A4C /* ThemeManager.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		C58FE9E3295657076A56CAB5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				539369DC7C8F4E06F04BF8BD /* ActivityViewController.swift */,
+				5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */,
+				EA570100E37B71D26C8DE147 /* Theme.swift */,
+				0CE5C60B44F5241839389A2D /* URLRouter.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CA54212A28E78ACA6AE78C6C /* MonoFocusWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				933FB4FCE9030B42ECC39CCA /* Info.plist */,
+				E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */,
+				14E8CD0EF768770A7E6F2359 /* TimerLiveActivity.swift */,
+			);
+			name = MonoFocusWidgets;
+			path = mobile/MonoFocusWidgets;
+			sourceTree = "<group>";
+		};
+		DC611F9F48987A9E2E2B6D6A = {
+			isa = PBXGroup;
+			children = (
+				36BA51090534E661666DDCCA /* mobile */,
+				CA54212A28E78ACA6AE78C6C /* MonoFocusWidgets */,
+				12E71DBDD80C1FA260606684 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE9A0A9BC0E5188E853889AB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B5D01580A523937B25F87E6 /* FocusSession.swift */,
+				49B808BF9E35A92859790B41 /* TimerAttributes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EB7184078CE0DF75960A7952 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0122413DFD8891461DD2CC99 /* MonoFocus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0E208EBE10374EC78885698 /* Build configuration list for PBXNativeTarget "MonoFocus" */;
+			buildPhases = (
+				AD75E85BCF4C7DD80F9E1EC6 /* Sources */,
+				94927A45922B9C5E0A3692F8 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7C87A2DB750F799FD35C77BE /* PBXTargetDependency */,
+			);
+			name = MonoFocus;
+			packageProductDependencies = (
+			);
+			productName = MonoFocus;
+			productReference = 733EDD3C2A3752D484BF0B0F /* MonoFocus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF85CDB227F175F2634B059B /* Build configuration list for PBXNativeTarget "MonoFocusWidgets" */;
+			buildPhases = (
+				244A22323D21419A43099538 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonoFocusWidgets;
+			packageProductDependencies = (
+			);
+			productName = MonoFocusWidgets;
+			productReference = 655AE25680C9310789C89152 /* MonoFocusWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C434B445741090DA7143948 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1620;
+			};
+			buildConfigurationList = AAE10B38053CF0DC89182D7A /* Build configuration list for PBXProject "MonoFocus" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DC611F9F48987A9E2E2B6D6A;
+			minimizedProjectReferenceProxies = 1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0122413DFD8891461DD2CC99 /* MonoFocus */,
+				F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		244A22323D21419A43099538 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D153B7C52C17778938C733DB /* MonoFocusWidgets.swift in Sources */,
+				84E6722A3A3A20D09BDD4C16 /* TimerAttributes.swift in Sources */,
+				BA4C1D1E5AB56838F564B609 /* TimerLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD75E85BCF4C7DD80F9E1EC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				450CBC85972CA214071E3B67 /* ActivityViewController.swift in Sources */,
+				DDE529F7BA515F34AF36B262 /* Animations.swift in Sources */,
+				3E6DCBCCDD601CEA9407EB46 /* AutomationCardView.swift in Sources */,
+				134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */,
+				C4F8F264E6959075D730C865 /* ButtonStyles.swift in Sources */,
+				A840D9F880C4292FD12842D1 /* CircularProgressView.swift in Sources */,
+				C1C52D685B093F252E827F9A /* CircularTimerView.swift in Sources */,
+				D4D13A02C7E1900884E52836 /* Colors.swift in Sources */,
+				B89BF3761B1C004F84F23550 /* CompletionModal.swift in Sources */,
+				2071ABC26D30D9906A6EB840 /* ContentView.swift in Sources */,
+				183044CCBF304AEA6BE660AF /* ControlButtonGroup.swift in Sources */,
+				DF93149DD7230C12134823EB /* CustomModal.swift in Sources */,
+				979982C3F590B5A3B986C6EA /* DigitCardView.swift in Sources */,
+				53986D856EDB713D6777579F /* EmptyStateView.swift in Sources */,
+				78A1849B8CCF814904F78CF7 /* FocusSession.swift in Sources */,
+				19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */,
+				CBF01498628386BF976ADA46 /* HomeIndicatorView.swift in Sources */,
+				C4CAE5370BD42D3784524913 /* MonoFocusApp.swift in Sources */,
+				3C885EBC3C467157EFC74A0A /* NotificationService.swift in Sources */,
+				BCD7CDE6CC26936C7F2D9EB5 /* PresetButtonGroup.swift in Sources */,
+				4F77044AAF0F457922F19C01 /* Radius.swift in Sources */,
+				7F05066521A11CB0DAA25563 /* ResumeSessionDialog.swift in Sources */,
+				B6788DBF1E0B5D3E9AD8F25E /* SessionExporter.swift in Sources */,
+				744E7A3686C24818AE13512B /* SetupView.swift in Sources */,
+				5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */,
+				5BBC038C625840188E308193 /* ShortcutService.swift in Sources */,
+				BF46DB6374741C8550CD2BE2 /* Spacing.swift in Sources */,
+				76A926341BF2B0DE3D37279D /* StartTimerIntent.swift in Sources */,
+				FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */,
+				A3BDB5BE5D865B2A10254EC0 /* StopTimerIntent.swift in Sources */,
+				6BEAFB4A7B28620A9BE4A219 /* Theme.swift in Sources */,
+				43A86DBDAEBB74C81789DD07 /* ThemeManager.swift in Sources */,
+				D9186C4493EA48314B709F01 /* ThemeToggle.swift in Sources */,
+				9191BAF71CAA0C96443C7358 /* TimePickerModal.swift in Sources */,
+				E88D9C7E49F3C7BCF02AA6E7 /* TimerAttributes.swift in Sources */,
+				4E70C9BDFB3B9EA048FA025B /* TimerDigitsView.swift in Sources */,
+				C408EA5812F87B4460D29532 /* TimerShortcuts.swift in Sources */,
+				4D37550BB363905CA9854606 /* TimerView.swift in Sources */,
+				729152B6351A14EE31AAE38D /* TimerViewModel.swift in Sources */,
+				6EA028595854FE4BC858A759 /* Typography.swift in Sources */,
+				8BA4D29DFCC46858BEB74376 /* URLRouter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7C87A2DB750F799FD35C77BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */;
+			targetProxy = FEF4C651CB8ED17BB09E21C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		395D12C7C39F4BE61A13B508 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = mobile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		41E49339E0403D9707E3DEF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.widgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5BB82EE02DF80FE99CFDD0B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.widgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C143E0A275B59516D4DB2A14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		CEAEF4685C5DD8F7FE03F0D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = mobile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E3DF3DF57C7AFAC6DDB904A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAE10B38053CF0DC89182D7A /* Build configuration list for PBXProject "MonoFocus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3DF3DF57C7AFAC6DDB904A6 /* Debug */,
+				C143E0A275B59516D4DB2A14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AF85CDB227F175F2634B059B /* Build configuration list for PBXNativeTarget "MonoFocusWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BB82EE02DF80FE99CFDD0B0 /* Debug */,
+				41E49339E0403D9707E3DEF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C0E208EBE10374EC78885698 /* Build configuration list for PBXNativeTarget "MonoFocus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				395D12C7C39F4BE61A13B508 /* Debug */,
+				CEAEF4685C5DD8F7FE03F0D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C434B445741090DA7143948 /* Project object */;
+}
