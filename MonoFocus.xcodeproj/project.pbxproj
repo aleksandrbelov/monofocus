@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-	11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */; };
-	11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */; };
+		11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */; };
+		11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */; };
 		134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */; };
 		183044CCBF304AEA6BE660AF /* ControlButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */; };
 		19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B05AC6512D49E2F00B05FEF /* HeaderView.swift */; };
@@ -64,6 +64,13 @@
 			remoteGlobalIDString = F3CFA44E3900D3185FB2600C;
 			remoteInfo = MonoFocusWidgets;
 		};
+        7B4F6E1E6F1B58B4005C10F8 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = 5C434B445741090DA7143948 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 0122413DFD8891461DD2CC99;
+            remoteInfo = MonoFocus;
+        };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,9 +88,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-	7B4F6E1E6F1B58B4005C1000 /* MonoFocusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonoFocusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-	7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutServiceTests.swift; sourceTree = "<group>"; };
-	7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 		0387317BAC46E254A8503A0E /* TimerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerShortcuts.swift; sourceTree = "<group>"; };
 		03C38186D05076BD8581E020 /* ShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		040899776CF4AD863E345A4C /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
 		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutServiceTests.swift; sourceTree = "<group>"; };
+		7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 		8D635B3F231AD80883829559 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		933FB4FCE9030B42ECC39CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9371C0015B402D05FDF882F4 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 		E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusWidgets.swift; sourceTree = "<group>"; };
 		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonoFocusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -139,6 +146,7 @@
 			children = (
 				733EDD3C2A3752D484BF0B0F /* MonoFocus.app */,
 				655AE25680C9310789C89152 /* MonoFocusWidgets.appex */,
+				FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +242,15 @@
 			path = AppIntents;
 			sourceTree = "<group>";
 		};
+		7B4F6E1E6F1B58B4005C10FF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */,
+				7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7BA8D33A44A7BA6F579077AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,15 +325,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		7B4F6E1E6F1B58B4005C10FF /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */,
-				7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		DE9A0A9BC0E5188E853889AB /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +364,22 @@
 			productReference = 733EDD3C2A3752D484BF0B0F /* MonoFocus.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7B4F6E1E6F1B58B4005C10FE /* MonoFocusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B4F6E1E6F1B58B4005C10FD /* Build configuration list for PBXNativeTarget "MonoFocusTests" */;
+			buildPhases = (
+				7B4F6E1E6F1B58B4005C10FA /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+                7B4F6E1E6F1B58B4005C10F9 /* PBXTargetDependency */,
+			);
+			name = MonoFocusTests;
+			productName = MonoFocusTests;
+			productReference = FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF85CDB227F175F2634B059B /* Build configuration list for PBXNativeTarget "MonoFocusWidgets" */;
@@ -372,21 +396,6 @@
 			productName = MonoFocusWidgets;
 			productReference = 655AE25680C9310789C89152 /* MonoFocusWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
-		};
-		7B4F6E1E6F1B58B4005C10FE /* MonoFocusTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7B4F6E1E6F1B58B4005C10FD /* Build configuration list for PBXNativeTarget "MonoFocusTests" */;
-			buildPhases = (
-				7B4F6E1E6F1B58B4005C10FA /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MonoFocusTests;
-			productName = MonoFocusTests;
-			productReference = 7B4F6E1E6F1B58B4005C1000 /* MonoFocusTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -418,15 +427,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7B4F6E1E6F1B58B4005C10FA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */,
-				11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		244A22323D21419A43099538 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -434,6 +434,15 @@
 				D153B7C52C17778938C733DB /* MonoFocusWidgets.swift in Sources */,
 				84E6722A3A3A20D09BDD4C16 /* TimerAttributes.swift in Sources */,
 				BA4C1D1E5AB56838F564B609 /* TimerLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B4F6E1E6F1B58B4005C10FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */,
+				11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,37 +502,14 @@
 			target = F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */;
 			targetProxy = FEF4C651CB8ED17BB09E21C5 /* PBXContainerItemProxy */;
 		};
+        7B4F6E1E6F1B58B4005C10F9 /* PBXTargetDependency */ = {
+            isa = PBXTargetDependency;
+            target = 0122413DFD8891461DD2CC99 /* MonoFocus */;
+            targetProxy = 7B4F6E1E6F1B58B4005C10F8 /* PBXContainerItemProxy */;
+        };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		7B4F6E1E6F1B58B4005C10FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
-				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.9;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		7B4F6E1E6F1B58B4005C10FC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
-				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.9;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 		395D12C7C39F4BE61A13B508 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -579,6 +565,36 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		7B4F6E1E6F1B58B4005C10FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		7B4F6E1E6F1B58B4005C10FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
+				DEVELOPMENT_TEAM = M7FT37U5G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
 		};
 		C143E0A275B59516D4DB2A14 /* Release */ = {
 			isa = XCBuildConfiguration;

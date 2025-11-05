@@ -9,9 +9,9 @@ final class TimerViewModelTests: XCTestCase {
         }
         defer { NotificationCenter.default.removeObserver(token) }
 
-        let vm = TimerViewModel()
+        let vm = await TimerViewModel()
         // Use test hook to emit completion without needing to wait.
-        vm._test_emitCompletionNotification()
+        await vm._test_emitCompletionNotification()
 
         await fulfillment(of: [exp], timeout: 1.0)
     }

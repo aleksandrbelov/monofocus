@@ -2,7 +2,7 @@ import XCTest
 @testable import MonoFocus
 
 final class ShortcutServiceTests: XCTestCase {
-    func test_markPendingOff_setsFlagsWhenEnabled() {
+    @MainActor func test_markPendingOff_setsFlagsWhenEnabled() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
         let service = ShortcutService(userDefaults: defaults)
         service.isDNDAutomationEnabled = true
@@ -14,7 +14,7 @@ final class ShortcutServiceTests: XCTestCase {
         XCTAssertFalse(defaults.bool(forKey: "pendingDisableGrayscale"))
     }
 
-    func test_savePersistsNames() {
+    @MainActor func test_savePersistsNames() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
         let service = ShortcutService(userDefaults: defaults)
         service.dndShortcutName = "A"
