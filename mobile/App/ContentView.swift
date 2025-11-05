@@ -38,7 +38,7 @@ struct ContentView: View {
             Color.monoBackground.ignoresSafeArea()
 
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: Spacing.value(.xxl)) {
+                VStack(alignment: .center, spacing: Spacing.value(.xxl)) {
                     HeaderView {
                         showSetupSheet = true
                     }
@@ -54,7 +54,7 @@ struct ContentView: View {
                         EmptyStateView()
                     }
 
-                    VStack(alignment: .leading, spacing: Spacing.value(.md)) {
+                    VStack(alignment: .center, spacing: Spacing.value(.md)) {
                         Text("Presets")
                             .font(Typography.font(.title3, weight: .semibold))
                             .foregroundStyle(Color.monoForeground)
@@ -66,7 +66,7 @@ struct ContentView: View {
                         )
                     }
 
-                    VStack(alignment: .leading, spacing: Spacing.value(.md)) {
+                    VStack(alignment: .center, spacing: Spacing.value(.md)) {
                         Text("Controls")
                             .font(Typography.font(.title3, weight: .semibold))
                             .foregroundStyle(Color.monoForeground)
