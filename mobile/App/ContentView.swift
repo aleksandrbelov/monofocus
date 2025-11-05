@@ -92,13 +92,12 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal, Spacing.value(.xl))
-                .padding(.top, Spacing.statusBarHeight + Spacing.value(.xxl))
-                .padding(.bottom, Spacing.homeIndicatorHeight + Spacing.value(.xxl))
+                .padding(.top, Spacing.value(.xxl))
+                .padding(.bottom, Spacing.value(.xxl))
             }
             .accessibilityHidden(hasActiveModal)
         }
-        .safeAreaInset(edge: .top) { StatusBarView() }
-        .safeAreaInset(edge: .bottom) { HomeIndicatorView() }
+        // Custom status bar/home indicator views removed to avoid duplication
         .preferredColorScheme(themeManager.colorScheme)
         .sheet(isPresented: $showSetupSheet) {
             SetupView()
