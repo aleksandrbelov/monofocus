@@ -32,30 +32,38 @@ struct SetupView: View {
 
     private var instructionsSection: some View {
         VStack(alignment: .leading, spacing: Spacing.value(.md)) {
-            Text("To let MonoFocus mute distractions and grayscale the screen during a session, create two Shortcuts:")
+            Text("To let MonoFocus mute distractions and grayscale the screen during a session, create Shortcuts for turning features ON at start and OFF at the end:")
                 .font(Typography.font(.body))
                 .foregroundStyle(Color.label(.primary))
 
             Group {
-                Text("1. **Focus / DND Shortcut**")
-                Text("   - Open Shortcuts → New Shortcut → Add \"Set Focus\" → choose your focus mode (e.g., Do Not Disturb) → Turn **On**. Optionally add a \"Wait\" action followed by \"Set Focus\" **Off**.")
-                Text("   - Name it `MonoFocus DND` or customize the name below.")
+                Text("1. **Focus / DND On**")
+                Text("   - Open Shortcuts → New Shortcut → Add \"Set Focus\" → choose your focus mode (e.g., Do Not Disturb) → Turn **On**.")
+                Text("   - Name it `MonoFocus DND` (default) or customize the name below.")
+
+                Text("2. **Focus / DND Off**")
+                Text("   - New Shortcut → Add \"Set Focus\" → choose your focus mode → Turn **Off**.")
+                Text("   - Name it `MonoFocus DND Off` (default) or customize below.")
             }
             .font(Typography.font(.footnote))
             .foregroundStyle(Color.label(.secondary))
             .lineSpacing(4)
 
             Group {
-                Text("2. **Grayscale Shortcut**")
+                Text("3. **Grayscale On**")
                 Text("   - Settings → Accessibility → Accessibility Shortcut → select **Color Filters**.")
-                Text("   - In Shortcuts create: \"Set Color Filters\" → On, then \"Wait\" 25 minutes, then \"Set Color Filters\" → Off.")
-                Text("   - Name it `MonoFocus Grayscale` or customize the name below.")
+                Text("   - In Shortcuts create: \"Set Color Filters\" → On.")
+                Text("   - Name it `MonoFocus Grayscale` (default) or customize below.")
+
+                Text("4. **Grayscale Off**")
+                Text("   - In Shortcuts create: \"Set Color Filters\" → Off.")
+                Text("   - Name it `MonoFocus Grayscale Off` (default) or customize below.")
             }
             .font(Typography.font(.footnote))
             .foregroundStyle(Color.label(.secondary))
             .lineSpacing(4)
 
-            Text("Turn the automations on from the main screen; MonoFocus runs enabled shortcuts whenever a session starts or resumes.")
+            Text("Turn automations on from the main screen; MonoFocus runs ON shortcuts at start/resume, and OFF shortcuts when the timer ends. If you already have single shortcuts with a Wait step, those still work—OFF shortcuts provide more precise control.")
                 .font(Typography.font(.footnote, weight: .semibold))
                 .foregroundStyle(Color.label(.tertiary))
 
@@ -88,6 +96,18 @@ struct SetupView: View {
                     title: "Grayscale Shortcut",
                     value: $shortcuts.grayscaleShortcutName,
                     placeholder: "MonoFocus Grayscale"
+                )
+
+                labeledField(
+                    title: "Focus / DND Off Shortcut",
+                    value: $shortcuts.dndOffShortcutName,
+                    placeholder: "MonoFocus DND Off"
+                )
+
+                labeledField(
+                    title: "Grayscale Off Shortcut",
+                    value: $shortcuts.grayscaleOffShortcutName,
+                    placeholder: "MonoFocus Grayscale Off"
                 )
             }
         }

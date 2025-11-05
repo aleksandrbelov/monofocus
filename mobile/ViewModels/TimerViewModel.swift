@@ -297,6 +297,13 @@ final class TimerViewModel: ObservableObject {
         return String(format: "%02d:%02d", m, s)
     }
 
+#if DEBUG
+    // Test helper: emit completion notification without mutating state or writing to disk.
+    func _test_emitCompletionNotification() {
+        NotificationCenter.default.post(name: .timerSessionCompleted, object: nil)
+    }
+#endif
+
     // MARK: - Persistence
 
     private func persistSession(completed: Bool, elapsedSeconds: Int) {
