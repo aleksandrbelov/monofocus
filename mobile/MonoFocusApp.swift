@@ -48,12 +48,19 @@ struct MonoFocusApp: App {
                         timerVM.handleSceneDidBecomeActive(notificationService: notificationService)
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .timerSessionCompleted)) { _ in
+                    // Mark and attempt to run "off" automations when timer ends.
+                    shortcutService.markPendingOffIfEnabled()
+                    shortcutService.drainPendingOffIfAny(onlyIfActive: true)
+                }
                 .onChange(of: scenePhase) { newPhase in
                     switch newPhase {
                     case .background:
                         timerVM.prepareForBackground()
                     case .active:
                         timerVM.handleSceneDidBecomeActive(notificationService: notificationService)
+                        // Drain any pending off automations when returning to foreground.
+                        shortcutService.drainPendingOffIfAny(onlyIfActive: false)
                     case .inactive:
                         timerVM.persistState()
                     @unknown default:

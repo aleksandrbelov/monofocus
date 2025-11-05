@@ -76,12 +76,12 @@ struct ContentView: View {
                             isPaused: timer.isPaused,
                             onStart: {
                                 timer.start(notificationService: notifications)
-                                runEnabledAutomations()
+                                shortcuts.runAutomationsOnStartOrResume()
                             },
                             onPause: { timer.pause() },
                             onResume: {
                                 timer.resume(notificationService: notifications)
-                                runEnabledAutomations()
+                                shortcuts.runAutomationsOnStartOrResume()
                             },
                             onStop: { timer.stop(save: true) }
                         )
@@ -117,15 +117,6 @@ struct ContentView: View {
             previousRemainingSeconds = newValue
         }
         .overlay(modalsOverlay)
-    }
-
-    private func runEnabledAutomations() {
-        if shortcuts.isDNDAutomationEnabled {
-            shortcuts.runShortcut(named: shortcuts.dndShortcutName)
-        }
-        if shortcuts.isGrayscaleAutomationEnabled {
-            shortcuts.runShortcut(named: shortcuts.grayscaleShortcutName)
-        }
     }
 
     @ViewBuilder

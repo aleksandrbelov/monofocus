@@ -6,6 +6,9 @@ import BackgroundTasks
 #if canImport(ActivityKit)
 import ActivityKit
 #endif
+extension Notification.Name {
+    static let timerSessionCompleted = Notification.Name("TimerSessionCompleted")
+}
 
 @MainActor
 final class TimerViewModel: ObservableObject {
@@ -205,6 +208,8 @@ final class TimerViewModel: ObservableObject {
         if triggerHaptics {
             Haptics.timerComplete()
         }
+        // Inform observers (e.g., automation service) that the session completed.
+        NotificationCenter.default.post(name: .timerSessionCompleted, object: nil)
     }
 
     private func scheduleEndNotification(using notificationService: NotificationService?) {
