@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		036868CABE4DD5AC49291BF6 /* SessionEndReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491E4CC16D753DD15D5792E /* SessionEndReason.swift */; };
+		04D9CDCD7F5E36764ECE8293 /* SessionDidResumeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C211810AF881056AB504E544 /* SessionDidResumeIntent.swift */; };
 		134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */; };
+		180C0FB3AE10367E06BC9AFE /* PauseFocusSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932ADCDA81D73702813CFF /* PauseFocusSessionIntent.swift */; };
 		183044CCBF304AEA6BE660AF /* ControlButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */; };
 		19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B05AC6512D49E2F00B05FEF /* HeaderView.swift */; };
 		2071ABC26D30D9906A6EB840 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B629EF4A8B588087A40E1 /* ContentView.swift */; };
+		3BEADB498BC4FE7A7D365475 /* SessionDidCompleteIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F61EF6CA9FB6AB3746AB4 /* SessionDidCompleteIntent.swift */; };
 		3C885EBC3C467157EFC74A0A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */; };
 		3E6DCBCCDD601CEA9407EB46 /* AutomationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */; };
 		43A86DBDAEBB74C81789DD07 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040899776CF4AD863E345A4C /* ThemeManager.swift */; };
@@ -21,18 +25,24 @@
 		53986D856EDB713D6777579F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514DC351084B56C4A72B8EC /* EmptyStateView.swift */; };
 		5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF70E3700D03FC7810545C /* Shadows.swift */; };
 		60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */; };
+		621620886914A700B3A4B8B0 /* SessionWillEndIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14686053DF0CA812611B40A /* SessionWillEndIntent.swift */; };
+		67CCDA19D600535AFCED6538 /* SessionDidStartIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */; };
+		6BC70F2409C4D66D627156B0 /* IntentDonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C428EFAF7AFD33DBE5881 /* IntentDonationManager.swift */; };
 		6BEAFB4A7B28620A9BE4A219 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA570100E37B71D26C8DE147 /* Theme.swift */; };
 		6EA028595854FE4BC858A759 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96FFC8C26F47B7F47A1AF /* Typography.swift */; };
 		729152B6351A14EE31AAE38D /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */; };
 		744E7A3686C24818AE13512B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16984762DEFD1EA982CB43 /* SetupView.swift */; };
 		76A926341BF2B0DE3D37279D /* StartTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */; };
 		78A1849B8CCF814904F78CF7 /* FocusSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D01580A523937B25F87E6 /* FocusSession.swift */; };
+		7B2A217C4852A39D77140CB7 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAFD3DBEF791E6BD28030D3 /* AppDependencyContainer.swift */; };
 		7F05066521A11CB0DAA25563 /* ResumeSessionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15D26088BFC2A281C6EC9C8 /* ResumeSessionDialog.swift */; };
 		84E6722A3A3A20D09BDD4C16 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
 		89F3611BA2C51EB6BE70C0D3 /* MonoFocusWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 655AE25680C9310789C89152 /* MonoFocusWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8BA4D29DFCC46858BEB74376 /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5C60B44F5241839389A2D /* URLRouter.swift */; };
 		9191BAF71CAA0C96443C7358 /* TimePickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF1E5BFAD8E15FF0871E02A /* TimePickerModal.swift */; };
 		979982C3F590B5A3B986C6EA /* DigitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FDD78338644316DD62B740 /* DigitCardView.swift */; };
+		9BC83C0F3687FD77FDA640C9 /* ResumeFocusSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA10074356DD7B606DAC53D /* ResumeFocusSessionIntent.swift */; };
+		9C141EF184BBB2868D87BF38 /* AutomationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B95B8F5FC9D16CAF9FDB25 /* AutomationService.swift */; };
 		A3BDB5BE5D865B2A10254EC0 /* StopTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */; };
 		A840D9F880C4292FD12842D1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D635B3F231AD80883829559 /* CircularProgressView.swift */; };
 		B6788DBF1E0B5D3E9AD8F25E /* SessionExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */; };
@@ -85,8 +95,11 @@
 		0CE5C60B44F5241839389A2D /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 		14E8CD0EF768770A7E6F2359 /* TimerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLiveActivity.swift; sourceTree = "<group>"; };
 		16A833CA241DE7F74D5BE5CA /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		1BA10074356DD7B606DAC53D /* ResumeFocusSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeFocusSessionIntent.swift; sourceTree = "<group>"; };
 		1BF9D1B580F2CB5807048B08 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		20027F733506318B78AD85BE /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
+		228F61EF6CA9FB6AB3746AB4 /* SessionDidCompleteIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidCompleteIntent.swift; sourceTree = "<group>"; };
+		2491E4CC16D753DD15D5792E /* SessionEndReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionEndReason.swift; sourceTree = "<group>"; };
 		2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerIntent.swift; sourceTree = "<group>"; };
 		2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusApp.swift; sourceTree = "<group>"; };
 		2DF1E5BFAD8E15FF0871E02A /* TimePickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerModal.swift; sourceTree = "<group>"; };
@@ -107,25 +120,32 @@
 		6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
 		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B6C428EFAF7AFD33DBE5881 /* IntentDonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentDonationManager.swift; sourceTree = "<group>"; };
 		8D635B3F231AD80883829559 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		933FB4FCE9030B42ECC39CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9371C0015B402D05FDF882F4 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		9B05AC6512D49E2F00B05FEF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopTimerIntent.swift; sourceTree = "<group>"; };
+		9DAFD3DBEF791E6BD28030D3 /* AppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyContainer.swift; sourceTree = "<group>"; };
 		AFAFBAF609AF587678592F99 /* CompletionModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionModal.swift; sourceTree = "<group>"; };
 		B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		B1166CBCFE57F0E2D45D877C /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
 		B9FDD78338644316DD62B740 /* DigitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitCardView.swift; sourceTree = "<group>"; };
+		C211810AF881056AB504E544 /* SessionDidResumeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidResumeIntent.swift; sourceTree = "<group>"; };
+		C7932ADCDA81D73702813CFF /* PauseFocusSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseFocusSessionIntent.swift; sourceTree = "<group>"; };
 		CC2CE399CDD28CA59B3A6434 /* PresetButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetButtonGroup.swift; sourceTree = "<group>"; };
 		D15D26088BFC2A281C6EC9C8 /* ResumeSessionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeSessionDialog.swift; sourceTree = "<group>"; };
 		D1A8902F9C906AD30652A007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D1B95B8F5FC9D16CAF9FDB25 /* AutomationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationService.swift; sourceTree = "<group>"; };
 		D3CCA158C7EC8453397FC446 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSection.swift; sourceTree = "<group>"; };
 		DCE71FAC79960C7AAC04B37A /* HomeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndicatorView.swift; sourceTree = "<group>"; };
 		DD6515E27281A7FCB4560ADA /* ThemeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeToggle.swift; sourceTree = "<group>"; };
+		E14686053DF0CA812611B40A /* SessionWillEndIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWillEndIntent.swift; sourceTree = "<group>"; };
 		E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusWidgets.swift; sourceTree = "<group>"; };
 		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidStartIntent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -159,6 +179,18 @@
 				455114CF852DCAE3EE081F5B /* Tokens */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		20C7636B5B819735987B2BCF /* Automation */ = {
+			isa = PBXGroup;
+			children = (
+				228F61EF6CA9FB6AB3746AB4 /* SessionDidCompleteIntent.swift */,
+				C211810AF881056AB504E544 /* SessionDidResumeIntent.swift */,
+				F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */,
+				2491E4CC16D753DD15D5792E /* SessionEndReason.swift */,
+				E14686053DF0CA812611B40A /* SessionWillEndIntent.swift */,
+			);
+			path = Automation;
 			sourceTree = "<group>";
 		};
 		36BA51090534E661666DDCCA /* mobile */ = {
@@ -226,6 +258,8 @@
 				2A1FDC04B19AD6383236B899 /* StartTimerIntent.swift */,
 				9CEE5966CA9BB21244E61391 /* StopTimerIntent.swift */,
 				0387317BAC46E254A8503A0E /* TimerShortcuts.swift */,
+				20C7636B5B819735987B2BCF /* Automation */,
+				E34DE9CABDF76E6C62FD2D7D /* Timer */,
 			);
 			path = AppIntents;
 			sourceTree = "<group>";
@@ -233,6 +267,9 @@
 		7BA8D33A44A7BA6F579077AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9DAFD3DBEF791E6BD28030D3 /* AppDependencyContainer.swift */,
+				D1B95B8F5FC9D16CAF9FDB25 /* AutomationService.swift */,
+				7B6C428EFAF7AFD33DBE5881 /* IntentDonationManager.swift */,
 				E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */,
 			);
 			path = Services;
@@ -309,6 +346,15 @@
 				49B808BF9E35A92859790B41 /* TimerAttributes.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E34DE9CABDF76E6C62FD2D7D /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				C7932ADCDA81D73702813CFF /* PauseFocusSessionIntent.swift */,
+				1BA10074356DD7B606DAC53D /* ResumeFocusSessionIntent.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		EB7184078CE0DF75960A7952 /* ViewModels */ = {
@@ -415,8 +461,10 @@
 			files = (
 				450CBC85972CA214071E3B67 /* ActivityViewController.swift in Sources */,
 				DDE529F7BA515F34AF36B262 /* Animations.swift in Sources */,
+				7B2A217C4852A39D77140CB7 /* AppDependencyContainer.swift in Sources */,
 				3E6DCBCCDD601CEA9407EB46 /* AutomationCardView.swift in Sources */,
 				134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */,
+				9C141EF184BBB2868D87BF38 /* AutomationService.swift in Sources */,
 				C4F8F264E6959075D730C865 /* ButtonStyles.swift in Sources */,
 				A840D9F880C4292FD12842D1 /* CircularProgressView.swift in Sources */,
 				C1C52D685B093F252E827F9A /* CircularTimerView.swift in Sources */,
@@ -430,12 +478,20 @@
 				78A1849B8CCF814904F78CF7 /* FocusSession.swift in Sources */,
 				19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */,
 				CBF01498628386BF976ADA46 /* HomeIndicatorView.swift in Sources */,
+				6BC70F2409C4D66D627156B0 /* IntentDonationManager.swift in Sources */,
 				C4CAE5370BD42D3784524913 /* MonoFocusApp.swift in Sources */,
 				3C885EBC3C467157EFC74A0A /* NotificationService.swift in Sources */,
+				180C0FB3AE10367E06BC9AFE /* PauseFocusSessionIntent.swift in Sources */,
 				BCD7CDE6CC26936C7F2D9EB5 /* PresetButtonGroup.swift in Sources */,
 				4F77044AAF0F457922F19C01 /* Radius.swift in Sources */,
+				9BC83C0F3687FD77FDA640C9 /* ResumeFocusSessionIntent.swift in Sources */,
 				7F05066521A11CB0DAA25563 /* ResumeSessionDialog.swift in Sources */,
+				3BEADB498BC4FE7A7D365475 /* SessionDidCompleteIntent.swift in Sources */,
+				04D9CDCD7F5E36764ECE8293 /* SessionDidResumeIntent.swift in Sources */,
+				67CCDA19D600535AFCED6538 /* SessionDidStartIntent.swift in Sources */,
+				036868CABE4DD5AC49291BF6 /* SessionEndReason.swift in Sources */,
 				B6788DBF1E0B5D3E9AD8F25E /* SessionExporter.swift in Sources */,
+				621620886914A700B3A4B8B0 /* SessionWillEndIntent.swift in Sources */,
 				744E7A3686C24818AE13512B /* SetupView.swift in Sources */,
 				5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */,
 				BF46DB6374741C8550CD2BE2 /* Spacing.swift in Sources */,
@@ -569,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -652,7 +708,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
