@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -104,11 +104,11 @@
 		5B5D01580A523937B25F87E6 /* FocusSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSession.swift; sourceTree = "<group>"; };
 		5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExporter.swift; sourceTree = "<group>"; };
 		622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationCardView.swift; sourceTree = "<group>"; };
-		655AE25680C9310789C89152 /* MonoFocusWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MonoFocusWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		655AE25680C9310789C89152 /* MonoFocusWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MonoFocusWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
-		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D635B3F231AD80883829559 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		933FB4FCE9030B42ECC39CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9371C0015B402D05FDF882F4 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -370,14 +370,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-					0122413DFD8891461DD2CC99 = {
-						DevelopmentTeam = "";
-					};
-					F3CFA44E3900D3185FB2600C = {
-						DevelopmentTeam = "";
-					};
-				};
 			};
 			buildConfigurationList = AAE10B38053CF0DC89182D7A /* Build configuration list for PBXProject "MonoFocus" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -389,7 +381,6 @@
 			);
 			mainGroup = DC611F9F48987A9E2E2B6D6A;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -486,6 +477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -503,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,6 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
