@@ -19,7 +19,6 @@
 		4E70C9BDFB3B9EA048FA025B /* TimerDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */; };
 		4F77044AAF0F457922F19C01 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20027F733506318B78AD85BE /* Radius.swift */; };
 		53986D856EDB713D6777579F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514DC351084B56C4A72B8EC /* EmptyStateView.swift */; };
-		5BBC038C625840188E308193 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C38186D05076BD8581E020 /* ShortcutService.swift */; };
 		5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF70E3700D03FC7810545C /* Shadows.swift */; };
 		60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */; };
 		6BEAFB4A7B28620A9BE4A219 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA570100E37B71D26C8DE147 /* Theme.swift */; };
@@ -81,7 +80,6 @@
 
 /* Begin PBXFileReference section */
 		0387317BAC46E254A8503A0E /* TimerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerShortcuts.swift; sourceTree = "<group>"; };
-		03C38186D05076BD8581E020 /* ShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		040899776CF4AD863E345A4C /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButtonGroup.swift; sourceTree = "<group>"; };
 		0CE5C60B44F5241839389A2D /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */,
-				03C38186D05076BD8581E020 /* ShortcutService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -441,7 +438,6 @@
 				B6788DBF1E0B5D3E9AD8F25E /* SessionExporter.swift in Sources */,
 				744E7A3686C24818AE13512B /* SetupView.swift in Sources */,
 				5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */,
-				5BBC038C625840188E308193 /* ShortcutService.swift in Sources */,
 				BF46DB6374741C8550CD2BE2 /* Spacing.swift in Sources */,
 				76A926341BF2B0DE3D37279D /* StartTimerIntent.swift in Sources */,
 				FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */,
