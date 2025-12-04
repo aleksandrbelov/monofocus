@@ -3,7 +3,7 @@ import UIKit
 
 struct SetupView: View {
     @EnvironmentObject var timer: TimerViewModel
-    @EnvironmentObject var shortcuts: ShortcutService
+    @EnvironmentObject var automation: AutomationService
 
     @State private var showingShareSheet = false
     @State private var csvURL: URL?
@@ -16,7 +16,6 @@ struct SetupView: View {
                     .foregroundStyle(Color.monoForeground)
 
                 instructionsSection
-                shortcutConfigurationSection
                 historyExportSection
             }
             .padding(Spacing.value(.xl))
@@ -32,84 +31,40 @@ struct SetupView: View {
 
     private var instructionsSection: some View {
         VStack(alignment: .leading, spacing: Spacing.value(.md)) {
-            Text("To let MonoFocus mute distractions and grayscale the screen during a session, create Shortcuts for turning features ON at start and OFF at the end:")
+            Text("MonoFocus uses App Intents to trigger your Shortcuts automations. Create automations in the Shortcuts app that respond to MonoFocus events:")
                 .font(Typography.font(.body))
                 .foregroundStyle(Color.label(.primary))
 
             Group {
-                Text("1. **Focus / DND On**")
-                Text("   - Open Shortcuts → New Shortcut → Add \"Set Focus\" → choose your focus mode (e.g., Do Not Disturb) → Turn **On**.")
-                Text("   - Name it `MonoFocus DND` (default) or customize the name below.")
+                Text("1. **Session Start Automation**")
+                Text("   - Open Shortcuts → Automations → Create Personal Automation")
+                Text("   - Choose \"App\" → Select \"MonoFocus\" → \"Is Opened\"")
+                Text("   - Add actions: \"Set Focus\" to turn DND on, or \"Set Color Filters\" for grayscale")
 
-                Text("2. **Focus / DND Off**")
-                Text("   - New Shortcut → Add \"Set Focus\" → choose your focus mode → Turn **Off**.")
-                Text("   - Name it `MonoFocus DND Off` (default) or customize below.")
+                Text("2. **Session Complete Automation**")
+                Text("   - Create another automation triggered when MonoFocus is closed")
+                Text("   - Add actions to turn off DND or Color Filters")
             }
             .font(Typography.font(.footnote))
             .foregroundStyle(Color.label(.secondary))
             .lineSpacing(4)
 
             Group {
-                Text("3. **Grayscale On**")
-                Text("   - Settings → Accessibility → Accessibility Shortcut → select **Color Filters**.")
-                Text("   - In Shortcuts create: \"Set Color Filters\" → On.")
-                Text("   - Name it `MonoFocus Grayscale` (default) or customize below.")
-
-                Text("4. **Grayscale Off**")
-                Text("   - In Shortcuts create: \"Set Color Filters\" → Off.")
-                Text("   - Name it `MonoFocus Grayscale Off` (default) or customize below.")
+                Text("3. **Siri Integration**")
+                Text("   - Say \"Start a focus timer\" or \"Stop my focus timer\" to control MonoFocus with Siri")
+                Text("   - You can also use \"Pause my focus timer\" and \"Resume my focus timer\"")
             }
             .font(Typography.font(.footnote))
             .foregroundStyle(Color.label(.secondary))
             .lineSpacing(4)
 
-            Text("Turn automations on from the main screen; MonoFocus runs ON shortcuts at start/resume, and OFF shortcuts when the timer ends. If you already have single shortcuts with a Wait step, those still work—OFF shortcuts provide more precise control.")
+            Text("Turn automations on from the main screen to enable intent notifications. MonoFocus will donate intents when sessions start, resume, or complete.")
                 .font(Typography.font(.footnote, weight: .semibold))
                 .foregroundStyle(Color.label(.tertiary))
 
             Text("Lock Screen widgets provide 15/30/60 minute quick-start. Add them from the widget gallery after installing the app.")
                 .font(Typography.font(.footnote))
                 .foregroundStyle(Color.label(.tertiary))
-        }
-    }
-
-    private var shortcutConfigurationSection: some View {
-        VStack(alignment: .leading, spacing: Spacing.value(.sm)) {
-            Divider().padding(.vertical, Spacing.value(.sm))
-
-            Text("Shortcut Names")
-                .font(Typography.font(.headline, weight: .semibold))
-                .foregroundStyle(Color.monoForeground)
-
-            Text("Update these if you named your shortcuts differently. MonoFocus saves them automatically.")
-                .font(Typography.font(.footnote))
-                .foregroundStyle(Color.label(.secondary))
-
-            VStack(spacing: Spacing.value(.sm)) {
-                labeledField(
-                    title: "Focus / DND Shortcut",
-                    value: $shortcuts.dndShortcutName,
-                    placeholder: "MonoFocus DND"
-                )
-
-                labeledField(
-                    title: "Grayscale Shortcut",
-                    value: $shortcuts.grayscaleShortcutName,
-                    placeholder: "MonoFocus Grayscale"
-                )
-
-                labeledField(
-                    title: "Focus / DND Off Shortcut",
-                    value: $shortcuts.dndOffShortcutName,
-                    placeholder: "MonoFocus DND Off"
-                )
-
-                labeledField(
-                    title: "Grayscale Off Shortcut",
-                    value: $shortcuts.grayscaleOffShortcutName,
-                    placeholder: "MonoFocus Grayscale Off"
-                )
-            }
         }
     }
 
@@ -133,22 +88,6 @@ struct SetupView: View {
                 }
             }
             .buttonStyle(.secondary)
-        }
-    }
-
-    private func labeledField(
-        title: String,
-        value: Binding<String>,
-        placeholder: String
-    ) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.value(.xs)) {
-            Text(title)
-                .font(Typography.font(.footnote, weight: .semibold))
-                .foregroundStyle(Color.label(.primary))
-
-            TextField(placeholder, text: value)
-                .textFieldStyle(.roundedBorder)
-                .accessibilityLabel(title)
         }
     }
 }

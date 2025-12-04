@@ -1,8 +1,6 @@
 import Foundation
 import AppIntents
-import UIKit
 
-@available(iOS 16.0, *)
 struct StopTimerIntent: AppIntent {
     static var title: LocalizedStringResource = "Stop Focus Timer"
     static var description = IntentDescription(
@@ -16,9 +14,16 @@ struct StopTimerIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        if let url = URL(string: "monofocus://stop") {
-            await UIApplication.shared.open(url)
+        let container = AppDependencyContainer.shared
+        guard let timerViewModel = container.timerViewModel else {
+            return .result(dialog: "MonoFocus is not ready. Please open the app first.")
         }
+
+        // Notify automation service about session ending before stopping
+        container.automationService?.notifySessionWillEnd(reason: .stopped)
+
+        timerViewModel.stop(save: true)
+
         return .result(dialog: "Focus session stopped")
     }
 }

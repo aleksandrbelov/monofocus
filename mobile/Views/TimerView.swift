@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TimerView: View {
     @EnvironmentObject var timer: TimerViewModel
-    @EnvironmentObject var shortcuts: ShortcutService
+    @EnvironmentObject var automation: AutomationService
     @EnvironmentObject var notifications: NotificationService
     @State private var showingSetup = false
 
@@ -27,10 +27,16 @@ struct TimerView: View {
 
                 HStack(spacing: Theme.spacingM) {
                     if !timer.isRunning && !timer.isPaused {
-                        Button("Start") { timer.start(notificationService: notifications) }
+                        Button("Start") {
+                            timer.start(notificationService: notifications)
+                            automation.notifySessionStart(durationMinutes: timer.totalSeconds / 60)
+                        }
                             .buttonStyle(Primary())
                     } else if timer.isPaused {
-                        Button("Resume") { timer.resume(notificationService: notifications) }
+                        Button("Resume") {
+                            timer.resume(notificationService: notifications)
+                            automation.notifySessionResume(remainingMinutes: timer.remainingSeconds / 60)
+                        }
                             .buttonStyle(Primary())
                     } else {
                         Button("Pause") { timer.pause() }
@@ -48,21 +54,13 @@ struct TimerView: View {
                             .font(.headline)
                         Spacer()
                     }
-                    HStack {
-                        TextField("DND Shortcut name", text: $shortcuts.dndShortcutName)
-                            .textFieldStyle(.roundedBorder)
-                        Button("Run") { shortcuts.runShortcut(named: shortcuts.dndShortcutName) }
-                            .buttonStyle(Secondary())
-                    }
-                    HStack {
-                        TextField("Grayscale Shortcut name", text: $shortcuts.grayscaleShortcutName)
-                            .textFieldStyle(.roundedBorder)
-                        Button("Run") { shortcuts.runShortcut(named: shortcuts.grayscaleShortcutName) }
-                            .buttonStyle(Secondary())
-                    }
-                    Button("Save Shortcut Names") { shortcuts.save() }
-                        .buttonStyle(Pill())
-                        .padding(.top, 4)
+
+                    Toggle("Enable DND Automation", isOn: $automation.isDNDAutomationEnabled)
+                    Toggle("Enable Grayscale Automation", isOn: $automation.isGrayscaleAutomationEnabled)
+
+                    Text("Automations are triggered via App Intents when sessions start or complete.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
 
                 Spacer(minLength: 0)

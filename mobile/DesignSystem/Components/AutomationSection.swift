@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// Collection of automation toggles interacting with ShortcutService.
+/// Collection of automation toggles interacting with AutomationService.
 struct AutomationSection: View {
-    @ObservedObject var service: ShortcutService
+    @ObservedObject var service: AutomationService
     let onInfo: () -> Void
 
     var body: some View {
@@ -39,7 +39,7 @@ struct AutomationSection: View {
                 )
             }
 
-            Text("MonoFocus runs these shortcuts whenever you start or resume a session.")
+            Text("MonoFocus notifies your Shortcuts automations when sessions start, resume, or complete.")
                 .font(Typography.font(.footnote))
                 .foregroundStyle(Color.label(.tertiary))
         }
@@ -57,7 +57,7 @@ struct AutomationSection: View {
 #if DEBUG
 struct AutomationSection_Previews: PreviewProvider {
     static var previews: some View {
-        AutomationSection(service: ShortcutService(), onInfo: {})
+        AutomationSection(service: AutomationService(), onInfo: {})
             .padding()
             .background(Color.monoBackground)
             .previewLayout(.sizeThatFits)
