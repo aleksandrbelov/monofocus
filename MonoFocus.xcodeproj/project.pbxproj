@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */; };
-		11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */; };
 		134A7FAD8A13F32CFB2918FF /* AutomationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA92CE760BEBE1CAEEDCEF1 /* AutomationSection.swift */; };
 		183044CCBF304AEA6BE660AF /* ControlButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ED791FD648B3A35FA2D226 /* ControlButtonGroup.swift */; };
 		19D1E1CACFC4F4E47D5A8789 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B05AC6512D49E2F00B05FEF /* HeaderView.swift */; };
@@ -23,6 +21,7 @@
 		53986D856EDB713D6777579F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514DC351084B56C4A72B8EC /* EmptyStateView.swift */; };
 		5BBC038C625840188E308193 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C38186D05076BD8581E020 /* ShortcutService.swift */; };
 		5EF40DDE531D49444CF97A7F /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BF70E3700D03FC7810545C /* Shadows.swift */; };
+		60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */; };
 		6BEAFB4A7B28620A9BE4A219 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA570100E37B71D26C8DE147 /* Theme.swift */; };
 		6EA028595854FE4BC858A759 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC96FFC8C26F47B7F47A1AF /* Typography.swift */; };
 		729152B6351A14EE31AAE38D /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */; };
@@ -64,13 +63,6 @@
 			remoteGlobalIDString = F3CFA44E3900D3185FB2600C;
 			remoteInfo = MonoFocusWidgets;
 		};
-        7B4F6E1E6F1B58B4005C10F8 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = 5C434B445741090DA7143948 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = 0122413DFD8891461DD2CC99;
-            remoteInfo = MonoFocus;
-        };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,12 +104,11 @@
 		5B5D01580A523937B25F87E6 /* FocusSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSession.swift; sourceTree = "<group>"; };
 		5BD52ACACA2CAC8D64B181BA /* SessionExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExporter.swift; sourceTree = "<group>"; };
 		622BE4323FF94B21BF7AC5AC /* AutomationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationCardView.swift; sourceTree = "<group>"; };
-		655AE25680C9310789C89152 /* MonoFocusWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MonoFocusWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		655AE25680C9310789C89152 /* MonoFocusWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MonoFocusWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		6BBA49AD6B75F7FBE2ADDA9C /* TimerDigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDigitsView.swift; sourceTree = "<group>"; };
-		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutServiceTests.swift; sourceTree = "<group>"; };
-		7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
+		733EDD3C2A3752D484BF0B0F /* MonoFocus.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MonoFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D635B3F231AD80883829559 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		933FB4FCE9030B42ECC39CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9371C0015B402D05FDF882F4 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -137,7 +128,6 @@
 		E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoFocusWidgets.swift; sourceTree = "<group>"; };
 		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonoFocusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -146,7 +136,6 @@
 			children = (
 				733EDD3C2A3752D484BF0B0F /* MonoFocus.app */,
 				655AE25680C9310789C89152 /* MonoFocusWidgets.appex */,
-				FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				D1A8902F9C906AD30652A007 /* Info.plist */,
+				6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */,
 				2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */,
 				5AA0AB0C04E1A707120E79ED /* App */,
 				61948A26594B26BD24D2A5D4 /* AppIntents */,
@@ -240,15 +230,6 @@
 				0387317BAC46E254A8503A0E /* TimerShortcuts.swift */,
 			);
 			path = AppIntents;
-			sourceTree = "<group>";
-		};
-		7B4F6E1E6F1B58B4005C10FF /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7B4F6E1E6F1B58B4005C1001 /* ShortcutServiceTests.swift */,
-				7B4F6E1E6F1B58B4005C1002 /* TimerViewModelTests.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		7BA8D33A44A7BA6F579077AA /* Services */ = {
@@ -321,7 +302,6 @@
 				36BA51090534E661666DDCCA /* mobile */,
 				CA54212A28E78ACA6AE78C6C /* MonoFocusWidgets */,
 				12E71DBDD80C1FA260606684 /* Products */,
-				7B4F6E1E6F1B58B4005C10FF /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,6 +330,7 @@
 			buildConfigurationList = C0E208EBE10374EC78885698 /* Build configuration list for PBXNativeTarget "MonoFocus" */;
 			buildPhases = (
 				AD75E85BCF4C7DD80F9E1EC6 /* Sources */,
+				C7B982BD582297942EFEDB3A /* Resources */,
 				94927A45922B9C5E0A3692F8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -363,22 +344,6 @@
 			productName = MonoFocus;
 			productReference = 733EDD3C2A3752D484BF0B0F /* MonoFocus.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7B4F6E1E6F1B58B4005C10FE /* MonoFocusTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7B4F6E1E6F1B58B4005C10FD /* Build configuration list for PBXNativeTarget "MonoFocusTests" */;
-			buildPhases = (
-				7B4F6E1E6F1B58B4005C10FA /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-                7B4F6E1E6F1B58B4005C10F9 /* PBXTargetDependency */,
-			);
-			name = MonoFocusTests;
-			productName = MonoFocusTests;
-			productReference = FA437F972EBB97ED00D29F73 /* MonoFocusTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */ = {
 			isa = PBXNativeTarget;
@@ -404,7 +369,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0122413DFD8891461DD2CC99 = {
+						DevelopmentTeam = "";
+					};
+					F3CFA44E3900D3185FB2600C = {
+						DevelopmentTeam = "";
+					};
+				};
 			};
 			buildConfigurationList = AAE10B38053CF0DC89182D7A /* Build configuration list for PBXProject "MonoFocus" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -416,15 +389,26 @@
 			);
 			mainGroup = DC611F9F48987A9E2E2B6D6A;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				0122413DFD8891461DD2CC99 /* MonoFocus */,
 				F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */,
-				7B4F6E1E6F1B58B4005C10FE /* MonoFocusTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7B982BD582297942EFEDB3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		244A22323D21419A43099538 /* Sources */ = {
@@ -434,15 +418,6 @@
 				D153B7C52C17778938C733DB /* MonoFocusWidgets.swift in Sources */,
 				84E6722A3A3A20D09BDD4C16 /* TimerAttributes.swift in Sources */,
 				BA4C1D1E5AB56838F564B609 /* TimerLiveActivity.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7B4F6E1E6F1B58B4005C10FA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				11B4B9B0C1B3D58800C1E111 /* ShortcutServiceTests.swift in Sources */,
-				11B4B9B1C1B3D58800C1E111 /* TimerViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,11 +477,6 @@
 			target = F3CFA44E3900D3185FB2600C /* MonoFocusWidgets */;
 			targetProxy = FEF4C651CB8ED17BB09E21C5 /* PBXContainerItemProxy */;
 		};
-        7B4F6E1E6F1B58B4005C10F9 /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = 0122413DFD8891461DD2CC99 /* MonoFocus */;
-            targetProxy = 7B4F6E1E6F1B58B4005C10F8 /* PBXContainerItemProxy */;
-        };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -516,7 +486,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -534,7 +503,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -552,7 +520,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,36 +532,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		7B4F6E1E6F1B58B4005C10FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
-				DEVELOPMENT_TEAM = M7FT37U5G5;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.9;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		7B4F6E1E6F1B58B4005C10FC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MonoFocus.app/MonoFocus";
-				DEVELOPMENT_TEAM = M7FT37U5G5;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.monofocus.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.9;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
 		};
 		C143E0A275B59516D4DB2A14 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -634,7 +571,6 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -660,7 +596,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -712,7 +647,6 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -742,15 +676,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B4F6E1E6F1B58B4005C10FD /* Build configuration list for PBXNativeTarget "MonoFocusTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7B4F6E1E6F1B58B4005C10FB /* Debug */,
-				7B4F6E1E6F1B58B4005C10FC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		AAE10B38053CF0DC89182D7A /* Build configuration list for PBXProject "MonoFocus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
