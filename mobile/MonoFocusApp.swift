@@ -19,8 +19,9 @@ struct MonoFocusApp: App {
         _notificationService = StateObject(wrappedValue: notificationService)
         _themeManager = StateObject(wrappedValue: themeManager)
 
-        // Configure the dependency container for App Intents
-        Task { @MainActor in
+        // Configure the dependency container for App Intents synchronously.
+        // SwiftUI App init runs on the main actor, so we can safely configure here.
+        MainActor.assumeIsolated {
             AppDependencyContainer.shared.configure(
                 timerViewModel: timerViewModel,
                 notificationService: notificationService,
