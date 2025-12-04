@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var timer: TimerViewModel
     @EnvironmentObject private var themeManager: ThemeManager
-    @EnvironmentObject private var shortcuts: ShortcutService
+    @EnvironmentObject private var automation: AutomationService
     @EnvironmentObject private var notifications: NotificationService
 
     @AppStorage("preferredPreset") private var preferredPreset: Int = 25
@@ -76,18 +76,18 @@ struct ContentView: View {
                             isPaused: timer.isPaused,
                             onStart: {
                                 timer.start(notificationService: notifications)
-                                shortcuts.runAutomationsOnStartOrResume()
+                                automation.notifySessionStart(durationMinutes: timer.totalSeconds / 60)
                             },
                             onPause: { timer.pause() },
                             onResume: {
                                 timer.resume(notificationService: notifications)
-                                shortcuts.runAutomationsOnStartOrResume()
+                                automation.notifySessionResume(remainingMinutes: timer.remainingSeconds / 60)
                             },
                             onStop: { timer.stop(save: true) }
                         )
                     }
 
-                    AutomationSection(service: shortcuts) {
+                    AutomationSection(service: automation) {
                         showSetupSheet = true
                     }
                 }
@@ -102,7 +102,7 @@ struct ContentView: View {
         .sheet(isPresented: $showSetupSheet) {
             SetupView()
                 .environmentObject(timer)
-                .environmentObject(shortcuts)
+                .environmentObject(automation)
         }
         .onAppear {
             previousRemainingSeconds = timer.remainingSeconds
@@ -148,13 +148,13 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let timer = TimerViewModel()
-        let shortcuts = ShortcutService()
+        let automation = AutomationService()
         let notifications = NotificationService()
         let themeManager = ThemeManager()
 
         return ContentView()
             .environmentObject(timer)
-            .environmentObject(shortcuts)
+            .environmentObject(automation)
             .environmentObject(notifications)
             .environmentObject(themeManager)
             .preferredColorScheme(.dark)

@@ -1,8 +1,6 @@
 import Foundation
 import AppIntents
-import UIKit
 
-@available(iOS 16.0, *)
 struct StartTimerIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Focus Timer"
     static var description = IntentDescription(
@@ -25,9 +23,17 @@ struct StartTimerIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        if let url = URL(string: "monofocus://start?minutes=\(minutes)") {
-            await UIApplication.shared.open(url)
+        let container = AppDependencyContainer.shared
+        guard let timerViewModel = container.timerViewModel else {
+            return .result(dialog: "MonoFocus is not ready. Please open the app first.")
         }
+
+        timerViewModel.setPreset(minutes: minutes)
+        timerViewModel.start(notificationService: container.notificationService)
+
+        // Notify automation service about session start
+        container.automationService?.notifySessionStart(durationMinutes: minutes)
+
         return .result(dialog: "Starting \(minutes) minute focus session")
     }
 }

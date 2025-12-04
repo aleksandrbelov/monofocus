@@ -4,20 +4,29 @@ import BackgroundTasks
 @main
 struct MonoFocusApp: App {
     @StateObject private var timerVM: TimerViewModel
-    @StateObject private var shortcutService: ShortcutService
+    @StateObject private var automationService: AutomationService
     @StateObject private var notificationService: NotificationService
     @StateObject private var themeManager: ThemeManager
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
         let timerViewModel = TimerViewModel()
-        let shortcutService = ShortcutService()
+        let automationService = AutomationService()
         let notificationService = NotificationService()
         let themeManager = ThemeManager()
         _timerVM = StateObject(wrappedValue: timerViewModel)
-        _shortcutService = StateObject(wrappedValue: shortcutService)
+        _automationService = StateObject(wrappedValue: automationService)
         _notificationService = StateObject(wrappedValue: notificationService)
         _themeManager = StateObject(wrappedValue: themeManager)
+
+        // Configure the dependency container for App Intents
+        Task { @MainActor in
+            AppDependencyContainer.shared.configure(
+                timerViewModel: timerViewModel,
+                notificationService: notificationService,
+                automationService: automationService
+            )
+        }
 
         BGTaskScheduler.shared.register(forTaskWithIdentifier: TimerViewModel.backgroundTaskIdentifier, using: nil) { task in
             guard let processingTask = task as? BGProcessingTask else {
@@ -36,7 +45,7 @@ struct MonoFocusApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(timerVM)
-                .environmentObject(shortcutService)
+                .environmentObject(automationService)
                 .environmentObject(notificationService)
                 .environmentObject(themeManager)
                 .onOpenURL { url in
@@ -49,9 +58,8 @@ struct MonoFocusApp: App {
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .timerSessionCompleted)) { _ in
-                    // Mark and attempt to run "off" automations when timer ends.
-                    shortcutService.markPendingOffIfEnabled()
-                    shortcutService.drainPendingOffIfAny(onlyIfActive: true)
+                    // Notify automation service when timer ends.
+                    automationService.notifySessionComplete(elapsedMinutes: timerVM.totalSeconds / 60)
                 }
                 .onChange(of: scenePhase) { newPhase in
                     switch newPhase {
@@ -59,8 +67,6 @@ struct MonoFocusApp: App {
                         timerVM.prepareForBackground()
                     case .active:
                         timerVM.handleSceneDidBecomeActive(notificationService: notificationService)
-                        // Drain any pending off automations when returning to foreground.
-                        shortcutService.drainPendingOffIfAny(onlyIfActive: false)
                     case .inactive:
                         timerVM.persistState()
                     @unknown default:
