@@ -11,9 +11,11 @@ A frictionless, offline focus timer for iOS. Single-screen timer with quick pres
 ## Quick Start
 
 1. Install Xcode 15+ and XcodeGen (`brew install xcodegen`).
-2. `cd MonoFocus`
-3. `xcodegen generate`
+2. Navigate to the repository root (where `project.yml` is located).
+3. Run `xcodegen generate` to create/update the Xcode project.
 4. Open `MonoFocus.xcodeproj` and run on iPhone (iOS 18+).
+
+> **Note:** Always run `xcodegen generate` after pulling changes to ensure the Xcode project reflects the latest source files.
 
 ### Siri Integration
 
