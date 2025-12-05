@@ -26,6 +26,7 @@ final class TimerViewModel: ObservableObject {
     private var sessionStartDate: Date?
     private var endDate: Date?
     private var liveActivityID: String?
+    private weak var automationService: AutomationService?
 
     init() {
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -38,6 +39,10 @@ final class TimerViewModel: ObservableObject {
             updateLiveActivitySnapshot()
         }
 #endif
+    }
+    
+    func setAutomationService(_ service: AutomationService) {
+        self.automationService = service
     }
 
     func setPreset(minutes: Int) {
@@ -106,6 +111,9 @@ final class TimerViewModel: ObservableObject {
         if save {
             let elapsed = totalSeconds - remainingSeconds
             persistSession(completed: remainingSeconds == 0, elapsedSeconds: max(elapsed, 0))
+            
+            // Trigger automation cleanup when manually stopping
+            automationService?.notifySessionWillEnd(reason: .stopped)
         }
         sessionStartDate = nil
         endDate = nil
@@ -199,6 +207,10 @@ final class TimerViewModel: ObservableObject {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["end-of-session"])
         remainingSeconds = 0
         persistSession(completed: true, elapsedSeconds: totalSeconds)
+        
+        // Trigger automation cleanup
+        automationService?.notifySessionComplete(elapsedMinutes: totalSeconds / 60)
+        
         sessionStartDate = nil
         endDate = nil
         persistState()
