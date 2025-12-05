@@ -2,55 +2,47 @@ import XCTest
 @testable import MonoFocus
 
 final class AutomationServiceTests: XCTestCase {
-    @MainActor func test_toggles_persistToUserDefaults() {
+    @MainActor func test_toggle_persistsToUserDefaults() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
         let service = AutomationService(userDefaults: defaults)
 
         // Verify initial state is false
-        XCTAssertFalse(service.isDNDAutomationEnabled)
-        XCTAssertFalse(service.isGrayscaleAutomationEnabled)
+        XCTAssertFalse(service.isAutomationEnabled)
+        XCTAssertFalse(defaults.bool(forKey: "automationEnabled"))
 
-        // Enable DND automation
-        service.isDNDAutomationEnabled = true
-        XCTAssertTrue(defaults.bool(forKey: "dndAutomationEnabled"))
+        // Enable automation
+        service.isAutomationEnabled = true
+        XCTAssertTrue(defaults.bool(forKey: "automationEnabled"))
 
-        // Enable Grayscale automation
-        service.isGrayscaleAutomationEnabled = true
-        XCTAssertTrue(defaults.bool(forKey: "grayscaleAutomationEnabled"))
-
-        // Disable DND automation
-        service.isDNDAutomationEnabled = false
-        XCTAssertFalse(defaults.bool(forKey: "dndAutomationEnabled"))
+        // Disable automation
+        service.isAutomationEnabled = false
+        XCTAssertFalse(defaults.bool(forKey: "automationEnabled"))
     }
 
     @MainActor func test_notifySessionStart_skipsWhenDisabled() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
         let service = AutomationService(userDefaults: defaults)
-        service.isDNDAutomationEnabled = false
-        service.isGrayscaleAutomationEnabled = false
+        service.isAutomationEnabled = false
 
-        // This should not throw or crash when both automations are disabled
+        // This should not throw or crash when automation is disabled
         service.notifySessionStart(durationMinutes: 25)
     }
 
     @MainActor func test_notifySessionComplete_skipsWhenDisabled() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
         let service = AutomationService(userDefaults: defaults)
-        service.isDNDAutomationEnabled = false
-        service.isGrayscaleAutomationEnabled = false
+        service.isAutomationEnabled = false
 
-        // This should not throw or crash when both automations are disabled
+        // This should not throw or crash when automation is disabled
         service.notifySessionComplete(elapsedMinutes: 25)
     }
 
     @MainActor func test_restoredState_fromUserDefaults() {
         let defaults = UserDefaults(suiteName: UUID().uuidString)!
-        defaults.set(true, forKey: "dndAutomationEnabled")
-        defaults.set(false, forKey: "grayscaleAutomationEnabled")
+        defaults.set(true, forKey: "automationEnabled")
 
         let service = AutomationService(userDefaults: defaults)
 
-        XCTAssertTrue(service.isDNDAutomationEnabled)
-        XCTAssertFalse(service.isGrayscaleAutomationEnabled)
+        XCTAssertTrue(service.isAutomationEnabled)
     }
 }
