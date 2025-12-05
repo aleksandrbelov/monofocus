@@ -3,6 +3,7 @@ import AppIntents
 
 struct StopTimerIntent: AppIntent {
     static var title: LocalizedStringResource = "Stop Focus Timer"
+    static var openAppWhenRun: Bool = true
     static var description = IntentDescription(
         "Stop the current focus session",
         categoryName: "Timer"

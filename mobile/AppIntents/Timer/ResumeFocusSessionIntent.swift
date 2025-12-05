@@ -3,6 +3,7 @@ import AppIntents
 
 struct ResumeFocusSessionIntent: AppIntent {
     static var title: LocalizedStringResource = "Resume Focus Timer"
+    static var openAppWhenRun: Bool = true
     static var description = IntentDescription(
         "Resume a paused focus session",
         categoryName: "Timer"

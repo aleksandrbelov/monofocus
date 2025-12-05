@@ -3,6 +3,7 @@ import AppIntents
 
 struct StartTimerIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Focus Timer"
+    static var openAppWhenRun: Bool = true
     static var description = IntentDescription(
         "Start a focus session with a preset duration",
         categoryName: "Timer"
