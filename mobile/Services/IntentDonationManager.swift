@@ -10,7 +10,7 @@ final class IntentDonationManager {
     func donateSessionStart(durationMinutes: Int) {
         let intent = SessionDidStartIntent(durationMinutes: durationMinutes)
         Task {
-            try? await intent.perform()
+            _ = try? await intent.donate()
         }
     }
 
@@ -18,7 +18,7 @@ final class IntentDonationManager {
     func donateSessionComplete(elapsedMinutes: Int) {
         let intent = SessionDidCompleteIntent(elapsedMinutes: elapsedMinutes)
         Task {
-            try? await intent.perform()
+            _ = try? await intent.donate()
         }
     }
 
@@ -26,7 +26,7 @@ final class IntentDonationManager {
     func donateSessionResume(remainingMinutes: Int) {
         let intent = SessionDidResumeIntent(remainingMinutes: remainingMinutes)
         Task {
-            try? await intent.perform()
+            _ = try? await intent.donate()
         }
     }
 
@@ -34,7 +34,7 @@ final class IntentDonationManager {
     func donateSessionWillEnd(reason: SessionEndReason) {
         let intent = SessionWillEndIntent(reason: reason)
         Task {
-            try? await intent.perform()
+            _ = try? await intent.donate()
         }
     }
 }
