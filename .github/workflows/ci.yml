@@ -14,9 +14,9 @@ jobs:
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate project
-        working-directory: MonoFocus
+        #working-directory: MonoFocus
         run: xcodegen generate
       - name: Build (Debug)
-        working-directory: MonoFocus
+        #working-directory: MonoFocus
         run: |
           xcodebuild -project MonoFocus.xcodeproj -scheme MonoFocus -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' build
