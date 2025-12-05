@@ -20,9 +20,7 @@ struct StopTimerIntent: AppIntent {
             return .result(dialog: "MonoFocus is not ready. Please open the app first.")
         }
 
-        // Notify automation service about session ending before stopping
-        container.automationService?.notifySessionWillEnd(reason: .stopped)
-
+        // TimerViewModel.stop() handles automation notification internally
         timerViewModel.stop(save: true)
 
         return .result(dialog: "Focus session stopped")
