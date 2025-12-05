@@ -1,93 +1,176 @@
 import SwiftUI
-import UIKit
 
 struct SetupView: View {
-    @EnvironmentObject var timer: TimerViewModel
     @EnvironmentObject var automation: AutomationService
-
-    @State private var showingShareSheet = false
-    @State private var csvURL: URL?
-
+    @State private var testingStart = false
+    @State private var testingEnd = false
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Spacing.value(.lg)) {
-                Text("Setup (one time)")
-                    .font(Typography.font(.title2, weight: .bold))
-                    .foregroundStyle(Color.monoForeground)
-
-                instructionsSection
-                historyExportSection
-            }
-            .padding(Spacing.value(.xl))
-            .background(Color.monoBackground)
-        }
-        .scrollIndicators(.hidden)
-        .sheet(isPresented: $showingShareSheet) {
-            if let url = csvURL {
-                ActivityViewController(activityItems: [url])
-            }
-        }
-    }
-
-    private var instructionsSection: some View {
-        VStack(alignment: .leading, spacing: Spacing.value(.md)) {
-            Text("MonoFocus uses App Intents to trigger your Shortcuts automations. Create automations in the Shortcuts app that respond to MonoFocus events:")
-                .font(Typography.font(.body))
-                .foregroundStyle(Color.label(.primary))
-
-            Group {
-                Text("1. **Session Start Automation**")
-                Text("   - Open Shortcuts → Automations → Create Personal Automation")
-                Text("   - Choose \"App\" → Select \"MonoFocus\" → \"Is Opened\"")
-                Text("   - Add actions: \"Set Focus\" to turn DND on, or \"Set Color Filters\" for grayscale")
-
-                Text("2. **Session Complete Automation**")
-                Text("   - Create another automation triggered when MonoFocus is closed")
-                Text("   - Add actions to turn off DND or Color Filters")
-            }
-            .font(Typography.font(.footnote))
-            .foregroundStyle(Color.label(.secondary))
-            .lineSpacing(4)
-
-            Group {
-                Text("3. **Siri Integration**")
-                Text("   - Say \"Start a focus timer\" or \"Stop my focus timer\" to control MonoFocus with Siri")
-                Text("   - You can also use \"Pause my focus timer\" and \"Resume my focus timer\"")
-            }
-            .font(Typography.font(.footnote))
-            .foregroundStyle(Color.label(.secondary))
-            .lineSpacing(4)
-
-            Text("Turn automations on from the main screen to enable intent notifications. MonoFocus will donate intents when sessions start, resume, or complete.")
-                .font(Typography.font(.footnote, weight: .semibold))
-                .foregroundStyle(Color.label(.tertiary))
-
-            Text("Lock Screen widgets provide 15/30/60 minute quick-start. Add them from the widget gallery after installing the app.")
-                .font(Typography.font(.footnote))
-                .foregroundStyle(Color.label(.tertiary))
-        }
-    }
-
-    private var historyExportSection: some View {
-        VStack(alignment: .leading, spacing: Spacing.value(.sm)) {
-            Divider().padding(.vertical, Spacing.value(.sm))
-
-            Text("History Export")
-                .font(Typography.font(.headline, weight: .semibold))
-                .foregroundStyle(Color.monoForeground)
-
-            Text("Export your session history as CSV for sharing or analysis.")
-                .font(Typography.font(.footnote))
-                .foregroundStyle(Color.label(.secondary))
-
-            Button("Export Session History") {
-                let sessions = timer.loadSessions()
-                if let url = SessionExporter.exportToCSV(sessions: sessions) {
-                    csvURL = url
-                    showingShareSheet = true
+        NavigationView {
+            Form {
+                Section(header: Text("Automation Setup")) {
+                    Text("MonoFocus can automatically enable Do Not Disturb and Grayscale modes when you start a focus session, then disable them when the session ends.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    Text("This requires creating two Shortcuts in the Shortcuts app.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.top, 4)
+                }
+                
+                Section(header: Text("Step 1: Start Shortcut")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("This shortcut runs when you start a focus session.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        TextField("Shortcut Name", text: $automation.startShortcutName)
+                            .autocapitalization(.words)
+                            .textContentType(.none)
+                        
+                        Button {
+                            testingStart = true
+                            automation.testShortcut(named: automation.startShortcutName) { success in
+                                testingStart = false
+                            }
+                        } label: {
+                            HStack {
+                                if testingStart {
+                                    ProgressView()
+                                        .controlSize(.small)
+                                }
+                                Text(testingStart ? "Testing..." : "Test Start Shortcut")
+                            }
+                        }
+                        .disabled(testingStart || automation.startShortcutName.isEmpty)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Actions to add:")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text("• Set Focus → Do Not Disturb")
+                                .font(.caption2)
+                                .foregroundColor(.green)
+                            Text("• Set Color Filters → Turn On → Grayscale")
+                                .font(.caption2)
+                                .foregroundColor(.green)
+                        }
+                        .padding(.top, 4)
+                    }
+                }
+                
+                Section(header: Text("Step 2: End Shortcut")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("This shortcut runs when your focus session ends.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        TextField("Shortcut Name", text: $automation.endShortcutName)
+                            .autocapitalization(.words)
+                            .textContentType(.none)
+                        
+                        Button {
+                            testingEnd = true
+                            automation.testShortcut(named: automation.endShortcutName) { success in
+                                testingEnd = false
+                            }
+                        } label: {
+                            HStack {
+                                if testingEnd {
+                                    ProgressView()
+                                        .controlSize(.small)
+                                }
+                                Text(testingEnd ? "Testing..." : "Test End Shortcut")
+                            }
+                        }
+                        .disabled(testingEnd || automation.endShortcutName.isEmpty)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Actions to add:")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text("• Turn Off Focus")
+                                .font(.caption2)
+                                .foregroundColor(.blue)
+                            Text("• Set Color Filters → Turn Off")
+                                .font(.caption2)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.top, 4)
+                    }
+                }
+                
+                Section(header: Text("Detailed Instructions")) {
+                    Button {
+                        if let url = URL(string: "shortcuts://") {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "arrow.up.forward.app")
+                            Text("Open Shortcuts App")
+                                .font(.headline)
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        instructionStep(number: 1, text: "Open the Shortcuts app")
+                        instructionStep(number: 2, text: "Tap the + button to create a new shortcut")
+                        instructionStep(number: 3, text: "Name it \"\(automation.startShortcutName)\"")
+                        instructionStep(number: 4, text: "Add action: \"Set Focus\" → Choose \"Do Not Disturb\"")
+                        instructionStep(number: 5, text: "Add action: \"Set Color Filters\" → Turn On → Grayscale")
+                        instructionStep(number: 6, text: "Save the shortcut")
+                        
+                        Divider()
+                            .padding(.vertical, 4)
+                        
+                        instructionStep(number: 7, text: "Create another shortcut named \"\(automation.endShortcutName)\"")
+                        instructionStep(number: 8, text: "Add action: \"Turn Off Focus\"")
+                        instructionStep(number: 9, text: "Add action: \"Set Color Filters\" → Turn Off")
+                        instructionStep(number: 10, text: "Save the shortcut")
+                        
+                        Divider()
+                            .padding(.vertical, 4)
+                        
+                        instructionStep(number: 11, text: "Return here and tap the Test buttons to verify")
+                    }
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                }
+                
+                Section(header: Text("Enable Automation")) {
+                    Toggle("Enable Focus Automations", isOn: $automation.isAutomationEnabled)
+                    
+                    Text("When enabled, your shortcuts will run automatically when sessions start and end. Customize them in the Shortcuts app to include DND, Grayscale, or both.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
             }
-            .buttonStyle(.secondary)
+            .navigationTitle("Setup Automations")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
+    
+    private func instructionStep(number: Int, text: String) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            Text("\(number).")
+                .fontWeight(.semibold)
+                .frame(width: 24, alignment: .trailing)
+            Text(text)
+        }
+    }
+}
+
+#Preview {
+    SetupView()
+        .environmentObject(AutomationService())
 }

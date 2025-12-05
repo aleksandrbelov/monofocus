@@ -27,6 +27,9 @@ struct MonoFocusApp: App {
                 notificationService: notificationService,
                 automationService: automationService
             )
+            
+            // Connect timer to automation service for lifecycle triggers
+            timerViewModel.setAutomationService(automationService)
         }
 
         BGTaskScheduler.shared.register(forTaskWithIdentifier: TimerViewModel.backgroundTaskIdentifier, using: nil) { task in
@@ -57,10 +60,6 @@ struct MonoFocusApp: App {
                     await MainActor.run {
                         timerVM.handleSceneDidBecomeActive(notificationService: notificationService)
                     }
-                }
-                .onReceive(NotificationCenter.default.publisher(for: .timerSessionCompleted)) { _ in
-                    // Notify automation service when timer ends.
-                    automationService.notifySessionComplete(elapsedMinutes: timerVM.totalSeconds / 60)
                 }
                 .onChange(of: scenePhase) { newPhase in
                     switch newPhase {

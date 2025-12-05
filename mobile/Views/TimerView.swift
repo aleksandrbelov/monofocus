@@ -55,10 +55,10 @@ struct TimerView: View {
                         Spacer()
                     }
 
-                    Toggle("Enable DND Automation", isOn: $automation.isDNDAutomationEnabled)
-                    Toggle("Enable Grayscale Automation", isOn: $automation.isGrayscaleAutomationEnabled)
 
-                    Text("Automations are triggered via App Intents when sessions start or complete.")
+                    Toggle("Enable Focus Automations", isOn: $automation.isAutomationEnabled)
+
+                    Text("Your shortcuts will run when sessions start and end. Configure them in Settings → Setup Automations.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

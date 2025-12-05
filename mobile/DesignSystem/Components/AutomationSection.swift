@@ -23,33 +23,21 @@ struct AutomationSection: View {
 
             VStack(spacing: Spacing.value(.sm)) {
                 AutomationCardView(
-                    systemImage: "bell.slash.fill",
-                    title: "Focus Filters",
-                    description: "Enable your Do Not Disturb shortcut during sessions.",
-                    isOn: $service.isDNDAutomationEnabled,
-                    onToggle: handleDNDToggle
-                )
-
-                AutomationCardView(
-                    systemImage: "circle.lefthalf.filled",
-                    title: "Grayscale Screen",
-                    description: "Automatically turn grayscale on while focusing.",
-                    isOn: $service.isGrayscaleAutomationEnabled,
-                    onToggle: handleGrayscaleToggle
+                    systemImage: "bolt.fill",
+                    title: "Focus Automations",
+                    description: "Run your shortcuts when sessions start and end.",
+                    isOn: $service.isAutomationEnabled,
+                    onToggle: handleAutomationToggle
                 )
             }
 
-            Text("MonoFocus notifies your Shortcuts automations when sessions start, resume, or complete.")
+            Text("Your shortcuts will run automatically. Customize them in the Shortcuts app to include DND, Grayscale, or both.")
                 .font(Typography.font(.footnote))
                 .foregroundStyle(Color.label(.tertiary))
         }
     }
 
-    private func handleDNDToggle(_ isOn: Bool) {
-        (isOn ? Haptics.toggleOn : Haptics.toggleOff)()
-    }
-
-    private func handleGrayscaleToggle(_ isOn: Bool) {
+    private func handleAutomationToggle(_ isOn: Bool) {
         (isOn ? Haptics.toggleOn : Haptics.toggleOff)()
     }
 }
