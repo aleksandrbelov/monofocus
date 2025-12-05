@@ -26,7 +26,7 @@ Control MonoFocus with your voice:
 - "Resume my focus timer" - Resume a paused session
 
 ### Optional: Lock Screen Widgets
-Add the **MonoFocus Presets** widget and use 15/30/60 minute quick-starts.
+Add the **MonoFocus Presets** widget and use 25/45/90 minute quick-starts.
 
 ### Optional: Automations
 MonoFocus uses App Intents to notify your Shortcuts automations when sessions start, resume, or complete. Create automations in the Shortcuts app to enable DND or grayscale during focus sessions.
