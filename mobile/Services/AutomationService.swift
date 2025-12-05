@@ -48,7 +48,6 @@ final class AutomationService: ObservableObject {
     }
 
     /// Notify that a focus session has resumed.
-    /// Notify that a focus session has resumed.
     func notifySessionResume(remainingMinutes: Int) {
         guard isAutomationEnabled else { return }
         donationManager.donateSessionResume(remainingMinutes: remainingMinutes)
