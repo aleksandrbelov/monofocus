@@ -61,6 +61,7 @@
 		DDE529F7BA515F34AF36B262 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A833CA241DE7F74D5BE5CA /* Animations.swift */; };
 		DF93149DD7230C12134823EB /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1166CBCFE57F0E2D45D877C /* CustomModal.swift */; };
 		E88D9C7E49F3C7BCF02AA6E7 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
+		FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E42EE4A553006A19E3 /* Assets.xcassets */; };
 		FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidStartIntent.swift; sourceTree = "<group>"; };
+		FAF850E42EE4A553006A19E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -196,6 +198,7 @@
 		36BA51090534E661666DDCCA /* mobile */ = {
 			isa = PBXGroup;
 			children = (
+				FAF850E42EE4A553006A19E3 /* Assets.xcassets */,
 				D1A8902F9C906AD30652A007 /* Info.plist */,
 				6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */,
 				2BB3F27F8686BB55F27D1347 /* MonoFocusApp.swift */,
@@ -438,6 +441,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */,
 				60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,11 +531,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -640,11 +647,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
