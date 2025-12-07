@@ -35,7 +35,7 @@ private struct TimerLiveActivityLockScreenView: View {
     let context: ActivityViewContext<TimerAttributes>
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
             LabelView(context: context)
                 .font(.headline)
             if context.state.isPaused {
@@ -43,16 +43,24 @@ private struct TimerLiveActivityLockScreenView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 RemainingTimeText(seconds: context.state.remainingSeconds)
-                    .font(.largeTitle.monospacedDigit())
+                    .font(.title.monospacedDigit())
             } else {
-                Text("Remaining")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
                 CountdownView(context: context)
-                    .font(.largeTitle.monospacedDigit())
+                    .font(.title.monospacedDigit())
             }
         }
-        .padding(.vertical, 8)
+        .padding(16)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityDescription)
+    }
+    
+    private var accessibilityDescription: String {
+        let minutes = context.state.remainingSeconds / 60
+        let seconds = context.state.remainingSeconds % 60
+        let timeText = "\(minutes) minutes \(seconds) seconds"
+        return context.state.isPaused
+            ? "Timer paused, \(timeText) remaining"
+            : "Focus timer, \(timeText) remaining"
     }
 }
 
@@ -71,6 +79,7 @@ private struct LabelView: View {
     var body: some View {
         HStack(spacing: 6) {
             Image(systemName: "timer")
+                .accessibilityHidden(true)
             Text(label)
         }
         .foregroundStyle(.primary)

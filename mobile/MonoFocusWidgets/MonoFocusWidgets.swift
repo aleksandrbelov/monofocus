@@ -50,7 +50,7 @@ struct WidgetView: View {
                 Link("90", destination: URL(string: "monofocus://start?minutes=90")!)
             }
             .font(.headline.monospacedDigit())
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 12)
 
         case .systemSmall:
             // Home Screen: Vertical layout with labels
