@@ -62,6 +62,7 @@
 		DF93149DD7230C12134823EB /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1166CBCFE57F0E2D45D877C /* CustomModal.swift */; };
 		E88D9C7E49F3C7BCF02AA6E7 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
 		FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E42EE4A553006A19E3 /* Assets.xcassets */; };
+		FAF850E72EE5C929006A19E3 /* MonoFocus.icon in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E62EE5C929006A19E3 /* MonoFocus.icon */; };
 		FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +149,7 @@
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidStartIntent.swift; sourceTree = "<group>"; };
 		FAF850E42EE4A553006A19E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAF850E62EE5C929006A19E3 /* MonoFocus.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = MonoFocus.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -198,6 +200,7 @@
 		36BA51090534E661666DDCCA /* mobile */ = {
 			isa = PBXGroup;
 			children = (
+				FAF850E62EE5C929006A19E3 /* MonoFocus.icon */,
 				FAF850E42EE4A553006A19E3 /* Assets.xcassets */,
 				D1A8902F9C906AD30652A007 /* Info.plist */,
 				6A20E638DD7EA3AB6FDFF56C /* LaunchScreen.storyboard */,
@@ -442,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */,
+				FAF850E72EE5C929006A19E3 /* MonoFocus.icon in Resources */,
 				60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,7 +534,7 @@
 		395D12C7C39F4BE61A13B508 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -539,6 +543,7 @@
 				INFOPLIST_FILE = mobile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,7 +651,7 @@
 		CEAEF4685C5DD8F7FE03F0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -655,6 +660,7 @@
 				INFOPLIST_FILE = mobile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
