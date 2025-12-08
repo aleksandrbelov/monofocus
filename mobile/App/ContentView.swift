@@ -110,7 +110,7 @@ struct ContentView: View {
                 showResumeDialog = true
             }
         }
-        .onChange(of: timer.remainingSeconds) { newValue in
+        .onChange(of: timer.remainingSeconds) { _, newValue in
             if previousRemainingSeconds > 0 && newValue == 0 && !timer.isRunning && !timer.isPaused {
                 showCompletionModal = true
             }

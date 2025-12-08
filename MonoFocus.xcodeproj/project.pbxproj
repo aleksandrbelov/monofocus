@@ -148,6 +148,7 @@
 		E84ED4D96942D34B0B6D6C50 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidStartIntent.swift; sourceTree = "<group>"; };
+		FA31B7E02EE6028F002440A8 /* MonoFocusWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonoFocusWidgets.entitlements; sourceTree = SOURCE_ROOT; };
 		FAF850E42EE4A553006A19E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAF850E62EE5C929006A19E3 /* MonoFocus.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = MonoFocus.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -328,6 +329,7 @@
 		CA54212A28E78ACA6AE78C6C /* MonoFocusWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				FA31B7E02EE6028F002440A8 /* MonoFocusWidgets.entitlements */,
 				933FB4FCE9030B42ECC39CCA /* Info.plist */,
 				E2CB7E0B1F82F74737451144 /* MonoFocusWidgets.swift */,
 				14E8CD0EF768770A7E6F2359 /* TimerLiveActivity.swift */,
@@ -536,8 +538,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = MonoFocus.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
@@ -557,7 +561,9 @@
 		41E49339E0403D9707E3DEF8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MonoFocusWidgets.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -574,7 +580,9 @@
 		5BB82EE02DF80FE99CFDD0B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MonoFocusWidgets.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				INFOPLIST_FILE = mobile/MonoFocusWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,7 +631,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -652,8 +659,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = MonoFocusRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mobile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MonoFocus;
@@ -705,7 +714,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M7FT37U5G5;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

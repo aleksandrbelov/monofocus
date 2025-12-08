@@ -61,7 +61,7 @@ struct MonoFocusApp: App {
                         timerVM.handleSceneDidBecomeActive(notificationService: notificationService)
                     }
                 }
-                .onChange(of: scenePhase) { newPhase in
+                .onChange(of: scenePhase) { _, newPhase in
                     switch newPhase {
                     case .background:
                         timerVM.prepareForBackground()

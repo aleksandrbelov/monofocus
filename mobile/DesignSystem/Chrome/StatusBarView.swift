@@ -28,7 +28,7 @@ struct StatusBarView: View {
             .onAppear {
                 updateSafeAreaTop(proxy.safeAreaInsets.top)
             }
-            .onChange(of: proxy.safeAreaInsets.top) { newValue in
+            .onChange(of: proxy.safeAreaInsets.top) { _, newValue in
                 updateSafeAreaTop(newValue)
             }
         }

@@ -6,6 +6,7 @@ import BackgroundTasks
 #if canImport(ActivityKit)
 import ActivityKit
 #endif
+import CoreHaptics
 extension Notification.Name {
     static let timerSessionCompleted = Notification.Name("TimerSessionCompleted")
 }
@@ -21,17 +22,22 @@ final class TimerViewModel: ObservableObject {
     @Published var lastPreset: Int? = 25
 
     private var tickCancellable: AnyCancellable?
-    private let storageURL: URL
-    private let stateURL: URL
+    
+    // Legacy fallback paths
+    private let legacyStorageURL: URL
+    private let legacyStateURL: URL
+
     private var sessionStartDate: Date?
     private var endDate: Date?
     private var liveActivityID: String?
     private weak var automationService: AutomationService?
 
     init() {
+        // Fallback URLs (Documents Directory)
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        storageURL = dir.appendingPathComponent("sessions.json")
-        stateURL = dir.appendingPathComponent("timer-state.json")
+        legacyStorageURL = dir.appendingPathComponent("sessions.json")
+        legacyStateURL = dir.appendingPathComponent("timer-state.json")
+        
         restoreState()
 #if canImport(ActivityKit)
         if #available(iOS 16.1, *) {
@@ -274,8 +280,13 @@ final class TimerViewModel: ObservableObject {
                     }
                 } else {
                     do {
-                        let activity = try Activity<TimerAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
-                        liveActivityID = activity.id
+                        if #available(iOS 16.2, *) {
+                             let activity = try Activity<TimerAttributes>.request(attributes: attributes, content: ActivityContent(state: state, staleDate: nil), pushType: nil)
+                             liveActivityID = activity.id
+                        } else {
+                             let activity = try Activity<TimerAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
+                             liveActivityID = activity.id
+                        }
                     } catch {
                         // Ignore failures; Live Activity is an enhancement.
                         liveActivityID = nil
@@ -298,7 +309,11 @@ final class TimerViewModel: ObservableObject {
         }
         liveActivityID = nil
         Task {
-            try? await activity.end(dismissalPolicy: dismissImmediately ? .immediate : .default)
+            if #available(iOS 16.2, *) {
+                await activity.end(ActivityContent(state: activity.content.state, staleDate: nil), dismissalPolicy: dismissImmediately ? .immediate : .default)
+            } else {
+                await activity.end(using: activity.content.state, dismissalPolicy: dismissImmediately ? .immediate : .default)
+            }
         }
     }
 #endif
@@ -328,10 +343,20 @@ final class TimerViewModel: ObservableObject {
             presetLabel: lastPreset.map { "\($0)m" },
             completed: completed
         )
-        var arr = (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: storageURL))) ?? []
-        arr.append(session)
-        if let data = try? JSONEncoder().encode(arr) {
-            try? data.write(to: storageURL)
+        
+        // Load from Shared first, else Legacy
+        var sessions: [FocusSession] = SharedDataManager.load([FocusSession].self, from: SharedDataManager.sessionsURL) 
+            ?? (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacyStorageURL)))
+            ?? []
+            
+        sessions.append(session)
+        
+        // Write to Shared
+        SharedDataManager.save(sessions, to: SharedDataManager.sessionsURL)
+        
+        // Also update legacy for safety (optional, but good for backup if App Group fails)
+        if let data = try? JSONEncoder().encode(sessions) {
+            try? data.write(to: legacyStorageURL)
         }
     }
 
@@ -351,16 +376,22 @@ final class TimerViewModel: ObservableObject {
         if let sessionStartDate {
             state["sessionStart"] = sessionStartDate.timeIntervalSince1970
         }
+        
+        // Save to Shared Container for Widget Access
+        SharedDataManager.saveRawTimerState(state)
+        
+        // Also save text to legacy local file
         if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-            try? data.write(to: stateURL)
+            try? data.write(to: legacyStateURL)
         }
     }
 
     private func restoreState() {
-        guard
-            let data = try? Data(contentsOf: stateURL),
-            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-        else { return }
+        // Try Shared first, then Legacy
+        let stateDict = SharedDataManager.loadRawTimerState() ?? 
+            (try? JSONSerialization.jsonObject(with: Data(contentsOf: legacyStateURL)) as? [String: Any])
+            
+        guard let json = stateDict else { return }
         totalSeconds = json["total"] as? Int ?? 1500
         remainingSeconds = json["remaining"] as? Int ?? totalSeconds
         isRunning = json["running"] as? Bool ?? false
@@ -387,47 +418,126 @@ final class TimerViewModel: ObservableObject {
     }
 
     // Expose sessions for export
+    // Expose sessions for export
     func loadSessions() -> [FocusSession] {
-        guard let data = try? Data(contentsOf: storageURL) else { return [] }
-        return (try? JSONDecoder().decode([FocusSession].self, from: data)) ?? []
+        return SharedDataManager.load([FocusSession].self, from: SharedDataManager.sessionsURL)
+            ?? (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacyStorageURL)))
+            ?? []
+    }
+}
+
+// MARK: - Shared Data Manager (Inlined for Target Access)
+
+/// Manages data shared between the main app and extensions via App Groups.
+/// Requires the App Group capability to be enabled in Xcode with the matching identifier.
+struct SharedDataManager {
+    // TODO: Update this to match the App Group ID configured in Xcode
+    static let appGroupId = "group.dev.monofocus.data"
+    
+    private static var fileContainerURL: URL? {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
+    }
+    
+    static var sessionsURL: URL? {
+        fileContainerURL?.appendingPathComponent("sessions.json")
+    }
+    
+    static var stateURL: URL? {
+        fileContainerURL?.appendingPathComponent("timer-state.json")
+    }
+    
+    // MARK: - Generic Persistence
+    
+    static func save<T: Encodable>(_ data: T, to url: URL?) {
+        guard let url = url else {
+            print("❌ SharedDataManager: App Group container not found. Check Entitlements.")
+            return
+        }
+        
+        do {
+            let encoded = try JSONEncoder().encode(data)
+            try encoded.write(to: url)
+        } catch {
+            print("❌ SharedDataManager: Failed to save to \(url.lastPathComponent): \(error)")
+        }
+    }
+    
+    static func load<T: Decodable>(_ type: T.Type, from url: URL?) -> T? {
+        guard let url = url, let data = try? Data(contentsOf: url) else { return nil }
+        
+        do {
+            return try JSONDecoder().decode(type, from: data)
+        } catch {
+            print("❌ SharedDataManager: Failed to load from \(url.lastPathComponent): \(error)")
+            return nil
+        }
+    }
+    
+    // MARK: - Specific Data Helpers for Widgets
+    
+    /// Reads the raw timer state dictionary directly (lightweight for Widgets).
+    static func loadRawTimerState() -> [String: Any]? {
+        guard let url = stateURL, let data = try? Data(contentsOf: url) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    }
+    
+    /// Writes the raw timer state dictionary.
+    static func saveRawTimerState(_ state: [String: Any]) {
+        guard let url = stateURL else { return }
+        if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
+            try? data.write(to: url)
+        }
     }
 }
 
 enum Haptics {
+    static var supportsHaptics: Bool {
+        CHHapticEngine.capabilitiesForHardware().supportsHaptics
+    }
+
     static func selection() {
+        guard supportsHaptics else { return }
         UISelectionFeedbackGenerator().selectionChanged()
     }
 
     static func toggleOn() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.8)
     }
 
     static func toggleOff() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.5)
     }
 
     static func timerStart() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .medium).impactOccurred(intensity: 0.9)
     }
 
     static func timerPause() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.6)
     }
 
     static func timerResume() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .medium).impactOccurred(intensity: 0.8)
     }
 
     static func timerStop() {
+        guard supportsHaptics else { return }
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.7)
     }
 
     static func timerComplete() {
+        guard supportsHaptics else { return }
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
 
     static func error() {
+        guard supportsHaptics else { return }
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
     }

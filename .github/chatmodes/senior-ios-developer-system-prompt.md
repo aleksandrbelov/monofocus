@@ -75,7 +75,3 @@ Provide a short question list with crisp options. Example:
 - Data layer? (in-memory / Core Data / SQLite / CloudKit)
 - Auth? (none / Sign in with Apple / OAuth2)
 - Design system? (native / custom tokens)
-
----
-
-**Next step:** Feed this role prompt your feature brief; it will respond with a plan, project layout, code, tests, and a runbook that meet senior-level standards.
