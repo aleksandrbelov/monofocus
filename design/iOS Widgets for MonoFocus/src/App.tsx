@@ -6,16 +6,18 @@ import { SmallWidgetV2 } from './components/SmallWidgetV2';
 import { MediumWidgetV2 } from './components/MediumWidgetV2';
 import { LargeWidgetV2 } from './components/LargeWidgetV2';
 import { DesignCritique } from './components/DesignCritique';
+import { LiveActivityShowcase } from './components/LiveActivityShowcase';
+import { AppIconShowcase } from './components/AppIconShowcase';
 import { Moon, Sun, ChevronDown } from 'lucide-react';
 
 type WidgetState = 'idle' | 'active' | 'paused' | 'completed' | 'automation';
 type ColorMode = 'light' | 'dark';
-type ViewMode = 'widgets' | 'critique' | 'comparison';
+type ViewMode = 'widgets' | 'critique' | 'comparison' | 'liveactivity' | 'icons';
 
 export default function App() {
   const [colorMode, setColorMode] = useState<ColorMode>('light');
   const [selectedState, setSelectedState] = useState<WidgetState>('active');
-  const [viewMode, setViewMode] = useState<ViewMode>('comparison');
+  const [viewMode, setViewMode] = useState<ViewMode>('icons');
 
   const states: { value: WidgetState; label: string }[] = [
     { value: 'idle', label: 'Idle State' },
@@ -81,6 +83,30 @@ export default function App() {
                   }`}
                 >
                   Comparison
+                </button>
+                <button
+                  onClick={() => setViewMode('liveactivity')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    viewMode === 'liveactivity'
+                      ? colorMode === 'light'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'bg-gray-900 text-white shadow-sm'
+                      : secondaryTextColor
+                  }`}
+                >
+                  Live Activity
+                </button>
+                <button
+                  onClick={() => setViewMode('icons')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    viewMode === 'icons'
+                      ? colorMode === 'light'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'bg-gray-900 text-white shadow-sm'
+                      : secondaryTextColor
+                  }`}
+                >
+                  App Icons
                 </button>
               </div>
               
@@ -256,6 +282,14 @@ export default function App() {
             </div>
           </div>
         </>
+      ) : viewMode === 'liveactivity' ? (
+        <div className="max-w-5xl mx-auto px-6 py-12">
+          <LiveActivityShowcase colorMode={colorMode} />
+        </div>
+      ) : viewMode === 'icons' ? (
+        <div className="max-w-5xl mx-auto px-6 py-12">
+          <AppIconShowcase colorMode={colorMode} />
+        </div>
       ) : (
         <>
           {/* Controls */}
