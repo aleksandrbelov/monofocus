@@ -6,6 +6,9 @@ import BackgroundTasks
 #if canImport(ActivityKit)
 import ActivityKit
 #endif
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 import CoreHaptics
 extension Notification.Name {
     static let timerSessionCompleted = Notification.Name("TimerSessionCompleted")
@@ -384,6 +387,8 @@ final class TimerViewModel: ObservableObject {
         if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
             try? data.write(to: legacyStateURL)
         }
+
+        refreshWidgets()
     }
 
     private func restoreState() {
@@ -414,6 +419,14 @@ final class TimerViewModel: ObservableObject {
         }
 #if canImport(ActivityKit)
         updateLiveActivitySnapshot()
+#endif
+    }
+
+    private func refreshWidgets() {
+#if canImport(WidgetKit)
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "MonoFocusWidgets")
+        }
 #endif
     }
 
