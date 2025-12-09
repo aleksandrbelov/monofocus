@@ -165,7 +165,8 @@ private struct TimerLiveActivityLockScreenView: View {
                 }
                 
                 VStack(spacing: 0) {
-                    Text(context.format(seconds: context.state.remainingSeconds))
+                    context.countdownText
+                        .multilineTextAlignment(.center)
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
                         .monospacedDigit()
                         .foregroundColor(TimerActivityColors.primaryText(for: colorScheme))
@@ -281,7 +282,8 @@ private struct TimerActivityCompactTrailingView: View {
     let context: ActivityViewContext<TimerAttributes>
 
     var body: some View {
-        Text(context.format(seconds: context.state.remainingSeconds))
+        context.countdownText
+            .multilineTextAlignment(.center)
             .font(.callout)
             .monospacedDigit()
             .fontWeight(.semibold)
@@ -384,7 +386,8 @@ private struct TimerActivityExpandedView: View {
                 Spacer()
                 
                 VStack{
-                    Text(context.format(seconds: context.state.remainingSeconds))
+                    context.countdownText
+                        .multilineTextAlignment(.center)
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .monospacedDigit()
                         .foregroundColor(.white)
@@ -447,8 +450,27 @@ private struct TimerActivityExpandedView: View {
 extension ActivityViewContext<TimerAttributes> {
     var progress: Double {
         let total = Double(attributes.totalSeconds)
-        let remaining = Double(state.remainingSeconds)
+        let remaining = Double(liveRemainingSeconds)
         return total > 0 ? max(0, min(1, (total - remaining) / total)) : 0
+    }
+
+    var liveRemainingSeconds: Int {
+        if state.isPaused {
+            return max(0, state.remainingSeconds)
+        }
+        return max(0, Int(ceil(state.endDate.timeIntervalSince(Date()))))
+    }
+
+    var countdownText: Text {
+        guard !state.isPaused else {
+            return Text(format(seconds: liveRemainingSeconds))
+        }
+        let now = Date()
+        guard now < state.endDate else {
+            return Text(format(seconds: 0))
+        }
+        // Use timerInterval so the system keeps the countdown fresh without extra pushes.
+        return Text(timerInterval: now...state.endDate, countsDown: true)
     }
 
     func format(seconds: Int) -> String {
