@@ -14,5 +14,7 @@ struct TimerAttributes: ActivityAttributes {
 
     var totalSeconds: Int
     var presetLabel: String?
+    var sessionType: String?
+    var isAutomation: Bool = false
 }
 #endif
