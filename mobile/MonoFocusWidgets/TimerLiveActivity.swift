@@ -114,72 +114,56 @@ private struct TimerLiveActivityLockScreenView: View {
 //            .padding(.bottom, 16).padding(.top, 16)
             
             // Main Content
-            HStack(spacing: 20) {
+            HStack(spacing: 10) {
                 // Progress Ring
-                ZStack {
-                    Circle()
-                        .stroke(TimerActivityColors.progressTrack(for: colorScheme), lineWidth: 6)
-                        .frame(width: 68, height: 68)
-                    
-                    Circle()
-                        .trim(from: 0, to: context.progress)
-                        .stroke(
-                            context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent,
-                            style: StrokeStyle(lineWidth: 6, lineCap: .round, dash: context.state.isPaused ? [8, 4] : [])
-                        )
-                        .rotationEffect(.degrees(-90))
-                        .frame(width: 68, height: 68)
-                    
-                    VStack(spacing: 0) {
-//                        Text(context.format(seconds: context.state.remainingSeconds))
-//                            .font(.system(size: 20, weight: .semibold, design: .rounded))
-//                            .monospacedDigit()
-//                            .foregroundColor(TimerActivityColors.primaryText(for: colorScheme))
-                        
-                        if context.state.isPaused {
+                if context.state.isPaused {
+                        ProgressView(timerInterval: context.timerInterval, countsDown: false, label: {EmptyView()}, currentValueLabel: {
                             Image(systemName: "pause.fill")
                                 .font(.system(size: 12))
                                 .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
                                 .padding(.top, 2)
-                        }
-                    }
+                        })
+                        .progressViewStyle(.circular)
+                        .tint(TimerActivityColors.paused)
+                        .frame(width: 68, height: 68)
+                } else {
+                    ProgressView(timerInterval: context.timerInterval, countsDown: false, label: {EmptyView()}, currentValueLabel: {
+                        Text("\(context.format(seconds: context.attributes.totalSeconds, f: "%d"))")
+                    })
+                    .progressViewStyle(.circular)
+                    .tint(TimerActivityColors.accent)
+                    .frame(width: 68, height: 68, alignment: .center)
                 }
                 
                 // Info
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(context.attributes.sessionType ?? "Deep Focus")
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.headline)
                         .foregroundColor(TimerActivityColors.primaryText(for: colorScheme))
                     
-//                    Text("\(Int(context.progress * 100))% complete")
-//                        .font(.system(size: 15))
-//                        .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
-                    
                     Text(context.state.isPaused ? "Paused" : "In Progress")
-                        .font(.system(size: 13, weight: .medium))
+                        .font(.caption)
                         .foregroundColor(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent)
                     
-                    Text("Ends at \(context.state.endDate.formatted(date: .omitted, time: .shortened))")
-                        .font(.system(size: 13))
+                    Text(context.state.isPaused ? "\(Int(context.progress * 100))% complete" :
+                            "Ends at \(context.state.endDate.formatted(date: .omitted, time: .shortened))")
+                        .font(.caption2)
                         .foregroundColor(TimerActivityColors.tertiaryText(for: colorScheme))
                 }
                 
-                VStack(spacing: 0) {
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 2) {
                     context.countdownText
                         .multilineTextAlignment(.center)
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .monospacedDigit()
                         .foregroundColor(TimerActivityColors.primaryText(for: colorScheme))
-                    Text("\(Int(context.progress * 100))% complete")
+                    Text("remaining")
                         .font(.system(size: 15))
                         .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
-//                    if context.state.isPaused {
-//                        Image(systemName: "pause.fill")
-//                            .font(.system(size: 12))
-//                            .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
-//                            .padding(.top, 2)
-//                    }
                 }
+                
                 Spacer()
             }
             .padding(.bottom, 10)
@@ -251,27 +235,40 @@ private struct TimerActivityCompactLeadingView: View {
     var body: some View {
         HStack(spacing: 4) {
              ZStack {
-                Circle()
-                    .stroke(TimerActivityColors.progressTrack(for: .dark), lineWidth: 2)
-                    .frame(width: 22, height: 22)
-
-                Circle()
-                    .trim(from: 0, to: context.progress)
-                    .stroke(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent, style: StrokeStyle(lineWidth: 2, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                    .frame(width: 22, height: 22)
-                 
                 if context.state.isPaused {
-                     Image(systemName: "pause.fill")
-                        .font(.system(size: 8))
-                        .foregroundColor(TimerActivityColors.paused)
+//                    Circle()
+//                        .stroke(TimerActivityColors.progressTrack(for: .dark), lineWidth: 2)
+//                        .frame(width: 22, height: 22)
+//
+//                    Circle()
+//                        .trim(from: 0, to: context.progress)
+//                        .stroke(TimerActivityColors.paused, style: StrokeStyle(lineWidth: 2, lineCap: .round))
+//                        .rotationEffect(.degrees(-90))
+//                        .frame(width: 22, height: 22)
+                    ProgressView(value: context.progress) {
+                        Image(systemName: "pause.fill")
+                            .font(.system(size: 8))
+                            .foregroundColor(TimerActivityColors.paused)
+                    }
+                    .progressViewStyle(.circular)
+                    .tint(TimerActivityColors.paused)
+                    .frame(width: 22, height: 22, alignment: .center)
+                    
+                } else {
+                    ProgressView(timerInterval: context.timerInterval, countsDown: false, label: {EmptyView()}, currentValueLabel: {
+                        Text("\(context.format(seconds: context.attributes.totalSeconds, f: "%d"))")
+                    })
+                    .progressViewStyle(.circular)
+                    .tint(TimerActivityColors.accent)
+                    .frame(width: 22, height: 22, alignment: .center)
                 }
             }
             
-            Text("MonoFocus")
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
+//            Text(context.state.isPaused ? "\(Int(context.progress * 100))%" :
+//                    "\(context.state.endDate.formatted(date: .omitted, time: .shortened))")
+//                .font(.caption)
+//                .fontWeight(.semibold)
+//                .foregroundColor(.white)
         }
         .padding(.leading, 6)
     }
@@ -283,7 +280,7 @@ private struct TimerActivityCompactTrailingView: View {
 
     var body: some View {
         context.countdownText
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(.leading)
             .font(.callout)
             .monospacedDigit()
             .fontWeight(.semibold)
@@ -298,18 +295,23 @@ private struct TimerActivityMinimalView: View {
 
     var body: some View {
         ZStack {
-            Circle()
-                .stroke(TimerActivityColors.progressTrack(for: .dark), lineWidth: 2)
-                // Minimal view size is handled by system, but we provide content
-            
-            Circle()
-                .trim(from: 0, to: context.progress)
-                .stroke(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent, style: StrokeStyle(lineWidth: 2, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-            
-            Image(systemName: context.state.isPaused ? "pause.fill" : "timer")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundColor(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent)
+            if context.state.isPaused
+            {
+                ProgressView(value: context.progress) {
+                    Image(systemName: "pause.fill")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(TimerActivityColors.paused)
+                }
+                .progressViewStyle(.circular)
+                .tint(TimerActivityColors.paused)
+                
+            } else {
+                ProgressView(timerInterval: context.timerInterval, countsDown: false, label: {EmptyView()}, currentValueLabel: {
+                    Text("\(context.format(seconds: context.attributes.totalSeconds, f: "%02d"))")
+                })
+                .progressViewStyle(.circular)
+                .tint(TimerActivityColors.accent)
+            }
         }
         .padding(2)
     }
@@ -322,50 +324,28 @@ private struct TimerActivityExpandedView: View {
     let colorScheme: ColorScheme = .dark 
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-//            HStack(alignment: .center) {
-//                HStack(spacing: 6) {
-//                    // Automation Badge
-//                    if context.attributes.isAutomation {
-//                         Image(systemName: "bolt.fill")
-//                            .font(.system(size: 10))
-//                            .foregroundColor(TimerActivityColors.accent)
-//                    }
-//                    Text("MonoFocus")
-//                        .font(.system(size: 13, weight: .semibold))
-//                        .foregroundColor(TimerActivityColors.secondaryText(for: .dark))
-//                }
-//                
-//                Spacer()
-//                
-//                Text(context.state.isPaused ? "Paused" : "In Progress")
-//                    .font(.caption)
-//                    .fontWeight(.medium)
-//                    .foregroundColor(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent)
-//            }
-//            .padding(.bottom, 12)
-            
+        VStack(alignment: .center, spacing: 0) {
             // Main Content (Similar to Lock Screen but tighter)
-            HStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .stroke(TimerActivityColors.progressTrack(for: .dark), lineWidth: 5)
+            HStack(alignment: .center, spacing: 10) {
+                ZStack(alignment: .center) {
+                    if context.state.isPaused {
+                        ProgressView(value: context.progress) {
+                            Image(systemName: "pause.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
+                                .padding(.top, 2)
+                        }
+                        .progressViewStyle(.circular)
+                        .tint(TimerActivityColors.paused)
                         .frame(width: 52, height: 52)
-                    
-                    Circle()
-                        .trim(from: 0, to: context.progress)
-                        .stroke(
-                            context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent,
-                            style: StrokeStyle(lineWidth: 5, lineCap: .round, dash: context.state.isPaused ? [6, 3] : [])
-                        )
-                        .rotationEffect(.degrees(-90))
+                    } else {
+                        ProgressView(timerInterval: context.timerInterval, countsDown: false, label: {EmptyView()}, currentValueLabel: {
+                            Text("\(context.format(seconds: context.attributes.totalSeconds, f: "%02d"))")
+                        })
+                        .progressViewStyle(.circular)
+                        .tint(TimerActivityColors.accent)
                         .frame(width: 52, height: 52)
-                    
-//                    Text(context.format(seconds: context.state.remainingSeconds))
-//                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-//                        .monospacedDigit()
-//                        .foregroundColor(.white)
+                    }
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
@@ -378,14 +358,15 @@ private struct TimerActivityExpandedView: View {
                         .fontWeight(.medium)
                         .foregroundColor(context.state.isPaused ? TimerActivityColors.paused : TimerActivityColors.accent)
                     
-                    Text("\(Int(context.progress * 100))% · Ends \(context.state.endDate.formatted(date: .omitted, time: .shortened))")
+                    Text(context.state.isPaused ? "\(Int(context.progress * 100))% complete" :
+                            "Ends at \(context.state.endDate.formatted(date: .omitted, time: .shortened))")
                          .font(.caption2)
                          .foregroundColor(TimerActivityColors.secondaryText(for: .dark))
                 }
                 
                 Spacer()
                 
-                VStack{
+                VStack(alignment: .center, spacing: 2) {
                     context.countdownText
                         .multilineTextAlignment(.center)
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
@@ -396,11 +377,12 @@ private struct TimerActivityExpandedView: View {
                         .foregroundColor(TimerActivityColors.secondaryText(for: colorScheme))
                     
                 }
+                Spacer()
             }
             .padding(.bottom, 10)
             
             // Buttons
-             HStack(spacing: 8) {
+            HStack(spacing: 8) {
                 // Pause/Resume
                 if context.state.isPaused {
                     Button(intent: ResumeFocusSessionIntent()) {
@@ -448,6 +430,12 @@ private struct TimerActivityExpandedView: View {
 
 @available(iOSApplicationExtension 16.1, *)
 extension ActivityViewContext<TimerAttributes> {
+    var timerInterval: ClosedRange<Date> {
+        let end = state.endDate
+        let start = end.addingTimeInterval(-TimeInterval(attributes.totalSeconds))
+        return start...end
+    }
+    
     var progress: Double {
         let total = Double(attributes.totalSeconds)
         let remaining = Double(liveRemainingSeconds)
@@ -473,10 +461,10 @@ extension ActivityViewContext<TimerAttributes> {
         return Text(timerInterval: now...state.endDate, countsDown: true)
     }
 
-    func format(seconds: Int) -> String {
+    func format(seconds: Int, f value: String = "%02d:%02d") -> String {
         let m = seconds / 60
         let s = seconds % 60
-        return String(format: "%02d:%02d", m, s)
+        return String(format: value, m, s)
     }
 }
 
@@ -506,4 +494,103 @@ struct StopTimerIntent: AppIntent {
     func perform() async throws -> some IntentResult { return .result() }
 }
 #endif
+
+// MARK: - Previews
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Lock Screen - Running", as: .content, using: TimerAttributes(
+    totalSeconds: 1500,
+    presetLabel: "Deep Work",
+    sessionType: "Deep Focus",
+    isAutomation: false
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 900,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(900)
+    )
+}
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Lock Screen - Paused", as: .content, using: TimerAttributes(
+    totalSeconds: 1500,
+    presetLabel: "Deep Work",
+    sessionType: "Deep Focus",
+    isAutomation: true
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 600,
+        isPaused: true,
+        endDate: Date().addingTimeInterval(600)
+    )
+}
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Dynamic Island - Compact", as: .dynamicIsland(.compact), using: TimerAttributes(
+    totalSeconds: 1500,
+    presetLabel: "Deep Work",
+    sessionType: "Deep Focus",
+    isAutomation: false
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 900,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(900)
+    )
+}
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Dynamic Island - Minimal", as: .dynamicIsland(.minimal), using: TimerAttributes(
+    totalSeconds: 1500,
+    presetLabel: "Deep Work",
+    sessionType: "Deep Focus",
+    isAutomation: false
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 300,
+        isPaused: true,
+        endDate: Date().addingTimeInterval(300)
+    )
+}
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Dynamic Island - Expanded", as: .dynamicIsland(.expanded), using: TimerAttributes(
+    totalSeconds: 3600,
+    presetLabel: "Long Focus",
+    sessionType: "Deep Focus",
+    isAutomation: false
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 2400,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(2400)
+    )
+}
+
+@available(iOSApplicationExtension 16.1, *)
+#Preview("Dynamic Island - Paused", as: .dynamicIsland(.expanded), using: TimerAttributes(
+    totalSeconds: 3600,
+    presetLabel: "Long Focus",
+    sessionType: "Deep Focus",
+    isAutomation: false
+)) {
+    TimerLiveActivityWidget()
+} contentStates: {
+    TimerAttributes.ContentState(
+        remainingSeconds: 2400,
+        isPaused: true,
+        endDate: Date().addingTimeInterval(2400)
+    )
+}
+
 #endif

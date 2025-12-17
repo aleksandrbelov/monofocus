@@ -138,16 +138,20 @@ struct PresetButton: View {
 struct CircularProgressView: View {
     let progress: Double
     let color: Color
+    var w: CGFloat = 90
+    var h: CGFloat = 90
     
     var body: some View {
         ZStack {
             Circle()
                 .stroke(color.opacity(0.2), lineWidth: 8)
+                .frame(width: w, height: h)
             
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(color, style: StrokeStyle(lineWidth: 8, lineCap: .round))
                 .rotationEffect(.degrees(-90))
+                .frame(width: w, height: h)
         }
     }
 }
@@ -305,6 +309,7 @@ struct MediumWidgetView: View {
             }
             
             Text("Focus Session")
+                .multilineTextAlignment(.center)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
@@ -379,6 +384,7 @@ struct LargeWidgetView: View {
         VStack(spacing: 4) {
             if let endDate = entry.endDate, entry.isRunning, !entry.isPaused {
                 Text(timerInterval: Date()...endDate, countsDown: true)
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 64, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .minimumScaleFactor(0.8)
@@ -398,8 +404,23 @@ struct LargeWidgetView: View {
                     Text("Session Paused")
                         .foregroundColor(.orange)
                 } else {
-                    Image(systemName: "timer")
-                        .foregroundColor(.blue)
+//                    Image(systemName: "timer")
+//                        .foregroundColor(.blue)
+                    ZStack {
+                        CircularProgressView(
+                            progress: entry.progress,
+                            color: entry.isPaused ? .orange : .blue,
+                            w: 20,
+                            h: 20
+                        )
+//                        Circle()
+//                            .stroke(Color.blue.opacity(0.2), lineWidth: 8)
+//                            .fill(Color.white)
+//                            .frame(width: 12, height: 12)
+                        Circle()
+                            .fill(entry.isPaused ? Color.orange : Color.blue)
+                            .frame(width: 6, height: 6)
+                    }
                     Text("Focusing...")
                         .foregroundColor(.secondary)
                 }
@@ -568,3 +589,76 @@ struct MonoFocusWidgetEntryView: View {
         }
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 17.0, *)
+#Preview("Small - Idle", as: .systemSmall) {
+    MonoFocusWidgets()
+} timeline: {
+    WidgetEntry(
+        date: Date(),
+        totalSeconds: 1500,
+        remainingSeconds: 1500,
+        isRunning: false,
+        isPaused: false,
+        endDate: nil
+    )
+}
+
+@available(iOS 17.0, *)
+#Preview("Small - Running", as: .systemSmall) {
+    MonoFocusWidgets()
+} timeline: {
+    WidgetEntry(
+        date: Date(),
+        totalSeconds: 1500,
+        remainingSeconds: 1200, // 20 mins left
+        isRunning: true,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(1200)
+    )
+}
+
+@available(iOS 17.0, *)
+#Preview("Medium - Running", as: .systemMedium) {
+    MonoFocusWidgets()
+} timeline: {
+    WidgetEntry(
+        date: Date(),
+        totalSeconds: 1500,
+        remainingSeconds: 1200,
+        isRunning: true,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(1200)
+    )
+}
+
+@available(iOS 17.0, *)
+#Preview("Large - Idle", as: .systemLarge) {
+    MonoFocusWidgets()
+} timeline: {
+    WidgetEntry(
+        date: Date(),
+        totalSeconds: 1500,
+        remainingSeconds: 1500,
+        isRunning: false,
+        isPaused: false,
+        endDate: nil
+    )
+}
+
+@available(iOS 17.0, *)
+#Preview("Large - Running", as: .systemLarge) {
+    MonoFocusWidgets()
+} timeline: {
+    WidgetEntry(
+        date: Date(),
+        totalSeconds: 1500,
+        remainingSeconds: 600, // 10 mins left
+        isRunning: true,
+        isPaused: false,
+        endDate: Date().addingTimeInterval(600)
+    )
+}
+
