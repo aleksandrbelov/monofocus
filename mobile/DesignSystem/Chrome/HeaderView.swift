@@ -2,6 +2,7 @@ import SwiftUI
 
 /// Top-level header containing brand title, tagline, and chromed controls.
 struct HeaderView: View {
+    let onHistory: () -> Void
     let onInfo: () -> Void
 
     var body: some View {
@@ -22,6 +23,19 @@ struct HeaderView: View {
 
             Button {
                 Haptics.selection()
+                onHistory()
+            } label: {
+                Image(systemName: "clock.arrow.circlepath")
+                    .font(.system(size: 20, weight: .semibold))
+                    .frame(width: 44, height: 44)
+                    .background(Color.surface(.surface2))
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("View session history")
+
+            Button {
+                Haptics.selection()
                 onInfo()
             } label: {
                 Image(systemName: "questionmark.circle")
@@ -39,7 +53,7 @@ struct HeaderView: View {
 #if DEBUG
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(onInfo: {})
+        HeaderView(onHistory: {}, onInfo: {})
             .environmentObject(ThemeManager())
             .padding()
             .background(Color.monoBackground)
