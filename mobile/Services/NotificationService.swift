@@ -31,7 +31,8 @@ final class NotificationService: ObservableObject {
         do {
             try await UNUserNotificationCenter.current().add(req)
         } catch {
-            // ignore for MVP
+            print("⚠️ [NotificationService] Failed to schedule notification: \(error)")
+            // Still optional—timer works without notifications
         }
     }
 }
