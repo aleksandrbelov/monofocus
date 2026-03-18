@@ -1,0 +1,50 @@
+name: Create GitHub Issues from Development Plan
+
+# ---------------------------------------------------------------------------
+# Trigger
+# ---------------------------------------------------------------------------
+# Run manually from the GitHub Actions UI.  The optional `dry_run` input lets
+# you preview what would be created without actually calling the API.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: >
+          Dry run — list tickets that would be created without making any
+          API calls (true/false)
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+# ---------------------------------------------------------------------------
+# Permissions
+# ---------------------------------------------------------------------------
+permissions:
+  issues: write   # create issues and labels
+  contents: read  # check out the repository
+
+# ---------------------------------------------------------------------------
+# Jobs
+# ---------------------------------------------------------------------------
+jobs:
+  create-issues:
+    name: Create GitHub Issues
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the full repository so the tickets/ directory is available.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Run the Python script that parses ticket files and creates issues.
+      #    Python 3.x is pre-installed on ubuntu-latest; no extra packages are
+      #    needed because the script uses only the standard library.
+      - name: Create issues from ticket files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: python .github/scripts/create_issues.py
