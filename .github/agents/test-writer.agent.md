@@ -25,9 +25,9 @@ Test files live in `Tests/` and import `@testable import MonoFocus`.
 | Method | Pre-condition | Post-state |
 |--------|---------------|------------|
 | `setPreset(minutes:)` | `!isRunning` | `totalSeconds` and `remainingSeconds` updated |
-| `start()` | any | `isRunning=true`, `isPaused=false` |
+| `start(notificationService:)` | `!isRunning` | `isRunning=true`, `isPaused=false` |
 | `pause()` | `isRunning` | `isPaused=true`, `isRunning=false` |
-| `resume()` | `!isRunning && isPaused` | `isRunning=true`, `isPaused=false` |
+| `resume(notificationService:)` | `!isRunning && isPaused` | `isRunning=true`, `isPaused=false` |
 | `stop(save:)` | any | both flags false, `remainingSeconds=totalSeconds` |
 
 ## Testing Standards
