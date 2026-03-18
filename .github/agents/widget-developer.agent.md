@@ -18,7 +18,7 @@ MonoFocus has a **two-target** Xcode project (defined in `project.yml`):
 
 AppIntents live in `mobile/AppIntents/` (compiled into the main app target).
 
-**Deep-link URL scheme**: `monofocus://start?minutes=<N>` — widgets and intents use this to launch the app and start a timer.
+**Deep-link URL scheme**: `monofocus://start?minutes=<N>` — widgets use this to launch the app and start a timer; AppIntents currently call `TimerViewModel` directly via `AppDependencyContainer.shared` (no deep link).
 
 ## Widget Architecture
 
