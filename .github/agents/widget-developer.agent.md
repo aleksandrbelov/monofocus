@@ -22,14 +22,17 @@ AppIntents live in `mobile/AppIntents/` (compiled into the main app target).
 
 ## Widget Architecture
 
-### Current Static Widget (Lock Screen + Home Screen)
+### Current Timer Widgets (Home Screen)
 ```
 mobile/MonoFocusWidgets/MonoFocusWidgets.swift
 ```
-- `StaticConfiguration` with a `TimelineProvider` returning a single entry and `.never` reload policy
-- UI: Three `Link` buttons (`25`, `45`, `90`) each opening the deep-link URL
-- Supported families: `.accessoryRectangular` (Lock Screen), `.systemSmall` (Home Screen)
-- **No shared data** — widgets do not read app state; they only launch URLs
+- Widget configuration with a `TimelineProvider` that loads the latest timer state via `WidgetDataManager.fetchState()` in `getSnapshot`/`getTimeline`
+- Timeline policy:
+  - If the persisted state indicates a running timer, computes a `reloadDate` and returns `.after(reloadDate)` to keep the widget reasonably up to date
+  - If the timer is not running, returns a single entry with a `.never` (or equivalent) policy to avoid unnecessary refreshes
+- UI: Shows the current/last-known timer state and preset actions; taps still use deep-link URLs like `monofocus://start?minutes=<N>` to launch the app
+- Supported families: `.systemSmall`, `.systemMedium`, `.systemLarge` (Home Screen)
+- **Shared data source** — widgets read persisted timer state exclusively via `WidgetDataManager.fetchState()`; they do not talk directly to `TimerViewModel`
 
 ### Adding a New Widget
 1. Add the Swift file to `mobile/MonoFocusWidgets/`
