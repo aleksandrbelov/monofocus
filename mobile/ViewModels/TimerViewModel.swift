@@ -346,20 +346,30 @@ final class TimerViewModel: ObservableObject {
             presetLabel: lastPreset.map { "\($0)m" },
             completed: completed
         )
-        
-        // Load from Shared first, else Legacy
-        var sessions: [FocusSession] = SharedDataManager.load([FocusSession].self, from: SharedDataManager.sessionsURL) 
-            ?? (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacyStorageURL)))
-            ?? []
-            
-        sessions.append(session)
-        
-        // Write to Shared
-        SharedDataManager.save(sessions, to: SharedDataManager.sessionsURL)
-        
-        // Also update legacy for safety (optional, but good for backup if App Group fails)
-        if let data = try? JSONEncoder().encode(sessions) {
-            try? data.write(to: legacyStorageURL)
+
+        // Capture URLs before leaving the main actor; perform all disk I/O off the main thread.
+        let sharedURL = SharedDataManager.sessionsURL
+        let legacyURL = legacyStorageURL
+        Task.detached(priority: .utility) {
+            // Load from Shared first, else Legacy
+            var sessions: [FocusSession] = SharedDataManager.load([FocusSession].self, from: sharedURL)
+                ?? (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacyURL)))
+                ?? []
+
+            sessions.append(session)
+
+            // Write to Shared
+            SharedDataManager.save(sessions, to: sharedURL)
+
+            // Also update legacy for safety (optional, but good for backup if App Group fails)
+            do {
+                let data = try JSONEncoder().encode(sessions)
+                try data.write(to: legacyURL)
+            } catch {
+#if DEBUG
+                print("❌ TimerViewModel: persistSession legacy write failed: \(error)")
+#endif
+            }
         }
     }
 
@@ -379,13 +389,20 @@ final class TimerViewModel: ObservableObject {
         if let sessionStartDate {
             state["sessionStart"] = sessionStartDate.timeIntervalSince1970
         }
-        
-        // Save to Shared Container for Widget Access
-        SharedDataManager.saveRawTimerState(state)
-        
-        // Also save text to legacy local file
-        if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-            try? data.write(to: legacyStateURL)
+
+        // Encode on the main thread (fast in-memory), then write to disk off the main thread.
+        guard let data = try? JSONSerialization.data(withJSONObject: state, options: []) else { return }
+        let sharedURL = SharedDataManager.stateURL
+        let legacyURL = legacyStateURL
+        Task.detached(priority: .utility) {
+            do {
+                if let url = sharedURL { try data.write(to: url) }
+                try data.write(to: legacyURL)
+            } catch {
+#if DEBUG
+                print("❌ TimerViewModel: persistState write failed: \(error)")
+#endif
+            }
         }
 
         refreshWidgets()
