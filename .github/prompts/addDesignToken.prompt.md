@@ -1,6 +1,6 @@
 ---
 name: addDesignToken
-description: Add a new design token to figma-tokens.json, regenerate Theme.swift, and wire it into relevant DesignSystem components
+description: Add a new design token to figma-tokens.json, regenerate Theme.swift, and wire it into relevant Theme- and DesignSystem-level token APIs
 argument-hint: token category and name (e.g. "spacing.xxl = 48" or "color.accent")
 ---
 
@@ -21,7 +21,8 @@ You are the MonoFocus design system engineer. Add the requested token and propag
 ## Rules
 
 - The current token pipeline only parses the `spacing` category by default. If the user requests a `color` or typography token (or any non-`spacing` category), you **must** also update `mobile/Utils/generateTheme.swift` (Codable schema + output) and then regenerate `Theme.swift` so the new tokens are available in code.
-- No hard-coded hex, CGFloat literals, or point sizes — use `Theme.*` everywhere
+- No hard-coded hex, CGFloat literals, or point sizes — when working in legacy/non-DesignSystem views (e.g. `mobile/Views`, `mobile/Utils`), use generated `Theme.*` constants instead of literals.
+- Within `mobile/DesignSystem/*`, consume DesignSystem token APIs (`Spacing`, `Radius`, `Typography`, `Color.surface/label/mono*`) rather than `Theme.*`, so new tokens integrate consistently with existing components.
 - Token names follow camelCase in Swift: `spacingXXL`, `colorAccent`
 - Colors must work in both light and dark mode (use semantic or `.primary`/`.secondary`)
 - Typography tokens use `Font.TextStyle` — no fixed sizes
