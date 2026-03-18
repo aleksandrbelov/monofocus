@@ -119,7 +119,7 @@ Always run `xcodegen generate` after editing `project.yml`.
 
 ## Constraints
 
-- Widget extension sources MUST go in `mobile/MonoFocusWidgets/` — NOT in `mobile/`
+- Widget-specific implementation files go in `mobile/MonoFocusWidgets/`. Shared models/utils can live elsewhere under `mobile/` if they are explicitly added to the `MonoFocusWidgets` target in `project.yml`.
 - AppIntents sources go in `mobile/AppIntents/` (main app target)
 - Do NOT use `URLSession` or network calls inside extensions — offline-first always
 - Do NOT use third-party SDKs in extensions
