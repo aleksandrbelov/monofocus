@@ -86,7 +86,7 @@ struct PauseTimerIntent: AppIntent {
 | File | Purpose |
 |------|---------|
 | `mobile/Services/AppDependencyContainer.swift` | Dependency injection container for app services |
-| `mobile/Services/IntentDonationManager.swift` | Donates `INInteraction` for Siri suggestions |
+| `mobile/Services/IntentDonationManager.swift` | Manages AppIntents donations (e.g. `try await intent.donate()`) for Siri/Shortcuts suggestions |
 | `mobile/Models/TimerAttributes.swift` | `ActivityAttributes` for Live Activity |
 | `mobile/AppIntents/TimerShortcuts.swift` | `AppShortcutsProvider` — registers Siri phrases |
 
