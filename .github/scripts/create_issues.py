@@ -199,11 +199,17 @@ def ensure_label(repo: str, name: str, existing: set[str]) -> None:
         })
         existing.add(name)
         print(f"    ✚ Created label: {name}")
+        # Throttle successive write requests to avoid GitHub secondary rate limits.
+        if "API_RATE_LIMIT_DELAY" in globals() and API_RATE_LIMIT_DELAY > 0:
+            time.sleep(API_RATE_LIMIT_DELAY)
     except RuntimeError as exc:
         # HTTP 422 means the label already exists (e.g. a race condition);
         # treat it as success so we don't block issue creation.
         if "HTTP 422" in str(exc):
             existing.add(name)
+            # Even on 422 we just performed a write, so respect the rate-limit delay.
+            if "API_RATE_LIMIT_DELAY" in globals() and API_RATE_LIMIT_DELAY > 0:
+                time.sleep(API_RATE_LIMIT_DELAY)
         else:
             print(f"    ⚠ Could not create label '{name}': {exc}")
 
