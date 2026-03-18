@@ -65,7 +65,7 @@ struct FooView: View {
 - One component per file, named `<Name>View.swift` or `<Name>Style.swift` for `ButtonStyle`
 - No business logic inside components — they render only
 - Prefer `ViewModifier` over wrapper views for styling concerns
-- Use `Theme.*` constants for all spacing, radii, and color references
+- Use DesignSystem token APIs (`Spacing.value(_:)`, `Radius.value(_:)`, `Typography.font(_:)`, `Color.surface/label/mono*`) for all spacing, radii, typography, and color references inside `mobile/DesignSystem/` components. Use `Theme.*` only in non-DesignSystem views (e.g., `TimerView`) that have not yet been migrated to the typed tokens.
 
 ## ButtonStyle Palette (existing — extend, don't replace)
 
@@ -88,7 +88,7 @@ All styles apply `.scaleEffect(isPressed ? 0.97 : 1.0)` press feedback.
 ## Constraints
 
 - Do NOT add external UI libraries (no Lottie, no SnapKit, no third-party design kits)
-- Do NOT hard-code colors, font sizes, or spacing — always use `Theme.*` constants
+- Do NOT hard-code colors, font sizes, or spacing — always use DesignSystem tokens (`Spacing`, `Radius`, `Typography`, `Color.surface/label/mono*`) within `mobile/DesignSystem/` components, and `Theme.*` constants only in non-DesignSystem views that still depend on the generated theme.
 - Do NOT modify `Theme.swift` directly — update `figma-tokens.json` and re-run the generator
 - Do NOT introduce UIKit components unless SwiftUI has no equivalent
 
