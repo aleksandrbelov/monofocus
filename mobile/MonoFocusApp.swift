@@ -53,7 +53,7 @@ struct MonoFocusApp: App {
                 .environmentObject(notificationService)
                 .environmentObject(themeManager)
                 .onOpenURL { url in
-                    URLRouter.handle(url: url, timerVM: timerVM)
+                    URLRouter.handle(url: url, timerVM: timerVM, notificationService: notificationService)
                 }
                 .task {
                     await notificationService.requestAuthorizationIfNeeded()
