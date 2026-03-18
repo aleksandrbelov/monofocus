@@ -12,7 +12,7 @@ You own the visual language of MonoFocus. You extend the design token pipeline, 
 MonoFocus uses a **monochrome, offline-first** design philosophy. All visual constants are derived from tokens:
 
 ```
-design/figma-tokens.json          ← source of truth (spacing, radii, typography scales)
+design/figma-tokens.json          ← source of truth (currently spacing tokens; extendable to radii, typography, etc.)
 mobile/Utils/generateTheme.swift  ← code-gen script (run with `swift mobile/Utils/generateTheme.swift`)
 mobile/Utils/Theme.swift          ← generated output — DO NOT hand-edit
 mobile/DesignSystem/
@@ -30,6 +30,10 @@ When adding or changing a token:
 2. Run `swift mobile/Utils/generateTheme.swift` — regenerates `Theme.swift`
 3. Update `mobile/DesignSystem/Tokens/` if a new token category was added
 4. Update or add components that consume the new tokens
+
+> Note: The generator and token model currently support **spacing**. When introducing a new token category
+> (e.g., radii, typography), you **must** also update `mobile/Utils/generateTheme.swift` and the `Tokens`
+> `Codable` model so the new category is decoded from `figma-tokens.json` and emitted into `Theme.swift`.
 
 **Never hand-edit `Theme.swift`** — it is overwritten by the generator.
 
