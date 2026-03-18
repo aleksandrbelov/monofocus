@@ -41,7 +41,7 @@ mobile/MonoFocusWidgets/MonoFocusWidgets.swift
 Files: `mobile/Models/TimerAttributes.swift` (already exists) + view code in `MonoFocusWidgets`.
 - `TimerAttributes` conforms to `ActivityAttributes`; `ContentState` holds `remainingSeconds: Int`
 - The main app starts/updates/ends the activity via `Activity<TimerAttributes>`
-- Simulate on device with `xcrun simctl` or via Xcode → Debug → Simulate Live Activity
+- Simulate in the simulator with `xcrun simctl`, or on a physical device via Xcode → Debug → Simulate Live Activity
 
 ## AppIntents Architecture
 
