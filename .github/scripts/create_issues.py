@@ -346,13 +346,6 @@ def parse_ticket(filepath: Path) -> dict | None:
 
 
 def main() -> None:
-    if not GITHUB_TOKEN:
-        print("Error: GITHUB_TOKEN environment variable is not set.")
-        sys.exit(1)
-    if not GITHUB_REPOSITORY:
-        print("Error: GITHUB_REPOSITORY environment variable is not set.")
-        sys.exit(1)
-
     ticket_files = sorted(TICKETS_DIR.glob("MONO-*.md"))
     if not ticket_files:
         print(f"No ticket files found in {TICKETS_DIR}")
@@ -371,6 +364,13 @@ def main() -> None:
                     f"  type={ticket['type']}"
                 )
         return
+
+    if not GITHUB_TOKEN:
+        print("Error: GITHUB_TOKEN environment variable is not set.")
+        sys.exit(1)
+    if not GITHUB_REPOSITORY:
+        print("Error: GITHUB_REPOSITORY environment variable is not set.")
+        sys.exit(1)
 
     print("\nFetching existing issues…")
     existing_issues = fetch_existing_issue_ids(GITHUB_REPOSITORY)
