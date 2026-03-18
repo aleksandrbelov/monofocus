@@ -98,7 +98,7 @@ struct PauseTimerIntent: AppIntent {
 - **Simulator**: `xcrun simctl openurl booted "monofocus://start?minutes=45"` to test deep links
 - **Widget preview**: Use `#Preview(as: .systemSmall)` with `WidgetPreviewContext`
 - **AppIntents**: Test via Shortcuts app or Siri on device; no simulator shortcut execution
-- **Live Activity**: Requires physical device; use `xcrun simctl` push for basic validation
+- **Live Activity**: Test on both simulator and device — simulator supports basic Lock Screen Live Activities and `xcrun simctl` pushes; a physical device is required to validate Dynamic Island UI
 
 ## project.yml Changes
 
