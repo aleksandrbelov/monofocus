@@ -1,41 +1,35 @@
+import React from 'react';
+
 interface AppIconProps {
   variant: 'primary' | 'minimal' | 'gradient' | 'dark' | 'light' | 'progress' | 'ring' | 'mono' | 'sunset' | 'forest' | 'ocean' | 'midnight';
   size?: number;
   showLabel?: boolean;
+  square?: boolean;
 }
 
-export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps) {
-  const cornerRadius = size * 0.225; // iOS 22.5% corner radius
+export function AppIcon({ variant, size = 180, showLabel = false, square = false }: AppIconProps) {
+  const cornerRadius = square ? 0 : size * 0.225; // iOS 22.5% corner radius or 0 for square export
+  const uniqueId = `icon-${variant}-${Math.random().toString(36).substr(2, 9)}`;
 
-  const renderIcon = () => {
+  const renderIconContent = () => {
     switch (variant) {
       case 'primary':
-        // Classic iOS Blue with progress ring
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #007AFF 0%, #0051D5 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            {/* Subtle background pattern */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 60%)',
-              }}
-            />
-            
-            {/* Progress ring */}
-            <svg width={size * 0.65} height={size * 0.65} style={{ position: 'relative' }}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#007AFF" />
+                <stop offset="100%" stopColor="#0051D5" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="30%" cy="30%" r="60%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.175}, ${size * 0.175})`}>
               <circle
                 cx={size * 0.325}
                 cy={size * 0.325}
@@ -55,25 +49,15 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.325} ${size * 0.325})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'minimal':
-        // Black & White minimal design
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: '#000000',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <svg width={size * 0.5} height={size * 0.5}>
+          <>
+            <rect width={size} height={size} rx={cornerRadius} fill="#000000" />
+            <g transform={`translate(${size * 0.25}, ${size * 0.25})`}>
               <circle
                 cx={size * 0.25}
                 cy={size * 0.25}
@@ -94,34 +78,27 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 transform={`rotate(-90 ${size * 0.25} ${size * 0.25})`}
                 opacity="0.3"
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'gradient':
-        // Colorful gradient with ring
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 70% 20%, rgba(255,255,255,0.2) 0%, transparent 50%)',
-              }}
-            />
-            <svg width={size * 0.7} height={size * 0.7}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#667eea" />
+                <stop offset="100%" stopColor="#764ba2" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="70%" cy="20%" r="50%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.15}, ${size * 0.15})`}>
               <circle
                 cx={size * 0.35}
                 cy={size * 0.35}
@@ -141,38 +118,29 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.35} ${size * 0.35})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'dark':
-        // Dark theme with subtle accent
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                top: -size * 0.2,
-                right: -size * 0.2,
-                width: size * 0.6,
-                height: size * 0.6,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(0,122,255,0.15) 0%, transparent 70%)',
-              }}
-            />
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#1C1C1E" />
+                <stop offset="100%" stopColor="#2C2C2E" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-orb`} cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="rgba(0,122,255,0.15)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+
+            {/* Orb effect - translated from CSS top/right negative positioning */}
+            <circle cx={size * 0.8} cy={size * 0.2} r={size * 0.3} fill={`url(#${uniqueId}-orb)`} />
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -192,26 +160,24 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'light':
-        // Light theme with soft colors
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F7 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.04)',
-            }}
-          >
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#F5F5F7" />
+              </linearGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            {/* Inner Border sim using stroke */}
+            <rect width={size} height={size} rx={cornerRadius} fill="none" stroke="rgba(0,0,0,0.04)" strokeWidth={1} inset={1} />
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -231,34 +197,27 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'progress':
-        // Multiple rings showing progress
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #0A84FF 0%, #005BBB 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 60%)',
-              }}
-            />
-            <svg width={size * 0.75} height={size * 0.75}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0A84FF" />
+                <stop offset="100%" stopColor="#005BBB" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.1)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.125}, ${size * 0.125})`}>
               {/* Outer ring - 75% */}
               <circle
                 cx={size * 0.375}
@@ -321,72 +280,41 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 transform={`rotate(-90 ${size * 0.375} ${size * 0.375})`}
                 opacity="0.5"
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'ring':
-        // Simple bold ring
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #000000 0%, #1C1C1E 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div
-              style={{
-                width: size * 0.65,
-                height: size * 0.65,
-                borderRadius: '50%',
-                border: `${size * 0.08}px solid white`,
-                position: 'relative',
-              }}
-            >
-              {/* Small indicator dot */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  width: size * 0.12,
-                  height: size * 0.12,
-                  borderRadius: '50%',
-                  background: 'white',
-                  transform: 'translate(-50%, -50%)',
-                }}
-              />
-            </div>
-          </div>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#000000" />
+                <stop offset="100%" stopColor="#1C1C1E" />
+              </linearGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+
+            {/* Central elements, manually centered */}
+            <circle cx={size * 0.5} cy={size * 0.5} r={size * 0.325} fill="none" stroke="white" strokeWidth={size * 0.08} />
+            <circle cx={size * 0.5} cy={size * 0.5} r={size * 0.06} fill="white" />
+          </>
         );
 
       case 'mono':
-        // Monochrome sophisticated
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: '#1C1C1E',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)',
-            }}
-          >
-            <svg width={size * 0.65} height={size * 0.65}>
-              <defs>
-                <linearGradient id="monoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
-                  <stop offset="100%" stopColor="rgba(255,255,255,0.5)" />
-                </linearGradient>
-              </defs>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-monoGrad`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
+                <stop offset="100%" stopColor="rgba(255,255,255,0.5)" />
+              </linearGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill="#1C1C1E" />
+            {/* Inner border sim */}
+            <rect width={size} height={size} rx={cornerRadius} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={1} />
+
+            <g transform={`translate(${size * 0.175}, ${size * 0.175})`}>
               <circle
                 cx={size * 0.325}
                 cy={size * 0.325}
@@ -400,40 +328,34 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 cy={size * 0.325}
                 r={size * 0.24}
                 fill="none"
-                stroke="url(#monoGrad)"
+                stroke={`url(#${uniqueId}-monoGrad)`}
                 strokeWidth={size * 0.06}
                 strokeDasharray={`${size * 0.24 * Math.PI * 1.3} ${size * 0.24 * Math.PI * 0.7}`}
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.325} ${size * 0.325})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'sunset':
-        // Warm sunset gradient
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFBB5C 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25) 0%, transparent 60%)',
-              }}
-            />
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FF6B6B" />
+                <stop offset="50%" stopColor="#FF8E53" />
+                <stop offset="100%" stopColor="#FFBB5C" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="30%" cy="30%" r="60%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.25)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -453,34 +375,27 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'forest':
-        // Green nature theme
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 60% 40%, rgba(255,255,255,0.2) 0%, transparent 50%)',
-              }}
-            />
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#11998e" />
+                <stop offset="100%" stopColor="#38ef7d" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="60%" cy="40%" r="50%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -500,34 +415,27 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'ocean':
-        // Cool ocean gradient
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #2E3192 0%, #1BFFFF 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.2) 0%, transparent 60%)',
-              }}
-            />
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2E3192" />
+                <stop offset="100%" stopColor="#1BFFFF" />
+              </linearGradient>
+              <radialGradient id={`${uniqueId}-glow`} cx="50%" cy="30%" r="60%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+                <stop offset="100%" stopColor="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-glow)`} />
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -547,39 +455,32 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       case 'midnight':
-        // Deep midnight blue
         return (
-          <div
-            style={{
-              width: size,
-              height: size,
-              borderRadius: cornerRadius,
-              background: 'linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                top: size * 0.15,
-                right: size * 0.15,
-                width: size * 0.08,
-                height: size * 0.08,
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.6)',
-                boxShadow: '0 0 20px rgba(255,255,255,0.3)',
-              }}
-            />
-            <svg width={size * 0.6} height={size * 0.6}>
+          <>
+            <defs>
+              <linearGradient id={`${uniqueId}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0F2027" />
+                <stop offset="50%" stopColor="#203A43" />
+                <stop offset="100%" stopColor="#2C5364" />
+              </linearGradient>
+            </defs>
+            <rect width={size} height={size} rx={cornerRadius} fill={`url(#${uniqueId}-bg)`} />
+
+            {/* Glow dot */}
+            <circle cx={size * 0.85} cy={size * 0.15} r={size * 0.04} fill="rgba(255,255,255,0.6)" filter={`url(#${uniqueId}-blur)`} />
+            <defs>
+              <filter id={`${uniqueId}-blur`}>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+              </filter>
+            </defs>
+
+
+            <g transform={`translate(${size * 0.2}, ${size * 0.2})`}>
               <circle
                 cx={size * 0.3}
                 cy={size * 0.3}
@@ -599,8 +500,8 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
                 strokeLinecap="round"
                 transform={`rotate(-90 ${size * 0.3} ${size * 0.3})`}
               />
-            </svg>
-          </div>
+            </g>
+          </>
         );
 
       default:
@@ -628,7 +529,16 @@ export function AppIcon({ variant, size = 180, showLabel = false }: AppIconProps
 
   return (
     <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-      {renderIcon()}
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ display: 'block' }} // Remove inline-block gap
+      >
+        {renderIconContent()}
+      </svg>
       {showLabel && (
         <div style={{ fontSize: '13px', fontWeight: '500', color: '#8E8E93' }}>
           {getLabel()}

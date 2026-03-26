@@ -8,11 +8,12 @@ import { LargeWidgetV2 } from './components/LargeWidgetV2';
 import { DesignCritique } from './components/DesignCritique';
 import { LiveActivityShowcase } from './components/LiveActivityShowcase';
 import { AppIconShowcase } from './components/AppIconShowcase';
-import { Moon, Sun, ChevronDown } from 'lucide-react';
+import { IconExport } from './components/IconExport';
+import { Moon, Sun, ChevronDown, Download } from 'lucide-react';
 
 type WidgetState = 'idle' | 'active' | 'paused' | 'completed' | 'automation';
 type ColorMode = 'light' | 'dark';
-type ViewMode = 'widgets' | 'critique' | 'comparison' | 'liveactivity' | 'icons';
+type ViewMode = 'widgets' | 'critique' | 'comparison' | 'liveactivity' | 'icons' | 'export';
 
 export default function App() {
   const [colorMode, setColorMode] = useState<ColorMode>('light');
@@ -40,7 +41,7 @@ export default function App() {
             <div>
               <h1 className="text-3xl mb-2">MonoFocus iOS Widgets</h1>
               <p className={secondaryTextColor}>
-                {viewMode === 'widgets' 
+                {viewMode === 'widgets'
                   ? 'High-fidelity widget designs for all sizes and states'
                   : 'Principal Designer Review & Improvement Roadmap'}
               </p>
@@ -50,73 +51,79 @@ export default function App() {
               <div className={`flex rounded-lg border ${colorMode === 'light' ? 'border-gray-300 bg-gray-100' : 'border-gray-700 bg-gray-800'}`}>
                 <button
                   onClick={() => setViewMode('widgets')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    viewMode === 'widgets'
+                  className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'widgets'
                       ? colorMode === 'light'
                         ? 'bg-white text-gray-900 shadow-sm'
                         : 'bg-gray-900 text-white shadow-sm'
                       : secondaryTextColor
-                  }`}
+                    }`}
                 >
                   Widgets
                 </button>
                 <button
                   onClick={() => setViewMode('critique')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    viewMode === 'critique'
+                  className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'critique'
                       ? colorMode === 'light'
                         ? 'bg-white text-gray-900 shadow-sm'
                         : 'bg-gray-900 text-white shadow-sm'
                       : secondaryTextColor
-                  }`}
+                    }`}
                 >
-                  Design Review
+                  Critique
                 </button>
                 <button
                   onClick={() => setViewMode('comparison')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    viewMode === 'comparison'
+                  className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'comparison'
                       ? colorMode === 'light'
                         ? 'bg-white text-gray-900 shadow-sm'
                         : 'bg-gray-900 text-white shadow-sm'
                       : secondaryTextColor
-                  }`}
+                    }`}
                 >
-                  Comparison
+                  Compare
                 </button>
                 <button
                   onClick={() => setViewMode('liveactivity')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    viewMode === 'liveactivity'
+                  className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'liveactivity'
                       ? colorMode === 'light'
                         ? 'bg-white text-gray-900 shadow-sm'
                         : 'bg-gray-900 text-white shadow-sm'
                       : secondaryTextColor
-                  }`}
+                    }`}
                 >
                   Live Activity
                 </button>
                 <button
                   onClick={() => setViewMode('icons')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    viewMode === 'icons'
+                  className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'icons'
                       ? colorMode === 'light'
                         ? 'bg-white text-gray-900 shadow-sm'
                         : 'bg-gray-900 text-white shadow-sm'
                       : secondaryTextColor
-                  }`}
+                    }`}
                 >
-                  App Icons
+                  Icons
+                </button>
+                <button
+                  onClick={() => setViewMode('export')}
+                  className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${viewMode === 'export'
+                      ? colorMode === 'light'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'bg-gray-900 text-white shadow-sm'
+                      : secondaryTextColor
+                    }`}
+                >
+                  <Download size={16} />
+                  Export
                 </button>
               </div>
-              
+
               <button
                 onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}
-                className={`p-3 rounded-full transition-colors ${
-                  colorMode === 'light'
+                className={`p-3 rounded-full transition-colors ${colorMode === 'light'
                     ? 'bg-gray-900 text-white'
                     : 'bg-white text-gray-900'
-                }`}
+                  }`}
                 aria-label="Toggle color mode"
               >
                 {colorMode === 'light' ? <Moon size={24} /> : <Sun size={24} />}
@@ -140,11 +147,10 @@ export default function App() {
                 <select
                   value={selectedState}
                   onChange={(e) => setSelectedState(e.target.value as WidgetState)}
-                  className={`appearance-none px-4 py-2 pr-10 rounded-lg border ${
-                    colorMode === 'light'
+                  className={`appearance-none px-4 py-2 pr-10 rounded-lg border ${colorMode === 'light'
                       ? 'bg-white border-gray-300 text-gray-900'
                       : 'bg-gray-800 border-gray-700 text-white'
-                  } cursor-pointer`}
+                    } cursor-pointer`}
                 >
                   {states.map((state) => (
                     <option key={state.value} value={state.value}>
@@ -290,6 +296,10 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-6 py-12">
           <AppIconShowcase colorMode={colorMode} />
         </div>
+      ) : viewMode === 'export' ? (
+        <div className="min-h-[calc(100vh-80px)] bg-gray-50 dark:bg-gray-900">
+          <IconExport />
+        </div>
       ) : (
         <>
           {/* Controls */}
@@ -300,11 +310,10 @@ export default function App() {
                 <select
                   value={selectedState}
                   onChange={(e) => setSelectedState(e.target.value as WidgetState)}
-                  className={`appearance-none px-4 py-2 pr-10 rounded-lg border ${
-                    colorMode === 'light'
+                  className={`appearance-none px-4 py-2 pr-10 rounded-lg border ${colorMode === 'light'
                       ? 'bg-white border-gray-300 text-gray-900'
                       : 'bg-gray-800 border-gray-700 text-white'
-                  } cursor-pointer`}
+                    } cursor-pointer`}
                 >
                   {states.map((state) => (
                     <option key={state.value} value={state.value}>
@@ -448,9 +457,8 @@ interface SpecCardProps {
 function SpecCard({ title, items, colorMode }: SpecCardProps) {
   return (
     <div
-      className={`p-6 rounded-2xl ${
-        colorMode === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-800 border border-gray-700'
-      }`}
+      className={`p-6 rounded-2xl ${colorMode === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-800 border border-gray-700'
+        }`}
     >
       <h3 className="mb-4">{title}</h3>
       <ul className={`space-y-2 ${colorMode === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
@@ -475,9 +483,8 @@ interface ImprovementCardProps {
 function ImprovementCard({ title, before, after, colorMode }: ImprovementCardProps) {
   return (
     <div
-      className={`p-6 rounded-2xl ${
-        colorMode === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-800 border border-gray-700'
-      }`}
+      className={`p-6 rounded-2xl ${colorMode === 'light' ? 'bg-white border border-gray-200' : 'bg-gray-800 border border-gray-700'
+        }`}
     >
       <h3 className="mb-4">{title}</h3>
       <div className="grid grid-cols-2 gap-4">

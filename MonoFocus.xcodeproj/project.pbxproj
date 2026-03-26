@@ -61,7 +61,7 @@
 		DDE529F7BA515F34AF36B262 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A833CA241DE7F74D5BE5CA /* Animations.swift */; };
 		DF93149DD7230C12134823EB /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1166CBCFE57F0E2D45D877C /* CustomModal.swift */; };
 		E88D9C7E49F3C7BCF02AA6E7 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B808BF9E35A92859790B41 /* TimerAttributes.swift */; };
-		FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E42EE4A553006A19E3 /* Assets.xcassets */; };
+		FA18A07F2EF2D8B600EFFA41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E42EE4A553006A19E3 /* Assets.xcassets */; };
 		FAF850E72EE5C929006A19E3 /* MonoFocus.icon in Resources */ = {isa = PBXBuildFile; fileRef = FAF850E62EE5C929006A19E3 /* MonoFocus.icon */; };
 		FFC0186C953071B19FABF84C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAEB2BE8B1E71F0E3837134 /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
@@ -149,6 +149,7 @@
 		EA570100E37B71D26C8DE147 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F179D2DEEF3CBA17ABFA7FCF /* SessionDidStartIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDidStartIntent.swift; sourceTree = "<group>"; };
 		FA31B7E02EE6028F002440A8 /* MonoFocusWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonoFocusWidgets.entitlements; sourceTree = SOURCE_ROOT; };
+		FA31B7E42EEAD294002440A8 /* progressbar.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = progressbar.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FAF850E42EE4A553006A19E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAF850E62EE5C929006A19E3 /* MonoFocus.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = MonoFocus.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -341,6 +342,7 @@
 		DC611F9F48987A9E2E2B6D6A = {
 			isa = PBXGroup;
 			children = (
+				FA31B7E32EEAD260002440A8 /* playground */,
 				36BA51090534E661666DDCCA /* mobile */,
 				CA54212A28E78ACA6AE78C6C /* MonoFocusWidgets */,
 				12E71DBDD80C1FA260606684 /* Products */,
@@ -371,6 +373,14 @@
 				B00C96B7E6DD4999C08E229F /* TimerViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FA31B7E32EEAD260002440A8 /* playground */ = {
+			isa = PBXGroup;
+			children = (
+				FA31B7E42EEAD294002440A8 /* progressbar.playground */,
+			);
+			path = playground;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,8 +456,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF850E52EE4A553006A19E3 /* Assets.xcassets in Resources */,
 				FAF850E72EE5C929006A19E3 /* MonoFocus.icon in Resources */,
+				FA18A07F2EF2D8B600EFFA41 /* Assets.xcassets in Resources */,
 				60E25B27BAE1385CB2B163B5 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,7 +546,7 @@
 		395D12C7C39F4BE61A13B508 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MonoFocus.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -657,7 +667,7 @@
 		CEAEF4685C5DD8F7FE03F0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = MonoFocus;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MonoFocusRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
