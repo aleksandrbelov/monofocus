@@ -1,38 +1,36 @@
 {
-    "images": [
+  "images" : [
+    {
+      "filename" : "MonoFocus_Icon_mono.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    },
+    {
+      "appearances" : [
         {
-            "filename": "any.png",
-            "idiom": "universal",
-            "platform": "ios",
-            "size": "1024x1024"
-        },
-        {
-            "appearances": [
-                {
-                    "appearance": "luminosity",
-                    "value": "dark"
-                }
-            ],
-            "filename": "dark.png",
-            "idiom": "universal",
-            "platform": "ios",
-            "size": "1024x1024"
-        },
-        {
-            "appearances": [
-                {
-                    "appearance": "luminosity",
-                    "value": "tinted"
-                }
-            ],
-            "filename": "tinted.png",
-            "idiom": "universal",
-            "platform": "ios",
-            "size": "1024x1024"
+          "appearance" : "luminosity",
+          "value" : "dark"
         }
-    ],
-    "info": {
-        "author": "xcode",
-        "version": 1
+      ],
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "tinted"
+        }
+      ],
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
     }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
 }
