@@ -250,7 +250,12 @@ final class TimerViewModel: ObservableObject {
         if let endDate {
             request.earliestBeginDate = endDate.addingTimeInterval(-60)
         }
-        try? BGTaskScheduler.shared.submit(request)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("⚠️ [TimerViewModel] Failed to schedule background task: \(error)")
+            // Background task is optional—timer still works in foreground
+        }
     }
 
     private func cancelBackgroundProcessing() {
@@ -358,8 +363,11 @@ final class TimerViewModel: ObservableObject {
         SharedDataManager.save(sessions, to: SharedDataManager.sessionsURL)
         
         // Also update legacy for safety (optional, but good for backup if App Group fails)
-        if let data = try? JSONEncoder().encode(sessions) {
-            try? data.write(to: legacyStorageURL)
+        do {
+            let data = try JSONEncoder().encode(sessions)
+            try data.write(to: legacyStorageURL)
+        } catch {
+            print("⚠️ [TimerViewModel] Failed to persist session to legacy storage: \(error)")
         }
     }
 
@@ -384,8 +392,11 @@ final class TimerViewModel: ObservableObject {
         SharedDataManager.saveRawTimerState(state)
         
         // Also save text to legacy local file
-        if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-            try? data.write(to: legacyStateURL)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: state, options: [])
+            try data.write(to: legacyStateURL)
+        } catch {
+            print("⚠️ [TimerViewModel] Failed to persist state to legacy storage: \(error)")
         }
 
         refreshWidgets()
@@ -497,8 +508,11 @@ struct SharedDataManager {
     /// Writes the raw timer state dictionary.
     static func saveRawTimerState(_ state: [String: Any]) {
         guard let url = stateURL else { return }
-        if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-            try? data.write(to: url)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: state, options: [])
+            try data.write(to: url)
+        } catch {
+            print("⚠️ [SharedDataManager] Failed to save raw timer state: \(error)")
         }
     }
 }
