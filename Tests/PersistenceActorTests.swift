@@ -138,12 +138,13 @@ final class PersistenceActorTests: XCTestCase {
         let states: [[String: Any]] = (0..<10).map { i in
             ["total": i * 60, "remaining": i * 30, "running": false, "paused": false]
         }
+        let encodedStates = try states.map {
+            try JSONSerialization.data(withJSONObject: $0, options: [])
+        }
 
         await withTaskGroup(of: Void.self) { group in
-            for state in states {
-                if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-                    group.addTask { await actor.writeState(data) }
-                }
+            for data in encodedStates {
+                group.addTask { await actor.writeState(data) }
             }
         }
 
