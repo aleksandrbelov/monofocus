@@ -28,9 +28,9 @@ final class PersistenceActorTests: XCTestCase {
 
     /// Returns an actor whose shared URL is `nil` (simulating a missing App
     /// Group), writing only to the returned legacy URLs.
-    private func makeActor(prefix: String = "") -> (PersistenceActor, sessionsURL: URL, stateURL: URL) {
+    private func makeActor(prefix: String = "") throws -> (PersistenceActor, sessionsURL: URL, stateURL: URL) {
         let base = prefix.isEmpty ? tempDir! : tempDir.appendingPathComponent(prefix)
-        try? FileManager.default.createDirectory(at: base, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(at: base, withIntermediateDirectories: true)
         let sessionsURL = base.appendingPathComponent("sessions.json")
         let stateURL    = base.appendingPathComponent("timer-state.json")
         let actor = PersistenceActor(
@@ -55,7 +55,7 @@ final class PersistenceActorTests: XCTestCase {
     // MARK: - Session tests
 
     func test_appendSession_accumulatesSequentially() async throws {
-        let (actor, sessionsURL, _) = makeActor()
+        let (actor, sessionsURL, _) = try makeActor()
         let s1 = makeSession(durationSeconds: 900)
         let s2 = makeSession(durationSeconds: 1500)
 
@@ -70,7 +70,7 @@ final class PersistenceActorTests: XCTestCase {
     }
 
     func test_appendSession_noLostUpdates_underConcurrentCalls() async throws {
-        let (actor, sessionsURL, _) = makeActor()
+        let (actor, sessionsURL, _) = try makeActor()
         let count = 20
 
         await withTaskGroup(of: Void.self) { group in
@@ -87,7 +87,7 @@ final class PersistenceActorTests: XCTestCase {
     }
 
     func test_appendSession_fallsBackToLegacy_whenSharedUnavailable() async throws {
-        let (actor, sessionsURL, _) = makeActor()  // shared is nil
+        let (actor, sessionsURL, _) = try makeActor()  // shared is nil
         let session = makeSession()
 
         await actor.appendSession(session)
@@ -119,7 +119,7 @@ final class PersistenceActorTests: XCTestCase {
     // MARK: - State tests
 
     func test_writeState_producesValidJSON() async throws {
-        let (actor, _, stateURL) = makeActor()
+        let (actor, _, stateURL) = try makeActor()
         let state: [String: Any] = [
             "total": 1500, "remaining": 900, "running": true, "paused": false
         ]
@@ -134,7 +134,7 @@ final class PersistenceActorTests: XCTestCase {
     }
 
     func test_writeState_serialisesCalls_noCorruption() async throws {
-        let (actor, _, stateURL) = makeActor()
+        let (actor, _, stateURL) = try makeActor()
         let states: [[String: Any]] = (0..<10).map { i in
             ["total": i * 60, "remaining": i * 30, "running": false, "paused": false]
         }
@@ -154,7 +154,7 @@ final class PersistenceActorTests: XCTestCase {
     }
 
     func test_writeState_lastSequentialCallWins() async throws {
-        let (actor, _, stateURL) = makeActor()
+        let (actor, _, stateURL) = try makeActor()
 
         for i in 0..<5 {
             let state: [String: Any] = [
@@ -190,5 +190,42 @@ final class PersistenceActorTests: XCTestCase {
                       "Shared state must be written when URL is provided")
         XCTAssertTrue(FileManager.default.fileExists(atPath: legacyState.path),
                       "Legacy state must be written independently of the shared write")
+    }
+
+    /// Verifies that `appendSession` never silently truncates the legacy file
+    /// when the shared file exists but has fewer sessions (e.g. after a
+    /// previous App Group write failure).
+    func test_appendSession_prefersMoreCompleteSnapshot_whenFilesDiverge() async throws {
+        let sharedSessions = tempDir.appendingPathComponent("shared-sessions.json")
+        let legacySessions = tempDir.appendingPathComponent("legacy-sessions.json")
+        let actor = PersistenceActor(
+            sharedSessionsURL: sharedSessions,
+            legacySessionsURL: legacySessions,
+            sharedStateURL: nil,
+            legacyStateURL: tempDir.appendingPathComponent("timer-state.json")
+        )
+
+        // Pre-populate legacy with 3 sessions and shared with only 1
+        // (simulating a past shared write failure).
+        let baseDate = Date(timeIntervalSinceReferenceDate: 0)
+        let legacySessionsList = (0..<3).map { i in
+            FocusSession(id: UUID(), start: baseDate.addingTimeInterval(Double(i * 60)),
+                         durationSeconds: 900, presetLabel: "15m", completed: true)
+        }
+        let sharedSessionsList = Array(legacySessionsList.prefix(1))
+
+        let encoder = JSONEncoder()
+        try encoder.encode(legacySessionsList).write(to: legacySessions, options: .atomic)
+        try encoder.encode(sharedSessionsList).write(to: sharedSessions, options: .atomic)
+
+        // Append one new session; the actor must base its merge on the legacy
+        // file (3 sessions) not the shared file (1 session).
+        let newSession = makeSession(durationSeconds: 1500)
+        await actor.appendSession(newSession)
+
+        let stored = try JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacySessions))
+        XCTAssertEqual(stored.count, 4,
+                       "Must preserve all 3 existing sessions from the more-complete legacy file and append 1 new one")
+        XCTAssertEqual(stored.last?.id, newSession.id)
     }
 }

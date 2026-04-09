@@ -36,13 +36,35 @@ actor PersistenceActor {
     /// result atomically to both shared and legacy storage.  Because the
     /// entire read-modify-write cycle runs inside this actor method it is
     /// impossible for two concurrent callers to interleave and lose an update.
+    ///
+    /// Both the shared and legacy files are read before merging so that a
+    /// previous write failure to one path (e.g. the App Group container) does
+    /// not cause the other, more-complete file to be silently overwritten with
+    /// a shorter snapshot.  The more complete snapshot (higher session count,
+    /// tie-broken by the latest `start` date) is used as the base.
     func appendSession(_ session: FocusSession) {
-        let existing: [FocusSession] = loadSessions(from: sharedSessionsURL)
-            ?? loadSessions(from: legacySessionsURL)
-            ?? []
+        let fromShared = loadSessions(from: sharedSessionsURL) ?? []
+        let fromLegacy = loadSessions(from: legacySessionsURL) ?? []
+        let existing = mostComplete(fromShared, fromLegacy)
         let updated = existing + [session]
         guard let data = try? JSONEncoder().encode(updated) else { return }
         writeIndependently(data, shared: sharedSessionsURL, legacy: legacySessionsURL)
+    }
+
+    /// Returns the more complete of two session arrays.
+    ///
+    /// "More complete" means having a higher session count.  Ties are broken
+    /// by comparing the latest `start` date in each array — the array whose
+    /// most-recent session is newer is considered more current and wins.
+    private func mostComplete(_ a: [FocusSession], _ b: [FocusSession]) -> [FocusSession] {
+        if a.count != b.count { return a.count > b.count ? a : b }
+        let latestA = a.max(by: { $0.start < $1.start })?.start
+        let latestB = b.max(by: { $0.start < $1.start })?.start
+        switch (latestA, latestB) {
+        case (nil, _): return b
+        case (_, nil): return a
+        case let (la?, lb?): return la >= lb ? a : b
+        }
     }
 
     // MARK: - State persistence
