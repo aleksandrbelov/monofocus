@@ -265,7 +265,12 @@ final class TimerViewModel: ObservableObject {
         if let endDate {
             request.earliestBeginDate = endDate.addingTimeInterval(-60)
         }
-        try? BGTaskScheduler.shared.submit(request)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("⚠️ [TimerViewModel] Failed to schedule background task: \(error)")
+            // Background task is optional—timer still works in foreground
+        }
     }
 
     private func cancelBackgroundProcessing() {
@@ -505,8 +510,11 @@ struct SharedDataManager {
     /// Writes the raw timer state dictionary.
     static func saveRawTimerState(_ state: [String: Any]) {
         guard let url = stateURL else { return }
-        if let data = try? JSONSerialization.data(withJSONObject: state, options: []) {
-            try? data.write(to: url)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: state, options: [])
+            try data.write(to: url)
+        } catch {
+            print("⚠️ [SharedDataManager] Failed to save raw timer state: \(error)")
         }
     }
 }

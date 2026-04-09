@@ -14,15 +14,17 @@ interface DynamicIslandProps {
   isAutomation?: boolean;
 }
 
-export function DynamicIsland({
-  state,
-  colorMode,
+export function DynamicIsland({ 
+  state, 
+  colorMode, 
   size,
   timeRemaining,
   progress,
   sessionType = 'Deep Focus',
   isAutomation = false,
 }: DynamicIslandProps) {
+  const isLight = colorMode === 'light';
+
   // Dynamic Island always has dark background regardless of system mode
   const bgColor = '#000000';
   const primaryText = '#FFFFFF';
@@ -62,7 +64,7 @@ export function DynamicIsland({
               transition: 'width 0.3s ease',
             }}
           />
-
+          
           {/* Small icon */}
           {state === 'paused' ? (
             <Pause size={14} color={pausedColor} strokeWidth={2.5} />
@@ -80,7 +82,7 @@ export function DynamicIsland({
         </div>
 
         <div className="mt-3 text-center">
-          <p style={{ fontSize: '11px', color: colorMode === 'light' ? '#3C3C43' : '#AEAEB2' }}>
+          <p style={{ fontSize: '11px', color: isLight ? '#3C3C43' : '#AEAEB2' }}>
             Dynamic Island - Minimal
           </p>
         </div>
@@ -198,7 +200,7 @@ export function DynamicIsland({
         </div>
 
         <div className="mt-3 text-center">
-          <p style={{ fontSize: '11px', color: colorMode === 'light' ? '#3C3C43' : '#AEAEB2' }}>
+          <p style={{ fontSize: '11px', color: isLight ? '#3C3C43' : '#AEAEB2' }}>
             Dynamic Island - Compact (Other activity running)
           </p>
         </div>
@@ -426,7 +428,7 @@ export function DynamicIsland({
       </div>
 
       <div className="mt-3 text-center">
-        <p style={{ fontSize: '11px', color: colorMode === 'light' ? '#3C3C43' : '#AEAEB2' }}>
+        <p style={{ fontSize: '11px', color: isLight ? '#3C3C43' : '#AEAEB2' }}>
           Dynamic Island - Expanded (Long Press or Tap)
         </p>
       </div>
