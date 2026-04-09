@@ -25,10 +25,15 @@ final class TimerViewModel: ObservableObject {
     @Published var lastPreset: Int? = 25
 
     private var tickCancellable: AnyCancellable?
-    
+
     // Legacy fallback paths
     private let legacyStorageURL: URL
     private let legacyStateURL: URL
+
+    /// Serialises all disk I/O through a single actor to prevent concurrent
+    /// read-modify-write races in persistSession() and out-of-order writes
+    /// in persistState().
+    private let persistenceActor: PersistenceActor
 
     private var sessionStartDate: Date?
     private var endDate: Date?
@@ -38,9 +43,19 @@ final class TimerViewModel: ObservableObject {
     init() {
         // Fallback URLs (Documents Directory)
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        legacyStorageURL = dir.appendingPathComponent("sessions.json")
-        legacyStateURL = dir.appendingPathComponent("timer-state.json")
-        
+        let legacySessions = dir.appendingPathComponent("sessions.json")
+        let legacyState = dir.appendingPathComponent("timer-state.json")
+        legacyStorageURL = legacySessions
+        legacyStateURL = legacyState
+
+        // Single serialized writer shared for the lifetime of the view model.
+        persistenceActor = PersistenceActor(
+            sharedSessionsURL: SharedDataManager.sessionsURL,
+            legacySessionsURL: legacySessions,
+            sharedStateURL: SharedDataManager.stateURL,
+            legacyStateURL: legacyState
+        )
+
         restoreState()
 #if canImport(ActivityKit)
         if #available(iOS 16.1, *) {
@@ -347,29 +362,11 @@ final class TimerViewModel: ObservableObject {
             completed: completed
         )
 
-        // Capture URLs before leaving the main actor; perform all disk I/O off the main thread.
-        let sharedURL = SharedDataManager.sessionsURL
-        let legacyURL = legacyStorageURL
+        // Dispatch to the persistence actor which serialises the read-modify-write
+        // cycle; two rapid calls can never interleave and lose an update.
+        let actor = persistenceActor
         Task.detached(priority: .utility) {
-            // Load from Shared first, else Legacy
-            var sessions: [FocusSession] = SharedDataManager.load([FocusSession].self, from: sharedURL)
-                ?? (try? JSONDecoder().decode([FocusSession].self, from: Data(contentsOf: legacyURL)))
-                ?? []
-
-            sessions.append(session)
-
-            // Write to Shared
-            SharedDataManager.save(sessions, to: sharedURL)
-
-            // Also update legacy for safety (optional, but good for backup if App Group fails)
-            do {
-                let data = try JSONEncoder().encode(sessions)
-                try data.write(to: legacyURL)
-            } catch {
-#if DEBUG
-                print("❌ TimerViewModel: persistSession legacy write failed: \(error)")
-#endif
-            }
+            await actor.appendSession(session)
         }
     }
 
@@ -390,19 +387,13 @@ final class TimerViewModel: ObservableObject {
             state["sessionStart"] = sessionStartDate.timeIntervalSince1970
         }
 
-        // Encode on the main thread (fast in-memory), then write to disk off the main thread.
+        // Encode in-memory on the main thread (fast), then hand the bytes to
+        // the persistence actor which serialises writes and prevents
+        // out-of-order or concurrent file corruption.
         guard let data = try? JSONSerialization.data(withJSONObject: state, options: []) else { return }
-        let sharedURL = SharedDataManager.stateURL
-        let legacyURL = legacyStateURL
+        let actor = persistenceActor
         Task.detached(priority: .utility) {
-            do {
-                if let url = sharedURL { try data.write(to: url) }
-                try data.write(to: legacyURL)
-            } catch {
-#if DEBUG
-                print("❌ TimerViewModel: persistState write failed: \(error)")
-#endif
-            }
+            await actor.writeState(data)
         }
 
         refreshWidgets()
