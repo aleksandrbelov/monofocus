@@ -15,4 +15,19 @@ final class TimerViewModelTests: XCTestCase {
 
         await fulfillment(of: [exp], timeout: 1.0)
     }
+
+    func test_timerViewModelDeallocatesAfterStop() async {
+        weak var weakViewModel: TimerViewModel?
+
+        await MainActor.run {
+            var viewModel: TimerViewModel? = TimerViewModel()
+            viewModel?.start()
+            viewModel?.stop()
+            weakViewModel = viewModel
+            viewModel = nil
+        }
+
+        await Task.yield()
+        XCTAssertNil(weakViewModel)
+    }
 }
