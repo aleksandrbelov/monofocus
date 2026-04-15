@@ -17,11 +17,11 @@ This report is the canonical artifact for MONO-009 profiling results.
 | Criterion | Target | Result | Status |
 |---|---:|---:|---|
 | Memory leaks | 0 | _TBD_ | ⏳ Pending device run |
-| Baseline memory | \< 50 MB | _TBD_ | ⏳ Pending device run |
-| Peak memory | \< 75 MB | _TBD_ | ⏳ Pending device run |
-| Launch time | \< 2.0 s | _TBD_ | ⏳ Pending device run |
+| Baseline memory | < 50 MB | _TBD_ | ⏳ Pending device run |
+| Peak memory | < 75 MB | _TBD_ | ⏳ Pending device run |
+| Launch time | < 2.0 s | _TBD_ | ⏳ Pending device run |
 | Animation frame rate | 60 FPS sustained | _TBD_ | ⏳ Pending device run |
-| Battery drain | \< 2% / hour | _TBD_ | ⏳ Pending device run |
+| Battery drain | < 2% / hour | _TBD_ | ⏳ Pending device run |
 | Background CPU | No excessive usage | _TBD_ | ⏳ Pending device run |
 
 ## Instruments Sessions

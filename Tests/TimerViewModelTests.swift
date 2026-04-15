@@ -2,6 +2,8 @@ import XCTest
 @testable import MonoFocus
 
 final class TimerViewModelTests: XCTestCase {
+    private let asyncTeardownDelay: Duration = .milliseconds(100)
+
     func test_completionNotificationEmitted() async {
         let exp = expectation(description: "completion")
         let token = NotificationCenter.default.addObserver(forName: .timerSessionCompleted, object: nil, queue: .main) { _ in
@@ -29,7 +31,7 @@ final class TimerViewModelTests: XCTestCase {
         }
 
         // Give pending async teardown work a chance to complete before asserting deallocation.
-        try? await Task.sleep(for: .milliseconds(100))
+        try? await Task.sleep(for: asyncTeardownDelay)
         XCTAssertNil(weakViewModel)
     }
 
@@ -46,7 +48,7 @@ final class TimerViewModelTests: XCTestCase {
         }
 
         // Give pending async teardown work a chance to complete before asserting deallocation.
-        try? await Task.sleep(for: .milliseconds(100))
+        try? await Task.sleep(for: asyncTeardownDelay)
         XCTAssertNil(weakViewModel)
     }
 }
