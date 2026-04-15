@@ -21,12 +21,14 @@ final class TimerViewModelTests: XCTestCase {
 
         await MainActor.run {
             var viewModel: TimerViewModel? = TimerViewModel()
+            // Exercise start/stop path when notification service is intentionally absent.
             viewModel?.start()
             viewModel?.stop()
             weakViewModel = viewModel
             viewModel = nil
         }
 
+        // Give pending async teardown work a chance to complete before asserting deallocation.
         await Task.yield()
         XCTAssertNil(weakViewModel)
     }
@@ -43,6 +45,7 @@ final class TimerViewModelTests: XCTestCase {
             viewModel = nil
         }
 
+        // Give pending async teardown work a chance to complete before asserting deallocation.
         await Task.yield()
         XCTAssertNil(weakViewModel)
     }
