@@ -30,4 +30,20 @@ final class TimerViewModelTests: XCTestCase {
         await Task.yield()
         XCTAssertNil(weakViewModel)
     }
+
+    func test_timerViewModelDeallocatesAfterStopWithNotificationService() async {
+        weak var weakViewModel: TimerViewModel?
+
+        await MainActor.run {
+            var viewModel: TimerViewModel? = TimerViewModel()
+            let notificationService = NotificationService()
+            viewModel?.start(notificationService: notificationService)
+            viewModel?.stop()
+            weakViewModel = viewModel
+            viewModel = nil
+        }
+
+        await Task.yield()
+        XCTAssertNil(weakViewModel)
+    }
 }
