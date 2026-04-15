@@ -2,6 +2,7 @@ import XCTest
 @testable import MonoFocus
 
 final class TimerViewModelTests: XCTestCase {
+    // Small delay to let async cancellation/task cleanup complete before weak-reference assertions.
     private let asyncTeardownDelay: Duration = .milliseconds(100)
 
     func test_completionNotificationEmitted() async {
@@ -25,6 +26,7 @@ final class TimerViewModelTests: XCTestCase {
             var viewModel: TimerViewModel? = TimerViewModel()
             // Exercise start/stop path when notification service is intentionally absent.
             viewModel?.start()
+            XCTAssertEqual(viewModel?.isRunning, true)
             viewModel?.stop()
             weakViewModel = viewModel
             viewModel = nil
@@ -42,6 +44,7 @@ final class TimerViewModelTests: XCTestCase {
             var viewModel: TimerViewModel? = TimerViewModel()
             let notificationService = NotificationService()
             viewModel?.start(notificationService: notificationService)
+            XCTAssertEqual(viewModel?.isRunning, true)
             viewModel?.stop()
             weakViewModel = viewModel
             viewModel = nil
