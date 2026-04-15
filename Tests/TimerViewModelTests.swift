@@ -29,7 +29,7 @@ final class TimerViewModelTests: XCTestCase {
         }
 
         // Give pending async teardown work a chance to complete before asserting deallocation.
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(100))
         XCTAssertNil(weakViewModel)
     }
 
@@ -46,7 +46,7 @@ final class TimerViewModelTests: XCTestCase {
         }
 
         // Give pending async teardown work a chance to complete before asserting deallocation.
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(100))
         XCTAssertNil(weakViewModel)
     }
 }
