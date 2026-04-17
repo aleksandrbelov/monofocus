@@ -34,6 +34,7 @@ struct AutomationCardView: View {
             .labelsHidden()
             .toggleStyle(SwitchToggleStyle(tint: Color.monoForeground))
             .accessibilityLabel(title)
+            .accessibilityHint("Double tap to \(isOn ? "disable" : "enable") \(title.lowercased())")
         }
         .padding(Spacing.value(.md))
         .frame(minHeight: Spacing.touchTargetMinimum)
@@ -54,7 +55,9 @@ struct AutomationCardView: View {
             Image(systemName: systemImage)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundStyle(Color.monoForeground)
+                .accessibilityHidden(true)
         }
+        .accessibilityHidden(true)
     }
 }
 
@@ -81,4 +84,3 @@ struct AutomationCardView_Previews: PreviewProvider {
     }
 }
 #endif
-

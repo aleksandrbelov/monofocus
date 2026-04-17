@@ -5,14 +5,21 @@ import UIKit
 struct CustomModal<Content: View>: View {
     @Binding var isPresented: Bool
     let onDismiss: (() -> Void)?
+    let accessibilityAnnouncement: String?
     @ViewBuilder var content: () -> Content
 
     @State private var animateIn = false
     @AccessibilityFocusState private var isAccessibilityFocused: Bool
 
-    init(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) {
+    init(
+        isPresented: Binding<Bool>,
+        onDismiss: (() -> Void)? = nil,
+        accessibilityAnnouncement: String? = nil,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         _isPresented = isPresented
         self.onDismiss = onDismiss
+        self.accessibilityAnnouncement = accessibilityAnnouncement
         self.content = content
     }
 
@@ -83,7 +90,7 @@ struct CustomModal<Content: View>: View {
         guard UIAccessibility.isVoiceOverRunning else { return }
         DispatchQueue.main.async {
             self.isAccessibilityFocused = true
-            UIAccessibility.post(notification: .screenChanged, argument: nil)
+            UIAccessibility.post(notification: .screenChanged, argument: accessibilityAnnouncement)
         }
     }
 }

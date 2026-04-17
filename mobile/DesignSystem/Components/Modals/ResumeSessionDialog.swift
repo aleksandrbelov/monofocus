@@ -15,7 +15,11 @@ struct ResumeSessionDialog: View {
     }
 
     var body: some View {
-        CustomModal(isPresented: $isPresented, onDismiss: onDiscard) {
+        CustomModal(
+            isPresented: $isPresented,
+            onDismiss: onDiscard,
+            accessibilityAnnouncement: "Resume session"
+        ) {
             VStack(spacing: Spacing.value(.lg)) {
                 VStack(spacing: 4) {
                     Text("Resume Session?")
@@ -34,6 +38,7 @@ struct ResumeSessionDialog: View {
                         onDiscard()
                     }
                     .buttonStyle(.secondary)
+                    .accessibilityHint("Stops the previous session and resets the timer")
 
                     Button("Resume") {
                         Haptics.timerResume()
@@ -41,6 +46,7 @@ struct ResumeSessionDialog: View {
                         onResume()
                     }
                     .buttonStyle(.primary)
+                    .accessibilityHint("Resumes the paused session")
                 }
             }
             .padding(Spacing.value(.xl))
@@ -60,4 +66,3 @@ struct ResumeSessionDialog_Previews: PreviewProvider {
     }
 }
 #endif
-

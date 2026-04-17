@@ -19,6 +19,7 @@ struct AutomationSection: View {
                     .padding(.vertical, 6)
                     .background(Color.surface(.surface1))
                     .clipShape(Capsule())
+                    .accessibilityHint("Opens setup instructions for automation shortcuts")
             }
 
             VStack(spacing: Spacing.value(.sm)) {

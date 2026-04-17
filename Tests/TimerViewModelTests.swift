@@ -54,4 +54,31 @@ final class TimerViewModelTests: XCTestCase {
         try? await Task.sleep(for: asyncTeardownDelay)
         XCTAssertNil(weakViewModel)
     }
+
+    func test_accessibilityAnnouncement_forPresetSelection() async {
+        let vm = await TimerViewModel()
+
+        await MainActor.run {
+            vm.setPreset(minutes: 45)
+            XCTAssertEqual(vm.accessibilityAnnouncement, "45 minutes selected")
+        }
+    }
+
+    func test_accessibilityAnnouncement_forTimerStateChanges() async {
+        let vm = await TimerViewModel()
+
+        await MainActor.run {
+            vm.start()
+            XCTAssertEqual(vm.accessibilityAnnouncement, "Timer started")
+
+            vm.pause()
+            XCTAssertEqual(vm.accessibilityAnnouncement, "Timer paused")
+
+            vm.resume()
+            XCTAssertEqual(vm.accessibilityAnnouncement, "Timer resumed")
+
+            vm.stop()
+            XCTAssertEqual(vm.accessibilityAnnouncement, "Timer stopped, reset to 25 minutes")
+        }
+    }
 }

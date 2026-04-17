@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @EnvironmentObject private var timer: TimerViewModel
@@ -58,6 +59,7 @@ struct ContentView: View {
                         Text("Presets")
                             .font(Typography.font(.title3, weight: .semibold))
                             .foregroundStyle(Color.monoForeground)
+                            .accessibilityAddTraits(.isHeader)
 
                         PresetButtonGroup(
                             selectedTime: selectedTimeBinding,
@@ -70,6 +72,7 @@ struct ContentView: View {
                         Text("Controls")
                             .font(Typography.font(.title3, weight: .semibold))
                             .foregroundStyle(Color.monoForeground)
+                            .accessibilityAddTraits(.isHeader)
 
                         ControlButtonGroup(
                             isRunning: timer.isRunning,
@@ -117,6 +120,13 @@ struct ContentView: View {
             previousRemainingSeconds = newValue
         }
         .overlay(modalsOverlay)
+        .onChange(of: timer.accessibilityAnnouncement) { _, announcement in
+            guard
+                UIAccessibility.isVoiceOverRunning,
+                let announcement
+            else { return }
+            UIAccessibility.post(notification: .announcement, argument: announcement)
+        }
     }
 
     @ViewBuilder

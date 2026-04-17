@@ -23,6 +23,7 @@ final class TimerViewModel: ObservableObject {
     @Published var isRunning: Bool = false
     @Published var isPaused: Bool = false
     @Published var lastPreset: Int? = 25
+    @Published var accessibilityAnnouncement: String?
 
     private var tickCancellable: AnyCancellable?
     
@@ -61,6 +62,7 @@ final class TimerViewModel: ObservableObject {
         lastPreset = minutes
         sessionStartDate = nil
         endDate = nil
+        postAccessibilityAnnouncement("\(minutes) minutes selected")
         persistState()
     }
 
@@ -75,6 +77,7 @@ final class TimerViewModel: ObservableObject {
         scheduleTick()
         scheduleEndNotification(using: notificationService)
         scheduleBackgroundProcessing()
+        postAccessibilityAnnouncement("Timer started")
         persistState()
 #if canImport(ActivityKit)
         updateLiveActivitySnapshot()
@@ -90,6 +93,7 @@ final class TimerViewModel: ObservableObject {
         endDate = nil
         cancelBackgroundProcessing()
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["end-of-session"])
+        postAccessibilityAnnouncement("Timer paused")
         persistState()
 #if canImport(ActivityKit)
         updateLiveActivitySnapshot()
@@ -104,6 +108,7 @@ final class TimerViewModel: ObservableObject {
         scheduleTick()
         scheduleEndNotification(using: notificationService)
         scheduleBackgroundProcessing()
+        postAccessibilityAnnouncement("Timer resumed")
         persistState()
 #if canImport(ActivityKit)
         updateLiveActivitySnapshot()
@@ -127,6 +132,8 @@ final class TimerViewModel: ObservableObject {
         sessionStartDate = nil
         endDate = nil
         remainingSeconds = totalSeconds
+        let minutes = max(totalSeconds / 60, 1)
+        postAccessibilityAnnouncement("Timer stopped, reset to \(minutes) minutes")
         persistState()
 #if canImport(ActivityKit)
         endLiveActivity(dismissImmediately: true)
@@ -201,6 +208,10 @@ final class TimerViewModel: ObservableObject {
         let newRemaining = max(0, Int(ceil(target.timeIntervalSinceNow)))
         if newRemaining != remainingSeconds {
             remainingSeconds = newRemaining
+            if newRemaining > 0, newRemaining % 60 == 0 {
+                let minutes = newRemaining / 60
+                postAccessibilityAnnouncement("\(minutes) minute\(minutes == 1 ? "" : "s") remaining")
+            }
         }
         if newRemaining <= 0 && shouldFinalize {
             finishCurrentSession(triggerHaptics: triggerHaptics)
@@ -229,6 +240,7 @@ final class TimerViewModel: ObservableObject {
         if triggerHaptics {
             Haptics.timerComplete()
         }
+        postAccessibilityAnnouncement("Timer completed")
         // Inform observers (e.g., automation service) that the session completed.
         NotificationCenter.default.post(name: .timerSessionCompleted, object: nil)
     }
@@ -330,6 +342,12 @@ final class TimerViewModel: ObservableObject {
         let m = seconds / 60
         let s = seconds % 60
         return String(format: "%02d:%02d", m, s)
+    }
+
+    private func postAccessibilityAnnouncement(_ message: String) {
+        // Reset first so observers fire even when the same message repeats (e.g. start/pause cycles).
+        accessibilityAnnouncement = nil
+        accessibilityAnnouncement = message
     }
 
 #if DEBUG

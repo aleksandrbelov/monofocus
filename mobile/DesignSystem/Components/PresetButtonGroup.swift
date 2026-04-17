@@ -22,6 +22,7 @@ struct PresetButtonGroup: View {
                 }
                 .buttonStyle(PresetButtonStyle(isSelected: selectedTime == preset.value))
                 .disabled(isDisabled)
+                .accessibilityHint("Set preset to \(preset.value / 60) minutes")
             }
 
             Button {
@@ -36,6 +37,7 @@ struct PresetButtonGroup: View {
             .buttonStyle(PresetButtonStyle(isSelected: false))
             .disabled(isDisabled)
             .accessibilityLabel("Choose custom duration")
+            .accessibilityHint("Opens a picker to set a custom focus duration")
         }
     }
 }
@@ -58,4 +60,3 @@ struct PresetButtonGroup_Previews: PreviewProvider {
     }
 }
 #endif
-
