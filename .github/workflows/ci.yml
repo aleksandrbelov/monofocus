@@ -19,4 +19,4 @@ jobs:
       - name: Build (Debug)
         #working-directory: MonoFocus
         run: |
-          xcodebuild -project MonoFocus.xcodeproj -scheme MonoFocus -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' build
+          xcodebuild -project MonoFocus.xcodeproj -scheme MonoFocus -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' build
