@@ -376,7 +376,7 @@ struct LargeWidgetView: View {
                     .accessibilityLabel("25 minutes")
                     .accessibilityHint("Starts a 25 minute focus session")
                     Link(destination: WidgetCommon.startURL(minutes: 50)) {
-                        PresetButton(minutes: 10, color: .purple)
+                        PresetButton(minutes: 50, color: .purple)
                     }
                     .accessibilityLabel("50 minutes")
                     .accessibilityHint("Starts a 50 minute focus session")

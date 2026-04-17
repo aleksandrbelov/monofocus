@@ -123,8 +123,7 @@ struct ContentView: View {
         .onChange(of: timer.accessibilityAnnouncement) { _, announcement in
             guard
                 UIAccessibility.isVoiceOverRunning,
-                let announcement,
-                !announcement.isEmpty
+                let announcement
             else { return }
             UIAccessibility.post(notification: .announcement, argument: announcement)
         }

@@ -345,6 +345,7 @@ final class TimerViewModel: ObservableObject {
     }
 
     private func postAccessibilityAnnouncement(_ message: String) {
+        // Reset first so observers fire even when the same message repeats (e.g. start/pause cycles).
         accessibilityAnnouncement = nil
         accessibilityAnnouncement = message
     }
