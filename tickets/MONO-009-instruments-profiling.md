@@ -2,7 +2,7 @@
 
 **Type:** Performance  
 **Priority:** 🔴 Critical  
-**Status:** Ready for Execution  
+**Status:** In Progress (Device Profiling Pending)  
 **Estimate:** 3 hours  
 **Phase:** 1 (Critical Path)
 
@@ -13,6 +13,8 @@
 Run comprehensive Xcode Instruments profiling to identify memory leaks, performance bottlenecks, and battery drain issues before TestFlight release.
 
 **Tools:** Leaks, Allocations, Time Profiler, Energy Log
+
+**Report Location:** `docs/PERFORMANCE_REPORT.md`
 
 ---
 
