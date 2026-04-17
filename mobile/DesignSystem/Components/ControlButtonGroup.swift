@@ -22,6 +22,7 @@ struct ControlButtonGroup: View {
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.secondary)
+                .accessibilityHint("Stops the current timer and returns to the selected duration")
                 .transition(.scale.combined(with: .opacity))
             }
         }
@@ -40,6 +41,7 @@ struct ControlButtonGroup: View {
                     .labelStyle(.titleAndIcon)
             }
             .buttonStyle(.primary)
+            .accessibilityHint("Starts the focus timer")
         } else if isPaused {
             Button {
                 Haptics.timerResume()
@@ -49,6 +51,7 @@ struct ControlButtonGroup: View {
                     .labelStyle(.titleAndIcon)
             }
             .buttonStyle(.primary)
+            .accessibilityHint("Resumes the paused timer")
         } else {
             Button {
                 Haptics.timerPause()
@@ -58,6 +61,7 @@ struct ControlButtonGroup: View {
                     .labelStyle(.titleAndIcon)
             }
             .buttonStyle(.primary)
+            .accessibilityHint("Pauses the running timer")
         }
     }
 }
@@ -76,4 +80,3 @@ struct ControlButtonGroup_Previews: PreviewProvider {
     }
 }
 #endif
-

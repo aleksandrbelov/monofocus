@@ -14,7 +14,11 @@ struct TimePickerModal: View {
     }
 
     var body: some View {
-        CustomModal(isPresented: $isPresented, onDismiss: onCancel) {
+        CustomModal(
+            isPresented: $isPresented,
+            onDismiss: onCancel,
+            accessibilityAnnouncement: "Set custom time"
+        ) {
             VStack(spacing: Spacing.value(.lg)) {
                 Text("Set Focus Time")
                     .font(Typography.font(.title2, weight: .semibold))
@@ -28,6 +32,7 @@ struct TimePickerModal: View {
                 }
                 .pickerStyle(.wheel)
                 .frame(height: 160)
+                .accessibilityHint("Swipe up or down with one finger to adjust minutes")
 
                 HStack(spacing: Spacing.value(.md)) {
                     Button("Cancel") {
@@ -36,6 +41,7 @@ struct TimePickerModal: View {
                         onCancel()
                     }
                     .buttonStyle(.secondary)
+                    .accessibilityHint("Closes without changing the current preset")
 
                     Button("Set Time") {
                         Haptics.selection()
@@ -43,6 +49,7 @@ struct TimePickerModal: View {
                         onConfirm(selectedMinutes)
                     }
                     .buttonStyle(.primary)
+                    .accessibilityHint("Confirms the selected custom duration")
                 }
             }
             .padding(Spacing.value(.xl))
@@ -58,4 +65,3 @@ struct TimePickerModal_Previews: PreviewProvider {
     }
 }
 #endif
-

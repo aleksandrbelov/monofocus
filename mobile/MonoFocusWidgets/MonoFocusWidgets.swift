@@ -124,6 +124,7 @@ struct PresetButton: View {
             Image(systemName: "play.fill")
                 .font(.system(size: 10))
                 .opacity(0.6)
+                .accessibilityHidden(true)
         }
         .foregroundColor(color)
         .padding(.horizontal, 12)
@@ -237,12 +238,14 @@ struct SmallWidgetView: View {
             Link(destination: WidgetCommon.startURL(minutes: 25)) {
                 PresetButton(minutes: 25, color: .blue)
             }
-            .accessibilityLabel("Start 25-minute focus session")
+            .accessibilityLabel("25 minutes")
+            .accessibilityHint("Starts a 25 minute focus session")
             
             Link(destination: WidgetCommon.startURL(minutes: 45)) {
                 PresetButton(minutes: 45, color: .indigo)
             }
-            .accessibilityLabel("Start 45-minute focus session")
+            .accessibilityLabel("45 minutes")
+            .accessibilityHint("Starts a 45 minute focus session")
         }
         .padding()
         .widgetBackground(Color(UIColor.systemBackground))
@@ -268,11 +271,13 @@ struct MediumWidgetView: View {
                 Link(destination: WidgetCommon.startURL(minutes: 25)) {
                     PresetButton(minutes: 25, color: .blue)
                 }
-                .accessibilityLabel("Start 25-minute focus session")
+                .accessibilityLabel("25 minutes")
+                .accessibilityHint("Starts a 25 minute focus session")
                 Link(destination: WidgetCommon.startURL(minutes: 45)) {
                     PresetButton(minutes: 45, color: .indigo)
                 }
-                .accessibilityLabel("Start 45-minute focus session")
+                .accessibilityLabel("45 minutes")
+                .accessibilityHint("Starts a 45 minute focus session")
             }
             .frame(width: 110)
         }
@@ -368,11 +373,13 @@ struct LargeWidgetView: View {
                     Link(destination: WidgetCommon.startURL(minutes: 25)) {
                         PresetButton(minutes: 25, color: .blue)
                     }
-                    .accessibilityLabel("Start 25-minute focus session")
+                    .accessibilityLabel("25 minutes")
+                    .accessibilityHint("Starts a 25 minute focus session")
                     Link(destination: WidgetCommon.startURL(minutes: 50)) {
                         PresetButton(minutes: 10, color: .purple)
                     }
-                    .accessibilityLabel("Start 50-minute focus session")
+                    .accessibilityLabel("50 minutes")
+                    .accessibilityHint("Starts a 50 minute focus session")
                 }
             }
         }
@@ -661,4 +668,3 @@ struct MonoFocusWidgetEntryView: View {
         endDate: Date().addingTimeInterval(600)
     )
 }
-

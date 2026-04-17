@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct SetupView: View {
     @EnvironmentObject var automation: AutomationService
@@ -29,6 +30,8 @@ struct SetupView: View {
                         TextField("Shortcut Name", text: $automation.startShortcutName)
                             .autocapitalization(.words)
                             .textContentType(.none)
+                            .accessibilityLabel("Start shortcut name")
+                            .accessibilityHint("Enter the exact name of your start automation shortcut")
                         
                         Button {
                             testingStart = true
@@ -45,6 +48,7 @@ struct SetupView: View {
                             }
                         }
                         .disabled(testingStart || automation.startShortcutName.isEmpty)
+                        .accessibilityHint("Runs the start shortcut to verify setup")
                         
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Actions to add:")
@@ -70,6 +74,8 @@ struct SetupView: View {
                         TextField("Shortcut Name", text: $automation.endShortcutName)
                             .autocapitalization(.words)
                             .textContentType(.none)
+                            .accessibilityLabel("End shortcut name")
+                            .accessibilityHint("Enter the exact name of your end automation shortcut")
                         
                         Button {
                             testingEnd = true
@@ -86,6 +92,7 @@ struct SetupView: View {
                             }
                         }
                         .disabled(testingEnd || automation.endShortcutName.isEmpty)
+                        .accessibilityHint("Runs the end shortcut to verify setup")
                         
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Actions to add:")
@@ -110,10 +117,12 @@ struct SetupView: View {
                     } label: {
                         HStack {
                             Image(systemName: "arrow.up.forward.app")
+                                .accessibilityHidden(true)
                             Text("Open Shortcuts App")
                                 .font(.headline)
                         }
                     }
+                    .accessibilityHint("Opens the Shortcuts app")
                     
                     VStack(alignment: .leading, spacing: 12) {
                         instructionStep(number: 1, text: "Open the Shortcuts app")
@@ -142,6 +151,7 @@ struct SetupView: View {
                 
                 Section(header: Text("Enable Automation")) {
                     Toggle("Enable Focus Automations", isOn: $automation.isAutomationEnabled)
+                        .accessibilityHint("Turns session automations on or off")
                     
                     Text("When enabled, your shortcuts will run automatically when sessions start and end. Customize them in the Shortcuts app to include DND, Grayscale, or both.")
                         .font(.caption)
@@ -150,11 +160,17 @@ struct SetupView: View {
             }
             .navigationTitle("Setup Automations")
             .navigationBarTitleDisplayMode(.inline)
+            .accessibilityAddTraits(.isModal)
+            .onAppear {
+                guard UIAccessibility.isVoiceOverRunning else { return }
+                UIAccessibility.post(notification: .screenChanged, argument: "Setup")
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
+                    .accessibilityHint("Closes setup and returns to the timer screen")
                 }
             }
         }

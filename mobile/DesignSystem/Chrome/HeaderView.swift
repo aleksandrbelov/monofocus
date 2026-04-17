@@ -10,6 +10,7 @@ struct HeaderView: View {
                 Text("MonoFocus")
                     .font(Typography.font(.largeTitle, weight: .bold))
                     .foregroundStyle(Color.monoForeground)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("Stay present. Protect your flow.")
                     .font(Typography.font(.callout))
@@ -32,6 +33,7 @@ struct HeaderView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Open setup instructions")
+            .accessibilityHint("Opens setup and automation help")
         }
     }
 }
@@ -47,4 +49,3 @@ struct HeaderView_Previews: PreviewProvider {
     }
 }
 #endif
-

@@ -5,7 +5,11 @@ struct CompletionModal: View {
     let onContinue: () -> Void
 
     var body: some View {
-        CustomModal(isPresented: $isPresented, onDismiss: onContinue) {
+        CustomModal(
+            isPresented: $isPresented,
+            onDismiss: onContinue,
+            accessibilityAnnouncement: "Well done! You've completed your focus session."
+        ) {
             VStack(spacing: Spacing.value(.md)) {
                 ZStack {
                     Circle()
@@ -15,6 +19,7 @@ struct CompletionModal: View {
                         .font(.system(size: 40, weight: .bold))
                         .foregroundStyle(Color.monoForeground)
                 }
+                .accessibilityHidden(true)
 
                 VStack(spacing: 4) {
                     Text("Well Done!")
@@ -33,6 +38,7 @@ struct CompletionModal: View {
                 }
                 .buttonStyle(.primary)
                 .frame(maxWidth: .infinity)
+                .accessibilityHint("Dismisses this message and returns to the timer")
             }
             .padding(Spacing.value(.xl))
         }
@@ -48,4 +54,3 @@ struct CompletionModal_Previews: PreviewProvider {
     }
 }
 #endif
-
