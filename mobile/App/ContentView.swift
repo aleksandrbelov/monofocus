@@ -9,6 +9,8 @@ struct ContentView: View {
     @AppStorage("preferredPreset") private var preferredPreset: Int = 25
 
     @State private var showSetupSheet = false
+    @State private var showHistorySheet = false
+    @State private var historySessions: [FocusSession] = []
     @State private var showCompletionModal = false
     @State private var showTimePicker = false
     @State private var showResumeDialog = false
@@ -39,9 +41,12 @@ struct ContentView: View {
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .center, spacing: Spacing.value(.xxl)) {
-                    HeaderView {
+                    HeaderView(onHistory: {
+                        historySessions = timer.loadSessions()
+                        showHistorySheet = true
+                    }, onInfo: {
                         showSetupSheet = true
-                    }
+                    })
 
                     CircularTimerView(
                         time: timer.remainingSeconds,
@@ -103,6 +108,9 @@ struct ContentView: View {
             SetupView()
                 .environmentObject(timer)
                 .environmentObject(automation)
+        }
+        .sheet(isPresented: $showHistorySheet) {
+            SessionHistoryView(sessions: historySessions)
         }
         .onAppear {
             previousRemainingSeconds = timer.remainingSeconds
